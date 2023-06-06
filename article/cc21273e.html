@@ -561,7 +561,7 @@
     <article class="post post-detail">
       <div class="post-content">
         <p>本篇主要汇总在使用 Git 进行提交和拉取文件时，遇到的问题的解决方案，以便下次查找。</p>
-<h3 id="1-关于使用Git出现“git-Failed-to-connect-to-127-0-0-1-port-xxxx-Connection-refused”的问题解决方案"><a href="#1-关于使用Git出现“git-Failed-to-connect-to-127-0-0-1-port-xxxx-Connection-refused”的问题解决方案" class="headerlink" title="1 关于使用Git出现“git Failed to connect to 127.0.0.1 port xxxx: Connection refused”的问题解决方案**"></a>1 关于使用Git出现“git Failed to connect to 127.0.0.1 port xxxx: Connection refused”的问题解决方案**</h3><p><strong>1. 问题描述</strong></p>
+<h3 id="1-关于使用Git出现“git-Failed-to-connect-to-127-0-0-1-port-xxxx-Connection-refused”的问题解决方案"><a href="#1-关于使用Git出现“git-Failed-to-connect-to-127-0-0-1-port-xxxx-Connection-refused”的问题解决方案" class="headerlink" title="1 关于使用Git出现“git Failed to connect to 127.0.0.1 port xxxx: Connection refused”的问题解决方案"></a>1 关于使用Git出现“git Failed to connect to 127.0.0.1 port xxxx: Connection refused”的问题解决方案</h3><p><strong>1. 问题描述</strong></p>
 <p>在使用 git 拉取、提交代码的时候，会出现 git Failed to connect to 127.0.0.1 port xxxx: Connection refused 的问题。</p>
 <p>原因：无法连接到127.0.0.1: xxx端口: 连接被拒绝。</p>
 <p><strong>2. 解决方案</strong><br>方案一：<br>思路：查询当前是否有代理，如果有就取消。</p>
@@ -591,6 +591,9 @@
 <li>在Github上设置好SSH密钥后，新建一个远程仓库，通过 <code>git remote add origin https://github.com/molimi/MyBlog.git</code> 将本地仓库和远程仓库进行关联；</li>
 <li>最后通过 <code>git push -u origin master</code> 把本地仓库的项目推送到远程仓库（也就是Github）上；（若新建远程仓库的时候自动创建了README文件会报错，解决办法看上面）。</li>
 </ol>
+<blockquote>
+<p>本部分参考自：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38198952/article/details/82792279">error: src refspec master does not match any. 错误的解决办法</a></p>
+</blockquote>
 
       </div>
       <div class="post-tags-categories">
@@ -865,7 +868,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8Git%E5%87%BA%E7%8E%B0%E2%80%9Cgit-Failed-to-connect-to-127-0-0-1-port-xxxx-Connection-refused%E2%80%9D%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">1 关于使用Git出现“git Failed to connect to 127.0.0.1 port xxxx: Connection refused”的问题解决方案**</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-error-src-refspec-master-does-not-match-any"><span class="toc-text">2 error: src refspec master does not match any.</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8Git%E5%87%BA%E7%8E%B0%E2%80%9Cgit-Failed-to-connect-to-127-0-0-1-port-xxxx-Connection-refused%E2%80%9D%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">1 关于使用Git出现“git Failed to connect to 127.0.0.1 port xxxx: Connection refused”的问题解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-error-src-refspec-master-does-not-match-any"><span class="toc-text">2 error: src refspec master does not match any.</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

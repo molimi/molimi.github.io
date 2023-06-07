@@ -551,7 +551,142 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        
+        <p>当前用得最多的是next主题，那为什么用得多呢？当然是符合大多数人的审美。我使用的是next(v7.8.0)，下载地址：<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">theme-next&#x2F;hexo-theme-next</a></p>
+<span id="more"></span>
+
+<h2 id="1-基本设置"><a href="#1-基本设置" class="headerlink" title="1 基本设置"></a>1 基本设置</h2><h3 id="1-1-主题设置"><a href="#1-1-主题设置" class="headerlink" title="1.1 主题设置"></a>1.1 主题设置</h3><p>打开博客根目录 Blog 文件夹，右键 <code>Git Bash</code>，输入如下代码将next主题下载到目录 <code>Blog/themes</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<p>打开根目录下的 <code>_config.yml</code>(称为站点配置文件)，修改主题（注意冒号后都要有空格）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">CarpeDiem&#x27;s</span> <span class="string">Blog</span>         <span class="comment"># 标题</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;虽不能至，心向往之&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;不闻不若闻之，闻之不若见之，见之不若知之，知之不若行之。&#x27;</span>       <span class="comment"># 简介或格言</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">&quot;Python, Linux, Java, 算法, 人工智能&quot;</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">Carpe</span> <span class="string">Diem</span>     <span class="comment"># 作者</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span>           <span class="comment"># 主题语言 en/zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">Asia/Shanghai</span>           <span class="comment"># 中国的时区</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">hexo-theme-bamboo</span>          <span class="comment"># 主体修改为 next</span></span><br></pre></td></tr></table></figure>
+
+<p>主题语言主要是看你的themes&#x2F;next&#x2F;language中的简体中文是 zh-CN 还是 zh-Hans：</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/010.6bt308ce0240.webp#pic_center" width = 48%>
+
+<p>next主题有四种，如下图依次为Muse、Mist、Pisces、Gemini（你可以每个设置一遍，确定一个喜欢的），这里选的是Gemini，打开目录 <code>Blog/themes/next/</code> 下的_config.yml（称为主题配置文件），只要将你选的主题前的#删除就行了：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line"><span class="comment">#scheme: Mist</span></span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Gemini</span>          <span class="comment"># 选择的主题</span></span><br></pre></td></tr></table></figure>
+
+<p>温馨提示：注意区分 根目录 Blog 下的 _config.yml 和 <code>Blog/themes/next/</code> 下的_config.yml，搞混就找不到相应的配置</p>
+<p>回到根目录打开 <code>Git Bash</code>，输入如下三条命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="comment">#清除缓存 网页正常情况下可以忽略此条命令</span></span><br><span class="line">hexo g <span class="comment">#生成静态网页</span></span><br><span class="line">hexo d <span class="comment">#开始部署</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-设置菜单"><a href="#1-2-设置菜单" class="headerlink" title="1.2 设置菜单"></a>1.2 设置菜单</h3><p>打开主题配置文件即themes&#x2F;next下的_config.yml，查找menu，将前面的#删除就行了：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span>                      <span class="comment">#首页</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span>      <span class="comment">#归档</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span>       <span class="comment">#分类</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span>                 <span class="comment">#标签</span></span><br><span class="line">  <span class="attr">about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">user</span>               <span class="comment">#关于</span></span><br><span class="line">  <span class="attr">resources:</span> <span class="string">/resources/</span> <span class="string">||</span> <span class="string">download</span>   <span class="comment">#资源</span></span><br><span class="line">  <span class="comment"># schedule: /schedule/ || calendar    #日历</span></span><br><span class="line">  <span class="comment"># sitemap: /sitemap.xml || sitemap    #站点地图，供搜索引擎爬取</span></span><br><span class="line">  <span class="comment"># commonweal: /404/ || heartbeat      #腾讯公益404</span></span><br></pre></td></tr></table></figure>
+
+<p>“||”前面的是目标链接，后面的是图标名称，next使用的图标全是<a target="_blank" rel="noopener" href="https://fontawesome.com.cn/search-download">图标库 - Font Awesome 中文网</a> 这一网站的，有想用的图标直接在fontawesome上面找图标的名称就行。resources 是我自己添加的。</p>
+<p>新添加的菜单需要翻译对应的中文，打开 <code>theme/next/languages/zh-CN.yml</code>，在 menu 下设置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">首页</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">归档</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">分类</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">标签</span></span><br><span class="line">  <span class="attr">about:</span> <span class="string">关于</span></span><br><span class="line">  <span class="attr">resources:</span> <span class="string">资源</span></span><br><span class="line">  <span class="attr">search:</span> <span class="string">搜索</span></span><br></pre></td></tr></table></figure>
+
+<p>在根目录下打开 <code>Git Bash</code>，输入如下代码：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">hexo</span> <span class="string">new</span> <span class="string">page</span> <span class="string">&quot;categories&quot;</span></span><br><span class="line"><span class="string">hexo</span> <span class="string">new</span> <span class="string">page</span> <span class="string">&quot;tags&quot;</span></span><br><span class="line"><span class="string">hexo</span> <span class="string">new</span> <span class="string">page</span> <span class="string">&quot;about&quot;</span></span><br><span class="line"><span class="string">hexo</span> <span class="string">new</span> <span class="string">page</span> <span class="string">&quot;resources&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时在根目录的sources文件夹下会生成categories、tags、about、resources四个文件，每个文件中有一个 <code>index.md</code> 文件，修改内容分别如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">分类</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020-02-10 22:07:08</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&quot;categories&quot;</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">标签</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020-02-10 22:07:08</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&quot;tags&quot;</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">关于</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020-02-10 22:07:08</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&quot;about&quot;</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">资源</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020-02-10 22:07:08</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&quot;resources&quot;</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<p>注：如果有启用评论，默认页面带有评论。需要关闭的话，添加字段 comments 并将值设置为false。</p>
+<h3 id="1-3-设置建站时间"><a href="#1-3-设置建站时间" class="headerlink" title="1.3 设置建站时间"></a>1.3 设置建站时间</h3><p>打开主题配置文件即 <code>themes/next</code> 下的_config.yml，查找since：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">footer:</span></span><br><span class="line">  <span class="comment"># Specify the date when the site was setup. If not defined, current year will be used.</span></span><br><span class="line">  <span class="attr">since:</span> <span class="number">2023-06</span>      <span class="comment"># 建站时间</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-设置头像"><a href="#1-4-设置头像" class="headerlink" title="1.4 设置头像"></a>1.4 设置头像</h3><p>打开主题配置文件即 <code>themes/next</code> 下的 <code>_config.yml</code>，查找avatar，url后是图片的链接地址：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="comment"># Replace the default image and set the url here.</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/images/avatar.gif</span>   <span class="comment">#图片的位置，也可以是http://xxx.com/avatar.png</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be dispalyed in circle.</span></span><br><span class="line">  <span class="attr">rounded:</span> <span class="literal">true</span>   <span class="comment">#头像展示在圈里</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  <span class="attr">rotated:</span> <span class="literal">false</span>  <span class="comment">#头像随光标旋转</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-添加评论"><a href="#1-添加评论" class="headerlink" title="1 添加评论"></a>1 添加评论</h2><p>针对 Hexo 静态博客的 nexT主题 继承了多种评论系统，此处介绍两种相对好用的评论系统： Valine、Gitment 和 Utterances 。</p>
+<h3 id="1-1-Valine-评论系统"><a href="#1-1-Valine-评论系统" class="headerlink" title="1.1 Valine 评论系统"></a>1.1 Valine 评论系统</h3><p>Valine 评论系统，此款系统不需要登录，无后端，nexT 主题最新也已经支持安装。</p>
+<p>因为 Valine 是基于 LeanCloud 系统的，所以先在 LeanCloud 中注册账号，LeanCloud官网：<a target="_blank" rel="noopener" href="https://console.leancloud.cn/login">https://console.leancloud.cn/login</a>，注册登陆后，访问控制台，创建应用，选择开发版，确定创建，如下图</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/007.63c1igtf5a40.webp#pic_center" width = 48%>
+
+<p>创建成功，生成了 AppID 和 AppKey，在控制台—应用凭证 查看，如下图</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/008.3bs8wz462a20.webp#pic_center" width = 48%>
+
+<p>在主题的配置文件_config.yml中，修改关于 valine 的配置，如下图</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/009.3xocq7i43e20.webp#pic_center" width = 48%>
+
+<p>上述设置仅作参考！<br>最后，重新部署即可。</p>
+<h3 id="1-2-Gitment-评论系统"><a href="#1-2-Gitment-评论系统" class="headerlink" title="1.2 Gitment 评论系统"></a>1.2 Gitment 评论系统</h3><p>Gitment 评论系统是基于 Github 开发的，是依靠 GitHub Issues 的评论系统，Next 主题最新也已经支持安装。</p>
+<p>安装前提：更新 Next 主题（5.1.2 主题及以上）</p>
+<p><strong>1. 注册 OAuth application</strong></p>
+<ol>
+<li>在 github 中进行注册，进入 <a target="_blank" rel="noopener" href="https://github.com/settings/profile">https://github.com/settings/profile</a></li>
+<li>点击左侧 Developer settings</li>
+<li>点击左侧Oauth Apps</li>
+<li>点击 Register a new application</li>
+</ol>
+<p>注册完成之后，得到：Client ID 和 Client Secret</p>
+<p><strong>2. 新建存放博客评论仓库</strong></p>
+<p>在 github 中建一个项目，专门用来存储你的博客评论</p>
+<p><strong>3. 配置 nexT 主题文件</strong></p>
+<p>编辑主题配置文件：<code>themes\ next主题 \ _config.yml</code>，找到有关 gitment 的设置，如下</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">gitment:</span>   </span><br><span class="line">  <span class="attr">enable:</span>  <span class="literal">true</span></span><br><span class="line">  <span class="attr">mint:</span> <span class="literal">true</span>  </span><br><span class="line">  <span class="attr">count:</span> <span class="literal">true</span> </span><br><span class="line">  <span class="attr">lazy:</span> <span class="literal">false</span>  						<span class="comment">#评论懒加载，如果true，则默认不展示评论，点击按钮查看评论</span></span><br><span class="line">  <span class="attr">cleanly:</span> <span class="literal">false</span>  	</span><br><span class="line">  <span class="attr">language:</span> 		</span><br><span class="line">  <span class="attr">github_user:</span> 						<span class="comment">#github名称</span></span><br><span class="line">  <span class="attr">github_repo:</span> <span class="string">BlogComments</span>			<span class="comment">#上一步新建存放评论的仓库名</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">b8bad0exxxx</span>			<span class="comment">#上面注册 OAuth Application 的 Client ID</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">bcee560xxxxxx</span>		<span class="comment">#上面注册 OAuth Application 申请的 Client Secret</span></span><br><span class="line">  <span class="attr">proxy_gateway:</span> </span><br><span class="line">  <span class="attr">redirect_protocol:</span> <span class="comment"># Protocol of redirect_uri with force_redirect_protocol when mint</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 初始化</strong></p>
+<p>在设置完成后，Hexo重新部署。每篇文章都要点击初始化评论按钮。</p>
+<p><strong>5. 管理</strong></p>
+<p>评论显示在新建存放评论的仓库中的 issue 中。</p>
+<p><strong>6. 关闭</strong></p>
+<p>可以单独关闭某个页面的评论，在页面的 Front-matter 中添加 comments 字段，设为 false。比如标签页不想要评论，则在标签页面中做如下设置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: xxxxxxxxx</span><br><span class="line">date: <span class="number">2023</span>-06-06 <span class="number">17</span>:05:<span class="number">24</span></span><br><span class="line"><span class="built_in">type</span>: <span class="string">&quot;tags&quot;</span></span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-Utterances-评论系统"><a href="#1-3-Utterances-评论系统" class="headerlink" title="1.3 Utterances 评论系统"></a>1.3 Utterances 评论系统</h3><p>这里主要介绍基于 Github Issues 的轻量级博客评论系统 Utterances。主要介绍 Utterances 的配置与使用</p>
+<p>Utterances是一个基于Github Issues的轻量级评论系统，可用于博客、Wiki等。它具有以下优点：</p>
+<ul>
+<li>开源</li>
+<li>不追踪，无广告，始终免费</li>
+<li>所有的数据都存储在Github Issues</li>
+<li>样式基于Github的Primer设计语言</li>
+<li>夜间模式</li>
+<li>轻量级；原生TypeScript；在“常青树”浏览器上不使用网络字体，JavaScript框架或Polyfill。</li>
+</ul>
+<p>快速上手</p>
+<ol>
+<li>在 GitHub 上新建一个公开仓库（Repository），安装 <a target="_blank" rel="noopener" href="https://github.com/apps/utterances">Utterances GitHub App</a> 至该仓库。</li>
+<li>在你的网页需要插入 Utterances 评论的位置，粘贴以下代码（username，reponame 分别修改为你的 GitHub 用户名，仓库名）。</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://utteranc.es/client.js&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">repo</span>=<span class="string">&quot;username/reponame&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">issue-term</span>=<span class="string">&quot;pathname&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">theme</span>=<span class="string">&quot;github-light&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">async</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>刷新网页就可以看到Utterances评论框了。</li>
+</ol>
+<p>了解更多配置，请移步——<a target="_blank" rel="noopener" href="https://blog.njilc.com/post/self-hosted-utterances-tutorial">自托管Utterances教程：基于Github Issues的轻量级博客评论系统</a></p>
+<h2 id="2-修改永久链接的默认格式"><a href="#2-修改永久链接的默认格式" class="headerlink" title="2 修改永久链接的默认格式"></a>2 修改永久链接的默认格式</h2><p>如果你的文章名称是中文的，那么 Hexo 默认生成的永久链接也会有中文，这样不利于 SEO，且 gitment 评论对中文链接也不支持。</p>
+<p>在 Hexo 根目录下的 _config.yml 文件采用初始设置。这里因为用“年月日”会让文章链接的层次太深，所以我用”article”代替：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># permalink: :year/:month/:day/:title/</span></span><br><span class="line">permalink: article/:title.html</span><br><span class="line">permalink_defaults:</span><br></pre></td></tr></table></figure>
+
+<p>生成的文章链接就是 (标题为“我的个人博客”)：<code>https://[你的网站域名]/article/我的个人博客.html</code></p>
+<p>链接中出现中文显然不太好，所以下面给出三种替代中的方法。</p>
+<h3 id="2-1-安装插件方法一（推荐）"><a href="#2-1-安装插件方法一（推荐）" class="headerlink" title="2.1 安装插件方法一（推荐）"></a>2.1 安装插件方法一（推荐）</h3><p>在 Hexo 根目录下使用 <code>git bash</code> 执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+
+<p>在 Hexo 根目录下的 <code>_config.yml</code> 文件，修改为如下配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># permalink: :year/:month/:day/:title/</span></span><br><span class="line"><span class="comment"># permalink: article/:title/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">article/:abbrlink.html</span></span><br><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span>  <span class="comment"># 算法：crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span>    <span class="comment"># 进制：dec(default) and hex</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>git bash</code> 按顺序运行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="comment">#清除缓存 网页正常情况下可以忽略此条命令</span></span><br><span class="line">hexo g <span class="comment">#生成静态网页</span></span><br><span class="line">hexo d <span class="comment">#开始部署</span></span><br></pre></td></tr></table></figure>
+
+<p>再打开网站的文件就可以看到效果————<code>https://[你的网站域名]/article/60762.html</code>（其中60762就是随机生成的）</p>
+<h3 id="2-2-安装插件方法二"><a href="#2-2-安装插件方法二" class="headerlink" title="2.2 安装插件方法二"></a>2.2 安装插件方法二</h3><p>中文链接转拼音，在 Hexo 根目录下使用 <code>git bash</code> 执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-permalink-pinyin --save</span><br></pre></td></tr></table></figure>
+
+<p>在 Hexo 根目录下的 _config.yml 文件中，修改以下的配置项：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">article/:title.html</span></span><br><span class="line"><span class="attr">permalink_pinyin:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">separator:</span> <span class="string">&#x27;-&#x27;</span>    <span class="comment"># default: &#x27;-&#x27;</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>git bash</code> 按顺序运行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="comment">#清除缓存 网页正常情况下可以忽略此条命令</span></span><br><span class="line">hexo g <span class="comment">#生成静态网页</span></span><br><span class="line">hexo d <span class="comment">#开始部署</span></span><br></pre></td></tr></table></figure>
+
+<p>再打开网站的文件就可以看到效果。<code>https://[你的网站域名]/article/wo-de-ge-ren-bo-ke.html</code>（标题为“我的个人博客”）</p>
+<h3 id="2-3-采用urlname"><a href="#2-3-采用urlname" class="headerlink" title="2.3 采用urlname"></a>2.3 采用urlname</h3><p>在写每篇md文章的时候，在 Front-matter 里加上urlname：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Next 主题介绍</span><br><span class="line">date: 2023-06-06 15:31:11</span><br><span class="line">urlname: 2023060601</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>在 Hexo 根目录下的 _config.yml 文件中，修改以下的配置项：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">article/:urlname.html</span>  <span class="comment"># urlname值文章里必须填写，格式2023060601</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>git bash</code> 按顺序运行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="comment">#清除缓存 网页正常情况下可以忽略此条命令</span></span><br><span class="line">hexo g <span class="comment">#生成静态网页</span></span><br><span class="line">hexo d <span class="comment">#开始部署</span></span><br></pre></td></tr></table></figure>
+
+<p>再打开网站的文件就可以看到效果。<code>https://[你的网站域名]/article/2023060601.html</code></p>
+<p><strong>小结</strong></p>
+<p>第一种方法是我试过中最好的；第三次之，因为每次都要手动加上urlname；而第二种，当文章的中文标题名字过长时，效果并不好。</p>
+
       </div>
       <div class="post-tags-categories">
         
@@ -838,7 +973,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!--  -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE"><span class="toc-text">1 基本设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE"><span class="toc-text">1.1 主题设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%AE%BE%E7%BD%AE%E8%8F%9C%E5%8D%95"><span class="toc-text">1.2 设置菜单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%AE%BE%E7%BD%AE%E5%BB%BA%E7%AB%99%E6%97%B6%E9%97%B4"><span class="toc-text">1.3 设置建站时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E8%AE%BE%E7%BD%AE%E5%A4%B4%E5%83%8F"><span class="toc-text">1.4 设置头像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA"><span class="toc-text">1 添加评论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F"><span class="toc-text">1.1 Valine 评论系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Gitment-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F"><span class="toc-text">1.2 Gitment 评论系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-Utterances-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F"><span class="toc-text">1.3 Utterances 评论系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5%E7%9A%84%E9%BB%98%E8%AE%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">2 修改永久链接的默认格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-text">2.1 安装插件方法一（推荐）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-text">2.2 安装插件方法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E9%87%87%E7%94%A8urlname"><span class="toc-text">2.3 采用urlname</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -864,6 +999,48 @@
       <!-- hash算法 -->
       
       <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/article/62580e04.html" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">06-06</span>
+                
+              </div>
+              <a class="post-title" href="/article/62580e04.html">Hexo 基本使用</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/article/ecc40a95.html" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">06-06</span>
+                
+              </div>
+              <a class="post-title" href="/article/ecc40a95.html">Nginx配置SSL证书</a>
+            </div>
+          </div>
         
           <div class="aside-list-item">
             
@@ -925,48 +1102,6 @@
                 
               </div>
               <a class="post-title" href="/article/85f919bc.html">你要选择一个怎样的伴侣，去渡过自己的一生？</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/db7d7796.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-06</span>
-                
-              </div>
-              <a class="post-title" href="/article/db7d7796.html">Next 主题 -- 基本配置</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/f3fb008f.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-05</span>
-                
-              </div>
-              <a class="post-title" href="/article/f3fb008f.html">博客搭建</a>
             </div>
           </div>
         

@@ -594,7 +594,7 @@
 
 <p>——————————————————————————————————————————————————————————</p>
 
-<p><strong>一、作用</strong></p>
+<h2>一、作用</h2>
 
 <p>不使用SSL/TLS的HTTP通信，就是不加密的通信。所有信息明文传播，带来了三大风险。</p>
 
@@ -620,7 +620,7 @@
 
 <p>——————————————————————————————————————————————————————————</p>
 
-<p><strong>二、历史</strong></p>
+<h2>二、历史</h2>
 
 <p>互联网加密通信协议的历史，几乎与互联网一样长。</p>
 
@@ -642,7 +642,7 @@
 
 <p>——————————————————————————————————————————————————————————</p>
 
-<p><strong>三、基本的运行过程</strong></p>
+<h3>三、基本的运行过程</h3>
 
 <p>SSL/TLS协议的基本思路是采用<a href="https://en.wikipedia.org/wiki/Public-key_cryptography" target="_blank">公钥加密法</a>，也就是说，客户端先向服务器端索要公钥，然后用公钥加密信息，服务器收到密文后，用自己的私钥解密。</p>
 
@@ -674,13 +674,13 @@
 
 <p>——————————————————————————————————————————————————————————</p>
 
-<p><strong>四、握手阶段的详细过程</strong></p>
+<h2>四、握手阶段的详细过程</h2>
 
 <p><img src="https://www.ruanyifeng.com/blogimg/asset/201402/bg2014020502.png" class="lazyload placeholder" data-srcset="https://www.ruanyifeng.com/blogimg/asset/201402/bg2014020502.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="" title=""></p>
 
 <p>"握手阶段"涉及四次通信，我们一个个来看。需要注意的是，"握手阶段"的所有通信都是明文的。</p>
 
-<p><strong>4.1 客户端发出请求（ClientHello）</strong></p>
+<h3>4.1 客户端发出请求（ClientHello）</h3>
 
 <p>首先，客户端（通常是浏览器）先向服务器发出加密通信的请求，这被叫做ClientHello请求。</p>
 
@@ -700,7 +700,7 @@
 
 <p>对于虚拟主机的用户来说，这当然很不方便。2006年，TLS协议加入了一个<a href="https://tools.ietf.org/html/rfc4366" target="_blank">Server Name Indication扩展</a>，允许客户端向服务器提供它所请求的域名。</p>
 
-<p><strong>4.2 服务器回应（SeverHello）</strong></p>
+<h3>4.2 服务器回应（SeverHello）</h3>
 
 <p>服务器收到客户端请求后，向客户端发出回应，这叫做SeverHello。服务器的回应包含以下内容。</p>
 
@@ -716,7 +716,7 @@
 
 <p>除了上面这些信息，如果服务器需要确认客户端的身份，就会再包含一项请求，要求客户端提供"客户端证书"。比如，金融机构往往只允许认证客户连入自己的网络，就会向正式客户提供USB密钥，里面就包含了一张客户端证书。</p>
 
-<p><strong>4.3 客户端回应</strong></p>
+<h3>4.3 客户端回应</h3>
 
 <p>客户端收到服务器回应以后，首先验证服务器证书。如果证书不是可信机构颁布、或者证书中的域名与实际域名不一致、或者证书已经过期，就会向访问者显示一个警告，由其选择是否还要继续通信。</p>
 
@@ -744,7 +744,7 @@
 
 <p>此外，如果前一步，服务器要求客户端证书，客户端会在这一步发送证书及相关信息。</p>
 
-<p><strong>4.4 服务器的最后回应</strong></p>
+<h3>4.4 服务器的最后回应</h3>
 
 <p>服务器收到客户端的第三个随机数pre-master key之后，计算生成本次会话所用的"会话密钥"。然后，向客户端最后发送下面信息。</p>
 
@@ -760,7 +760,7 @@
 
 <p>——————————————————————————————————————————————————————————</p>
 
-<p><strong>五、参考链接</strong></p>
+<h2>五、参考链接</h2>
 
 <ul>
 <li>MicroSoft TechNet, <a href="https://technet.microsoft.com/en-us/library/cc785811(v=ws.10).aspx" target="_blank">SSL/TLS in Detail</a></li>
@@ -1065,7 +1065,7 @@ HTTP 协议是互联网的基础协议，也是网页开发的必
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!--  -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">一、作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">二、历史</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">三、基本的运行过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">四、握手阶段的详细过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">4.1 客户端发出请求（ClientHello）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">4.2 服务器回应（SeverHello）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">4.3 客户端回应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">4.4 服务器的最后回应</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">五、参考链接</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

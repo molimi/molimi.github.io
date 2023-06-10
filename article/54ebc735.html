@@ -598,9 +598,9 @@
 
 <p><strong>互联网协议入门</strong></p>
 
-<p><strong>一、概述</strong></p>
+<h2>一、概述</strong></h2>
 
-<p><strong>1.1 五层模型</strong></p>
+<h3>1.1 五层模型</h3>
 
 <p>互联网的实现，分成好几层。每一层都有自己的功能，就像建筑物一样，每一层都靠下一层支持。</p>
 
@@ -614,7 +614,7 @@
 
 <p>它们叫什么名字，其实并不重要。只需要知道，互联网分成若干层就可以了。</p>
 
-<p><strong>1.2 层与协议</strong></p>
+<h3>1.2 层与协议</h3>
 
 <p>每一层都是为了完成一种功能。为了实现这些功能，就需要大家都遵守共同的规则。</p>
 
@@ -624,7 +624,7 @@
 
 <p>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 
-<p><strong>二、实体层</strong></p>
+<h2>二、实体层</h2>
 
 <p>我们从最底下的一层开始。</p>
 
@@ -636,15 +636,15 @@
 
 <p>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 
-<p><strong>三、链接层</strong></p>
+<h2>三、链接层</h2>
 
-<p><strong>3.1 定义</strong></p>
+<h3>3.1 定义</h3>
 
 <p>单纯的0和1没有任何意义，必须规定解读方式：多少个电信号算一组？每个信号位有何意义？</p>
 
 <p><strong>这就是"链接层"的功能，它在"实体层"的上方，确定了0和1的分组方式。</strong></p>
 
-<p><strong>3.2 以太网协议</strong></p>
+<h3>3.2 以太网协议</h3>
 
 <p>早期的时候，每家公司都有自己的电信号分组方式。逐渐地，一种叫做<a href="https://zh.wikipedia.org/wiki/%E4%BB%A5%E5%A4%AA%E7%BD%91" target="_blank">"以太网"</a>（Ethernet）的协议，占据了主导地位。</p>
 
@@ -657,7 +657,7 @@
 
 <p>"标头"的长度，固定为18字节。"数据"的长度，最短为46字节，最长为1500字节。因此，整个"帧"最短为64字节，最长为1518字节。如果数据很长，就必须分割成多个帧进行发送。</p>
 
-<p><strong>3.3 MAC地址</strong></p>
+<h3>3.3 MAC地址</h3>
 
 <p>上面提到，以太网数据包的"标头"，包含了发送者和接受者的信息。那么，发送者和接受者是如何标识呢？</p>
 
@@ -671,7 +671,7 @@
 
 <p>前6个十六进制数是厂商编号，后6个是该厂商的网卡流水号。有了MAC地址，就可以定位网卡和数据包的路径了。</p>
 
-<p><strong>3.4 广播</strong></p>
+<h3>3.4 广播</h3>
 
 <p>定义地址只是第一步，后面还有更多的步骤。</p>
 
@@ -692,9 +692,9 @@
 
 <p>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 
-<p><strong>四、网络层</strong></p>
+<h2>四、网络层</h2>
 
-<p><strong>4.1 网络层的由来</strong></p>
+<h3>4.1 网络层的由来</h3>
 
 <p>以太网协议，依靠MAC地址发送数据。理论上，单单依靠MAC地址，上海的网卡就可以找到洛杉矶的网卡了，技术上是可以实现的。</p>
 
@@ -713,7 +713,7 @@
 
 <p><strong><font color=#9900CC>网络地址帮助我们确定计算机所在的子网络，MAC地址则将数据包送到该子网络中的目标网卡。因此，从逻辑上可以推断，必定是先处理网络地址，然后再处理MAC地址。</strong></font></p>
 
-<p><strong>4.2 IP协议</strong></p>
+<h3>4.2 IP协议</h3>
 
 <p>规定网络地址的协议，叫做IP协议。它所定义的地址，就被称为IP地址。</p>
 
@@ -737,7 +737,7 @@
 
 <p>总结一下，<strong><font color=#9900CC>IP协议的作用主要有两个，一个是为每一台计算机分配IP地址，另一个是确定哪些地址在同一个子网络。</strong></font></p>
 
-<p><strong>4.3 IP数据包</strong></p>
+<h3>4.3 IP数据包</h3>
 
 <p>根据IP协议发送的数据，就叫做IP数据包。不难想象，其中必定包括IP地址信息。</p>
 
@@ -755,7 +755,7 @@
 
 <p>IP数据包的"标头"部分的长度为20到60字节，整个数据包的总长度最大为65,535字节。因此，理论上，一个IP数据包的"数据"部分，最长为65,515字节。前面说过，以太网数据包的"数据"部分，最长只有1500字节。因此，如果IP数据包超过了1500字节，它就需要分割成几个以太网数据包，分开发送了。</p>
 
-<p><strong>4.4 ARP协议</strong></p>
+<h3>4.4 ARP协议</h3>
 
 <p>关于"网络层"，还有最后一点需要说明。</p>
 
@@ -771,9 +771,9 @@
 
 <p>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 
-<p><strong>五、传输层</strong></p>
+<h2>五、传输层</h2>
 
-<p><strong>5.1 传输层的由来</strong></p>
+<h3>5.1 传输层的由来</h3>
 
 <p>有了MAC地址和IP地址，我们已经可以在互联网上任意两台主机上建立通信。</p>
 
@@ -785,7 +785,7 @@
 
 <p><strong><font color=#9900CC>"传输层"的功能，就是建立"端口到端口"的通信。相比之下，"网络层"的功能是建立"主机到主机"的通信。只要确定主机和端口，我们就能实现程序之间的交流。</font></strong>因此，Unix系统就把主机+端口，叫做"套接字"（socket）。有了它，就可以进行网络应用程序开发了。</p>
 
-<p><strong>5.2 UDP协议</strong></p>
+<h3>5.2 UDP协议</h3>
 
 <p>现在，我们必须在数据包中加入端口信息，这就需要新的协议。最简单的实现叫做UDP协议，它的格式几乎就是在数据前面，加上端口号。</p>
 
@@ -799,7 +799,7 @@
 
 <p>UDP数据包非常简单，"标头"部分一共只有8个字节，总长度不超过65,535字节，正好放进一个IP数据包。</p>
 
-<p><strong>5.3 TCP协议</strong></p>
+<h3>5.3 TCP协议</h3>
 
 <p>UDP协议的优点是比较简单，容易实现，但是缺点是可靠性较差，一旦数据包发出，无法知道对方是否收到。</p>
 
@@ -811,7 +811,7 @@
 
 <p>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 
-<p><strong>六、应用层</strong></p>
+<h2>六、应用层</h2>
 
 <p>应用程序收到"传输层"的数据，接下来就要进行解读。由于互联网是开放架构，数据来源五花八门，必须事先规定好格式，否则根本无法解读。</p>
 
@@ -827,7 +827,7 @@
 
 <p>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 
-<p><strong>七、一个小结</strong></p>
+<h2>七、一个小结</h2>
 
 <p>先对前面的内容，做一个小结。</p>
 
@@ -856,9 +856,9 @@
 
 <p>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 
-<p><strong>八、用户的上网设置</strong></p>
+<h2>八、用户的上网设置</h2>
 
-<p><strong>8.1 静态IP地址</strong></p>
+<h3>8.1 静态IP地址</h3>
 
 <p>你买了一台新电脑，插上网线，开机，这时电脑能够上网吗？</p>
 
@@ -882,7 +882,7 @@
 
 <p>但是，这样的设置很专业，普通用户望而生畏，而且如果一台电脑的IP地址保持不变，其他电脑就不能使用这个地址，不够灵活。出于这两个原因，大多数用户使用"动态IP地址上网"。</p>
 
-<p><strong>8.2 动态IP地址</strong></p>
+<h3>8.2 动态IP地址</h3>
 
 <p>所谓"动态IP地址"，指计算机开机后，会自动分配到一个IP地址，不用人为设定。它使用的协议叫做<a href="https://zh.wikipedia.org/zh/DHCP" target="_blank">DHCP协议</a>。</p>
 
@@ -892,7 +892,7 @@
 
 <p>DHCP协议做了一些巧妙的规定。</p>
 
-<p><strong>8.3 DHCP协议</strong></p>
+<h3>8.3 DHCP协议</h3>
 
 <p>首先，它是一种应用层协议，建立在UDP协议之上，所以整个数据包是这样的：</p>
 
@@ -910,7 +910,7 @@
 
 <p>新加入的计算机收到这个响应包，于是就知道了自己的IP地址、子网掩码、网关地址、DNS服务器等等参数。</p>
 
-<p><strong>8.4 上网设置：小结</strong></p>
+<h3>8.4 上网设置：小结</h3>
 
 <p>这个部分，需要记住的就是一点：不管是"静态IP地址"还是"动态IP地址"，电脑上网的首要步骤，是确定四个参数。这四个值很重要，值得重复一遍：</p>
 
@@ -925,9 +925,9 @@
 
 <p>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 
-<p><strong>九、一个实例：访问网页</strong></p>
+<h2>九、一个实例：访问网页</h2>
 
-<p><strong>9.1 本机参数</strong></p>
+<h3>9.1 本机参数</h3>
 
 <p>我们假定，经过上一节的步骤，用户设置好了自己的网络参数：</p>
 
@@ -944,7 +944,7 @@
 
 <p>这意味着，浏览器要向Google发送一个网页请求的数据包。</p>
 
-<p><strong>9.2 DNS协议</strong></p>
+<h3>9.2 DNS协议</h3>
 
 <p>我们知道，发送数据包，必须要知道对方的IP地址。但是，现在，我们只知道网址www.google.com，不知道它的IP地址。</p>
 
@@ -954,7 +954,7 @@
 
 <p>然后，DNS服务器做出响应，告诉我们Google的IP地址是172.194.72.105。于是，我们知道了对方的IP地址。</p>
 
-<p><strong>9.3 子网掩码</strong></p>
+<h3>9.3 子网掩码</h3>
 
 <p>接下来，我们要判断，这个IP地址是不是在同一个子网络，这就要用到子网掩码。</p>
 
@@ -962,7 +962,7 @@
 
 <p>因此，我们要向Google发送数据包，必须通过网关192.168.1.1转发，也就是说，接收方的MAC地址将是网关的MAC地址。</p>
 
-<p><strong>9.4 应用层协议</strong></p>
+<h3>9.4 应用层协议</h3>
 
 <p>浏览网页用的是HTTP协议，它的整个数据包构造是这样的：</p>
 
@@ -984,19 +984,19 @@
 
 <p>我们假定这个部分的长度为4960字节，它会被嵌在TCP数据包之中。</p>
 
-<p><strong>9.5 TCP协议</strong></p>
+<h3>9.5 TCP协议</h3>
 
 <p>TCP数据包需要设置端口，接收方（Google）的HTTP端口默认是80，发送方（本机）的端口是一个随机生成的1024-65535之间的整数，假定为51775。</p>
 
 <p>TCP数据包的标头长度为20字节，加上嵌入HTTP的数据包，总长度变为4980字节。</p>
 
-<p><strong>9.6 IP协议</strong></p>
+<h3>9.6 IP协议</h3>
 
 <p>然后，TCP数据包再嵌入IP数据包。IP数据包需要设置双方的IP地址，这是已知的，发送方是192.168.1.100（本机），接收方是172.194.72.105（Google）。</p>
 
 <p>IP数据包的标头长度为20字节，加上嵌入的TCP数据包，总长度变为5000字节。</p>
 
-<p><strong>9.7 以太网协议</strong></p>
+<h3>9.7 以太网协议</h3>
 
 <p>最后，IP数据包嵌入以太网数据包。以太网数据包需要设置双方的MAC地址，发送方为本机的网卡MAC地址，接收方为网关192.168.1.1的MAC地址（通过ARP协议得到）。</p>
 
@@ -1004,7 +1004,7 @@
 
 <p><img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/022.3r7z857cbfo0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/022.3r7z857cbfo0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%></p>
 
-<p><strong>9.8 服务器端响应</strong></p>
+<h3>9.8 服务器端响应</h3>
 
 <p>经过多个网关的转发，Google的服务器172.194.72.105，收到了这四个以太网数据包。</p>
 
@@ -1095,7 +1095,7 @@ HTTP 协议是互联网的基础协议，也是网页开发的必
         本篇主要记录使用 hexo 写博客并发布到个人网站上。建议先学习：MarkDown
 
 
-新建、编辑并预览文章1. 新建文
+1 新建、编辑并预览文章1. 新
       </div> -->
     </a>
   </div>
@@ -1316,7 +1316,7 @@ HTTP 协议是互联网的基础协议，也是网页开发的必
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!--  -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">一、概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">1.1 五层模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">1.2 层与协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">二、实体层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">三、链接层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">3.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">3.2 以太网协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">3.3 MAC地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">3.4 广播</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">四、网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">4.1 网络层的由来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">4.2 IP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">4.3 IP数据包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">4.4 ARP协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">五、传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">5.1 传输层的由来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">5.2 UDP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">5.3 TCP协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">六、应用层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">七、一个小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">八、用户的上网设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">8.1 静态IP地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">8.2 动态IP地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">8.3 DHCP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">8.4 上网设置：小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main-content"><span class="toc-text">九、一个实例：访问网页</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">9.1 本机参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">9.2 DNS协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">9.3 子网掩码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">9.4 应用层协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">9.5 TCP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">9.6 IP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">9.7 以太网协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-content"><span class="toc-text">9.8 服务器端响应</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

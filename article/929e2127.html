@@ -549,11 +549,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 3.2k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 2.8k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 13分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 10分钟 |
           </span>
   
           
@@ -580,30 +580,32 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <hr>
-<h2 id="3-创建UDP套接字"><a href="#3-创建UDP套接字" class="headerlink" title="3 创建UDP套接字"></a>3 创建UDP套接字</h2><p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;传输层除了有可靠的传输协议TCP之外，还有一种非常轻便的传输协议叫做用户数据报协议，简称UDP。<font color=#9900CC><strong>TCP和UDP都是提供端到端传输服务的协议，二者的差别就如同打电话和发短信的区别，后者不对传输的可靠性和可达性做出任何承诺从而避免了TCP中握手和重传的开销，所以在强调性能和而不是数据完整性的场景中（例如传输网络音视频数据），UDP可能是更好的选择。</strong></font>可能大家会注意到一个现象，就是在观看网络视频时，有时会出现卡顿，有时会出现花屏，这无非就是部分数据传丢或传错造成的。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数据包格式套接字（<code>Datagram Sockets</code>）也叫“无连接的套接字”，在代码中使用 <code>SOCK_DGRAM</code> 表示。可以将 <code>SOCK_DGRAM</code> 比喻成高速移动的摩托车快递，它有以下特征：</p>
+        <p>本文将首先利用 Python 实现面向UDP连接的套接字编程基础知识：如何创建套接字，将其绑定到特定的地址和端口，以及发送和接收数据包。其次还将学习 HTTP 协议格式的相关知识。在此基础上，本篇将用 Python 语言开发一个简单的 Web 服务器，它仅能处理一个HTTP连接请求。</p>
+<span id="more"></span>
+
+<h2 id="1-创建UDP套接字"><a href="#1-创建UDP套接字" class="headerlink" title="1 创建UDP套接字"></a>1 创建UDP套接字</h2><p>传输层除了有可靠的传输协议TCP之外，还有一种非常轻便的传输协议叫做用户数据报协议，简称UDP。<font color=#9900CC><strong>TCP和UDP都是提供端到端传输服务的协议，二者的差别就如同打电话和发短信的区别，后者不对传输的可靠性和可达性做出任何承诺从而避免了TCP中握手和重传的开销，所以在强调性能和而不是数据完整性的场景中（例如传输网络音视频数据），UDP可能是更好的选择。</strong></font>可能大家会注意到一个现象，就是在观看网络视频时，有时会出现卡顿，有时会出现花屏，这无非就是部分数据传丢或传错造成的。</p>
+<p>数据包格式套接字（<code>Datagram Sockets</code>）也叫“无连接的套接字”，在代码中使用 <code>SOCK_DGRAM</code> 表示。可以将 <code>SOCK_DGRAM</code> 比喻成高速移动的摩托车快递，它有以下特征：</p>
 <ul>
 <li>强调快速传输而非传输顺序；</li>
 <li>传输的数据可能丢失也可能损毁；</li>
 <li>限制每次传输的数据大小；</li>
 <li>数据的发送和接收是同步的。</li>
 </ul>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数据包套接字也使用 IP 协议作路由，但是它不使用 TCP 协议，而是使用 UDP 协议（User Datagram Protocol，用户数据报协议）。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;实际应用中，QQ 视频聊天和语音聊天主要使用 SOCK_DGRAM 来传输数据，因为首先要保证通信的效率，尽量减小延迟，而数据的正确性是次要的，即使丢失很小的一部分数据，视频和音频也可以正常解析，最多出现噪点或杂音，不会对通信质量有实质的影响。当然，SOCK_DGRAM 没有想象中的糟糕，不会频繁的丢失数据，数据错误只是小概率事件。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本部分将学习利用 UDP 套接字编程实现网络连通程序Ping。包含如何使用 UDP 套接字发送和接收数据报；如何设置适当的套接字超时；Ping 应用程序通信过程及计算网络统计信息（如丢包率）。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Ping 程序的基本原理：利用客户端发送一个数据包到远程机器，远程机器将收到的数据包返回到客户端（称为回显），客户端根据是否收到发送的消息及计算数据包的往返时间来反映网络是否连通及网络状态。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;首先，要实现一个用 Python 编写的简单的 Ping 服务端程序，然后再实现对应的客户端程序。程序功能类似于现代操作系统中可用的标准 Ping 程序功能，不过这里使用简单的 UDP 协议，而不是标准互联网控制消息协议（ICMP）来进行通信的</p>
-<h3 id="3-1-基于-UDP-协议的-Socket-套接字编程"><a href="#3-1-基于-UDP-协议的-Socket-套接字编程" class="headerlink" title="3.1 基于 UDP 协议的 Socket 套接字编程"></a>3.1 基于 UDP 协议的 Socket 套接字编程</h3><p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;UDP 协议是非连接的协议，通信双方不用建立连接，而是直接把要发送的数据发送给对方。UDP 协议适用于一次传输数据量很少，对可靠性要求不高的应用场景。但由于UDP 协议没有类似于 TCP 的三次握手、可靠传输机制等，所以通信效率比较高。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;UDP 协议的应用也非常广泛，比如知名的应用层协议：SNMP、DNS 都是基于 UDP的。一个常用的 UDP 通信的框架如下图所示：</p>
-<img src ="https://img-blog.csdnimg.cn/cdb632246b8a45afac85f34ccad84570.png#pic_center" width = 30%>
+<p>数据包套接字也使用 IP 协议作路由，但是它不使用 TCP 协议，而是使用 UDP 协议（User Datagram Protocol，用户数据报协议）。</p>
+<p>实际应用中，QQ 视频聊天和语音聊天主要使用 SOCK_DGRAM 来传输数据，因为首先要保证通信的效率，尽量减小延迟，而数据的正确性是次要的，即使丢失很小的一部分数据，视频和音频也可以正常解析，最多出现噪点或杂音，不会对通信质量有实质的影响。当然，SOCK_DGRAM 没有想象中的糟糕，不会频繁的丢失数据，数据错误只是小概率事件。</p>
+<p>本部分将学习利用 UDP 套接字编程实现网络连通程序Ping。包含如何使用 UDP 套接字发送和接收数据报；如何设置适当的套接字超时；Ping 应用程序通信过程及计算网络统计信息（如丢包率）。</p>
+<p>Ping 程序的基本原理：利用客户端发送一个数据包到远程机器，远程机器将收到的数据包返回到客户端（称为回显），客户端根据是否收到发送的消息及计算数据包的往返时间来反映网络是否连通及网络状态。</p>
+<p>首先，要实现一个用 Python 编写的简单的 Ping 服务端程序，然后再实现对应的客户端程序。程序功能类似于现代操作系统中可用的标准 Ping 程序功能，不过这里使用简单的 UDP 协议，而不是标准互联网控制消息协议（ICMP）来进行通信的</p>
+<h3 id="1-1-基于-UDP-协议的-Socket-套接字编程"><a href="#1-1-基于-UDP-协议的-Socket-套接字编程" class="headerlink" title="1.1 基于 UDP 协议的 Socket 套接字编程"></a>1.1 基于 UDP 协议的 Socket 套接字编程</h3><p>UDP 协议是非连接的协议，通信双方不用建立连接，而是直接把要发送的数据发送给对方。UDP 协议适用于一次传输数据量很少，对可靠性要求不高的应用场景。但由于UDP 协议没有类似于 TCP 的三次握手、可靠传输机制等，所以通信效率比较高。</p>
+<p>UDP 协议的应用也非常广泛，比如知名的应用层协议：SNMP、DNS 都是基于 UDP的。一个常用的 UDP 通信的框架如下图所示：</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/011.2h2w2f6qok40.webp#pic_center" width = 30%>
 
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;由图可以看出，客户端要发起一次请求，仅仅需要两个步骤（socket 和 sendto），而服务器端也仅仅需要三个步骤即可接收到来自客户端的消息（socket、bind、recvfrom）。和 TCP 通信不同的是，UDP 通信不需要监听（listen）及建立连接（accept）步骤，在创建及套接字后，可以直接使用 <code>sendto()</code> 及 <code>recvform()</code> 进行数据的发送及接收。</p>
-<h3 id="3-2-UDP-Ping服务程序框架"><a href="#3-2-UDP-Ping服务程序框架" class="headerlink" title="3.2 UDP Ping服务程序框架"></a>3.2 UDP Ping服务程序框架</h3><p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在这个简单的 UDP Ping 服务器程序中，完成套接字创建及绑定后，当接收到消息后进行简单处理（这里是转化为大写），再将消息回传给相应的客户端。</p>
-<h4 id="3-2-1-Ping服务端创建UDP套接字"><a href="#3-2-1-Ping服务端创建UDP套接字" class="headerlink" title="3.2.1 Ping服务端创建UDP套接字"></a>3.2.1 Ping服务端创建UDP套接字</h4><p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;创建UDP套接字，绑定地址包含主机及其端口：</p>
+<p>由图可以看出，客户端要发起一次请求，仅仅需要两个步骤（socket 和 sendto），而服务器端也仅仅需要三个步骤即可接收到来自客户端的消息（socket、bind、recvfrom）。和 TCP 通信不同的是，UDP 通信不需要监听（listen）及建立连接（accept）步骤，在创建及套接字后，可以直接使用 <code>sendto()</code> 及 <code>recvform()</code> 进行数据的发送及接收。</p>
+<h3 id="1-2-UDP-Ping服务程序框架"><a href="#1-2-UDP-Ping服务程序框架" class="headerlink" title="1.2 UDP Ping服务程序框架"></a>1.2 UDP Ping服务程序框架</h3><p>在这个简单的 UDP Ping 服务器程序中，完成套接字创建及绑定后，当接收到消息后进行简单处理（这里是转化为大写），再将消息回传给相应的客户端。</p>
+<h4 id="1-2-1-Ping服务端创建UDP套接字"><a href="#1-2-1-Ping服务端创建UDP套接字" class="headerlink" title="1.2.1 Ping服务端创建UDP套接字"></a>1.2.1 Ping服务端创建UDP套接字</h4><p>创建UDP套接字，绑定地址包含主机及其端口：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">serverSocket = socket(AF_INET, SOCK_DGRAM)</span><br><span class="line">serverSocket.bind((<span class="string">&#x27;0.0.0.0&#x27;</span>, <span class="number">12000</span>))</span><br></pre></td></tr></table></figure>
-<h4 id="3-2-2-UDP通信中发送与接收数据"><a href="#3-2-2-UDP通信中发送与接收数据" class="headerlink" title="3.2.2 UDP通信中发送与接收数据"></a>3.2.2 UDP通信中发送与接收数据</h4><p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在 UDP 通信中，使用 <code>sendto()</code> 函数发送 UDP 数据，将数据发送到套接字，输入参数 address 是形式为 <code>(host, port)</code> 的元组，指定远程地址，其中 <code>host</code> 表示服务器地址，<code>port</code> 表示服务器端口号。返回值是发送的字节数。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;接收数据使用 <code>recvfrom()</code> 函数实现。输入参数为接收缓冲区大小。该函数接收 UDP 数据，与 <code>recv()</code> 类似，但返回值是 <code>(data, address)</code>。其中 <code>data</code> 是包含接收数据的字符串，<code>address</code> 是发送数据的套接字地址。</p>
+<h4 id="1-2-2-UDP通信中发送与接收数据"><a href="#1-2-2-UDP通信中发送与接收数据" class="headerlink" title="1.2.2 UDP通信中发送与接收数据"></a>1.2.2 UDP通信中发送与接收数据</h4><p>在 UDP 通信中，使用 <code>sendto()</code> 函数发送 UDP 数据，将数据发送到套接字，输入参数 address 是形式为 <code>(host, port)</code> 的元组，指定远程地址，其中 <code>host</code> 表示服务器地址，<code>port</code> 表示服务器端口号。返回值是发送的字节数。</p>
+<p>接收数据使用 <code>recvfrom()</code> 函数实现。输入参数为接收缓冲区大小。该函数接收 UDP 数据，与 <code>recv()</code> 类似，但返回值是 <code>(data, address)</code>。其中 <code>data</code> 是包含接收数据的字符串，<code>address</code> 是发送数据的套接字地址。</p>
 <p><strong>示例如下：</strong></p>
 <ul>
 <li><p>接收数据</p>
@@ -614,48 +616,48 @@
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">udp_server.sendto(msg,addr)     <span class="comment"># 使用套接字对象udp_server的sendto()方法发送数据</span></span><br></pre></td></tr></table></figure>
 
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;完整的服务器程序一般都处于后台服务状态，通过不断循环等待客户端发送 <code>Ping</code> 消息，经过简单处理后，将消息发给相应的客户端。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在本实验中，为了避免大量资源的消耗，设置了一个接收消息计数器，当接收到消息超过设定值后，服务程序就退出（break）循环。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;UDP为应用程序提供了不可靠的传输服务。消息可能因为路由器队列溢出，硬件错误或其他原因，而在网络中丢失。但由于在内网中很少丢包甚至不丢包，所以在本实验室的服务器程序添加人为损失来模拟网络丢包的影响。这里为了模拟，采用对接收到的消息计数器进行模运算，当模 3 的取值为 1 时，就不回传消息，返回接收下一条消息。</p>
+<p>完整的服务器程序一般都处于后台服务状态，通过不断循环等待客户端发送 <code>Ping</code> 消息，经过简单处理后，将消息发给相应的客户端。</p>
+<p>在本实验中，为了避免大量资源的消耗，设置了一个接收消息计数器，当接收到消息超过设定值后，服务程序就退出（break）循环。</p>
+<p>UDP为应用程序提供了不可靠的传输服务。消息可能因为路由器队列溢出，硬件错误或其他原因，而在网络中丢失。但由于在内网中很少丢包甚至不丢包，所以在本实验室的服务器程序添加人为损失来模拟网络丢包的影响。这里为了模拟，采用对接收到的消息计数器进行模运算，当模 3 的取值为 1 时，就不回传消息，返回接收下一条消息。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建UDP套接字</span></span><br><span class="line">serverSocket = socket(AF_INET, SOCK_DGRAM)</span><br><span class="line"><span class="comment"># 绑定本机IP地址和端口号</span></span><br><span class="line">serverSocket.bind((<span class="string">&#x27;&#x27;</span>, <span class="number">12000</span>))</span><br><span class="line"></span><br><span class="line">num=<span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># 接收客户端消息</span></span><br><span class="line">    message, address = serverSocket.recvfrom(<span class="number">1024</span>)</span><br><span class="line">    <span class="comment"># 将数据包消息转换为大写</span></span><br><span class="line">    message = message.upper()</span><br><span class="line">        </span><br><span class="line">    num = num + <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> num &gt;= <span class="number">8</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> num % <span class="number">3</span> == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 将消息传回给客户端</span></span><br><span class="line">    serverSocket.sendto(message, address)</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-3-客户端创建UDP套接字"><a href="#3-3-客户端创建UDP套接字" class="headerlink" title="3.3 客户端创建UDP套接字"></a>3.3 客户端创建UDP套接字</h3><p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;创建 UDP 套接字：</p>
+<h3 id="1-3-客户端创建UDP套接字"><a href="#1-3-客户端创建UDP套接字" class="headerlink" title="1.3 客户端创建UDP套接字"></a>1.3 客户端创建UDP套接字</h3><p>创建 UDP 套接字：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">udpSocket = socket(AF_INET, SOCK_DGRAM)</span><br></pre></td></tr></table></figure>
 
-<h4 id="3-3-1-设置套接字超时时间"><a href="#3-3-1-设置套接字超时时间" class="headerlink" title="3.3.1 设置套接字超时时间"></a>3.3.1 设置套接字超时时间</h4><p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在进行客户端向服务器发送 Ping 消息的过程中，有时候可能会因为网络原因造成一直连不上服务器（如服务器程序没有开启），这时如不手动停止，Socket 可能会一直尝试重连，造成资源的浪费。这就需要设置 <code>timeout</code> 来限制重连时间，当 Socket 尝试重连到指定的时间时，就会停止一切操作，并提示达到 <code>timeout</code> 设定阈值。设置超时时间一般在创建套接字后，在网络通信之前进行。示例如下：</p>
+<h4 id="1-3-1-设置套接字超时时间"><a href="#1-3-1-设置套接字超时时间" class="headerlink" title="1.3.1 设置套接字超时时间"></a>1.3.1 设置套接字超时时间</h4><p>在进行客户端向服务器发送 Ping 消息的过程中，有时候可能会因为网络原因造成一直连不上服务器（如服务器程序没有开启），这时如不手动停止，Socket 可能会一直尝试重连，造成资源的浪费。这就需要设置 <code>timeout</code> 来限制重连时间，当 Socket 尝试重连到指定的时间时，就会停止一切操作，并提示达到 <code>timeout</code> 设定阈值。设置超时时间一般在创建套接字后，在网络通信之前进行。示例如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysocket.settimeout(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;代码作用为设定套接字的超时时间为 10 秒</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;客户端程序在创建完套接字后，通过循环向服务器发送消息，然后接收服务器回传的消息，通过计算收到消息及发送消息的时间差，来反映网络的状况。如果超时时间过后还没收到消息，则报出超时异常。</p>
-<h4 id="3-3-2-客户端向服务器发送消息并接收消息"><a href="#3-3-2-客户端向服务器发送消息并接收消息" class="headerlink" title="3.3.2 客户端向服务器发送消息并接收消息"></a>3.3.2 客户端向服务器发送消息并接收消息</h4><p><strong>1. 消息编解码</strong></p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在网络通信中，网络线路中传输的是字节（二进制格式）流 <code>bytes</code>。但在我们发送的消息习惯用字符串 <code>string</code> 来表示，这时就需要用编码 <code>encode()</code> 和解码 <code>decode()</code> 函数来转换。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<code>encode()</code> 函数：字符串类型（str）提供的方法，用于将字符串类型转换成 bytes 类型，这个过程也称为“编码”。其语法如下：</p>
+<p>代码作用为设定套接字的超时时间为 10 秒</p>
+<p>客户端程序在创建完套接字后，通过循环向服务器发送消息，然后接收服务器回传的消息，通过计算收到消息及发送消息的时间差，来反映网络的状况。如果超时时间过后还没收到消息，则报出超时异常。</p>
+<h4 id="1-3-2-客户端向服务器发送消息并接收消息"><a href="#1-3-2-客户端向服务器发送消息并接收消息" class="headerlink" title="1.3.2 客户端向服务器发送消息并接收消息"></a>1.3.2 客户端向服务器发送消息并接收消息</h4><p><strong>1. 消息编解码</strong></p>
+<p>在网络通信中，网络线路中传输的是字节（二进制格式）流 <code>bytes</code>。但在我们发送的消息习惯用字符串 <code>string</code> 来表示，这时就需要用编码 <code>encode()</code> 和解码 <code>decode()</code> 函数来转换。</p>
+<p><code>encode()</code> 函数：字符串类型（str）提供的方法，用于将字符串类型转换成 bytes 类型，这个过程也称为“编码”。其语法如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>.encode([encoding=<span class="string">&quot;utf-8&quot;</span>][,errors=<span class="string">&quot;strict&quot;</span>])</span><br></pre></td></tr></table></figure>
 
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;注意，格式中用 [] 括起来的参数为可选参数，也就是说，在使用此方法时，可以使用 [] 中的参数，也可以不使用。</p>
-<img src ="https://img-blog.csdnimg.cn/3b4bac058af44eb6979db4e5dcbe3df8.png#pic_center" width = 48%>
+<p>注意，格式中用 [] 括起来的参数为可选参数，也就是说，在使用此方法时，可以使用 [] 中的参数，也可以不使用。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/012.53ukirqvzok0.webp#pic_center" width = 48%>
 
 <p><strong>示例：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>.encode()</span><br></pre></td></tr></table></figure>
 
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;采用默认的 UTF-8 字符集将 str 编码为字节流</p>
+<p>采用默认的 UTF-8 字符集将 str 编码为字节流</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>.encode(<span class="string">&#x27;GBK&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;采用指定的 GBK 字符集将 str 编码为字节流</p>
+<p>采用指定的 GBK 字符集将 str 编码为字节流</p>
 <p><code>decode()</code> 函数：用于将 bytes 类型的二进制数据转换为 string 类型，这个过程也称为“解码”。其格式如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bytes</span>.decode([encoding=<span class="string">&quot;utf-8&quot;</span>][,errors=<span class="string">&quot;strict&quot;</span>])</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例：</strong></p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;使用默认的 UTF-8 字符集进行解码为字符串</p>
+<p>使用默认的 UTF-8 字符集进行解码为字符串</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bytes</span>.decode()</span><br></pre></td></tr></table></figure>
 
 
 
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;如果编码时采用的不是默认的 UTF-8 编码，则解码时要选择和编码时一样的格式，否则会抛出异常。</p>
+<p>如果编码时采用的不是默认的 UTF-8 编码，则解码时要选择和编码时一样的格式，否则会抛出异常。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bytes</span> = <span class="built_in">str</span>.encode(<span class="string">&quot;GBK&quot;</span>)</span><br><span class="line"><span class="built_in">bytes</span>.decode()  <span class="comment">#默认使用 UTF-8 编码，会抛出以下异常。</span></span><br><span class="line"><span class="built_in">bytes</span>.decode(<span class="string">&quot;GBK&quot;</span>)  <span class="comment">#不会抛出异常</span></span><br></pre></td></tr></table></figure>
 
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在 Ping 客户端程序中，发送消息时将发送消息的序号及发送时间发送到 Ping 服务器，然后接收消息，并将收到消息的时间与发送消息的时间差作为消息的延迟时间进行计算，并打印出来。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;客户端程序为：</p>
+<p>在 Ping 客户端程序中，发送消息时将发送消息的序号及发送时间发送到 Ping 服务器，然后接收消息，并将收到消息的时间与发送消息的时间差作为消息的延迟时间进行计算，并打印出来。</p>
+<p>客户端程序为：</p>
 <ol>
 <li>使用UDP发送<code>ping</code>消息（注意：不同于TCP，您不需要首先建立连接，因为UDP是无连接协议。）</li>
 <li>从服务器输出响应消息</li>
@@ -665,13 +667,13 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">serverName = <span class="string">&#x27;127.0.0.1&#x27;</span> 	<span class="comment"># 服务器地址，本例中使用本机地址</span></span><br><span class="line">serverPort = <span class="number">12000</span> 			<span class="comment"># 服务器指定的端口</span></span><br><span class="line">clientSocket = socket(AF_INET, SOCK_DGRAM) 	<span class="comment"># 创建UDP套接字，使用IPv4协议</span></span><br><span class="line">clientSocket.settimeout(<span class="number">1</span>) 					<span class="comment"># 设置套接字超时值1秒</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">9</span>):</span><br><span class="line">    sendTime = time.time()</span><br><span class="line">    message = (<span class="string">&#x27;Ping %d %s&#x27;</span> % (i+<span class="number">1</span>, sendTime)).encode()     <span class="comment"># 生成数据报，编码为bytes以便发送</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 将信息发送到服务器</span></span><br><span class="line">        clientSocket.sendto(message, (serverName, serverPort))</span><br><span class="line">        <span class="comment"># 从服务器接收信息，同时也能得到服务器地址</span></span><br><span class="line">        modifiedMessage, serverAddress = clientSocket.recvfrom(<span class="number">1024</span>)</span><br><span class="line">    </span><br><span class="line">        rtt = time.time() - sendTime    <span class="comment"># 计算往返时间</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Sequence %d: Reply from %s    RTT = %.3fs&#x27;</span> % (i+<span class="number">1</span>, serverName, rtt))         <span class="comment"># 显示信息</span></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Sequence %d: Request timed out.&#x27;</span> % (i+<span class="number">1</span>))</span><br><span class="line">        </span><br><span class="line">clientSocket.close()            <span class="comment"># 关闭套接字</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>服务器端：</strong></p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在一台主机上运行<code>UDPPingerServer.py</code>，作为接收ping程序数据的服务器。</p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;效果如下：</p>
-<img src ="https://img-blog.csdnimg.cn/e6c951282910490193d731f0e7afe7c9.png#pic_center" width = 48%>
+<p>在一台主机上运行<code>UDPPingerServer.py</code>，作为接收ping程序数据的服务器。</p>
+<p>效果如下：</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/013.7g8vggsmopo0.webp#pic_center" width = 48%>
 
 <p><strong>客户端：</strong></p>
-<p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在另一台主机上运行<code>UDPPinger.py</code>，效果如下：</p>
-<img src ="https://img-blog.csdnimg.cn/a1a71119113c4e308934299abdf15814.png#pic_center" width = 36%>
+<p>在另一台主机上运行<code>UDPPinger.py</code>，效果如下：</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/014.2qzffvjk6qw0.webp#pic_center" width = 36%>
       </div>
       <div class="post-tags-categories">
         
@@ -945,7 +947,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BAUDP%E5%A5%97%E6%8E%A5%E5%AD%97"><span class="toc-text">3 创建UDP套接字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%9F%BA%E4%BA%8E-UDP-%E5%8D%8F%E8%AE%AE%E7%9A%84-Socket-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B"><span class="toc-text">3.1 基于 UDP 协议的 Socket 套接字编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-UDP-Ping%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6"><span class="toc-text">3.2 UDP Ping服务程序框架</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-Ping%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%88%9B%E5%BB%BAUDP%E5%A5%97%E6%8E%A5%E5%AD%97"><span class="toc-text">3.2.1 Ping服务端创建UDP套接字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-UDP%E9%80%9A%E4%BF%A1%E4%B8%AD%E5%8F%91%E9%80%81%E4%B8%8E%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE"><span class="toc-text">3.2.2 UDP通信中发送与接收数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%88%9B%E5%BB%BAUDP%E5%A5%97%E6%8E%A5%E5%AD%97"><span class="toc-text">3.3 客户端创建UDP套接字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-%E8%AE%BE%E7%BD%AE%E5%A5%97%E6%8E%A5%E5%AD%97%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4"><span class="toc-text">3.3.1 设置套接字超时时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%90%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E5%B9%B6%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF"><span class="toc-text">3.3.2 客户端向服务器发送消息并接收消息</span></a></li></ol></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BAUDP%E5%A5%97%E6%8E%A5%E5%AD%97"><span class="toc-text">1 创建UDP套接字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%9F%BA%E4%BA%8E-UDP-%E5%8D%8F%E8%AE%AE%E7%9A%84-Socket-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B"><span class="toc-text">1.1 基于 UDP 协议的 Socket 套接字编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-UDP-Ping%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6"><span class="toc-text">1.2 UDP Ping服务程序框架</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1-Ping%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%88%9B%E5%BB%BAUDP%E5%A5%97%E6%8E%A5%E5%AD%97"><span class="toc-text">1.2.1 Ping服务端创建UDP套接字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2-UDP%E9%80%9A%E4%BF%A1%E4%B8%AD%E5%8F%91%E9%80%81%E4%B8%8E%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE"><span class="toc-text">1.2.2 UDP通信中发送与接收数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%88%9B%E5%BB%BAUDP%E5%A5%97%E6%8E%A5%E5%AD%97"><span class="toc-text">1.3 客户端创建UDP套接字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-1-%E8%AE%BE%E7%BD%AE%E5%A5%97%E6%8E%A5%E5%AD%97%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4"><span class="toc-text">1.3.1 设置套接字超时时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%90%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E5%B9%B6%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF"><span class="toc-text">1.3.2 客户端向服务器发送消息并接收消息</span></a></li></ol></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

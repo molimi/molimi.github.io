@@ -600,8 +600,8 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
 
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">容易碰到的笔试面试题</span><br><span class="line">        1) tcp/ip有哪几层</span><br><span class="line">                应用层、传输层、网络层、网络接口层</span><br><span class="line">        2) 传输层有哪些协议</span><br><span class="line">                tcp   udp    icmp</span><br><span class="line">        3) 应用层有哪些协议</span><br><span class="line">                http  ftp  dns  dhcp</span><br><span class="line">        4) 请描述同一网段下主机A ping 主机B的全过程   (百度)</span><br><span class="line">                同一网段下   没用到dns</span><br><span class="line">                ping 192.168.1.100(不知道对方的网卡地址 MAC   MAC地址：每一个网卡有一个唯一地址(物理地址))    </span><br><span class="line">                如何得到对方MAC地址(用arp协议)</span><br><span class="line">                1) A发送一个ARP广播包，询问192.168.1.100的MAC地址是多少</span><br><span class="line">                2) B回送ARP包，包中携带自己的MAC地址(00 50 A9 90 88 07)    </span><br><span class="line">                3) A记录ip地址，ARP表中(以后不用发送广播包)（可以不写）</span><br><span class="line">                4) A 发送一个icmp报文给B</span><br><span class="line">                5) B收到回送一个icmp报文    </span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="1-网络层"><a href="#1-网络层" class="headerlink" title="1 网络层"></a>1 网络层</h2><h3 id="1-1-IP协议"><a href="#1-1-IP协议" class="headerlink" title="1.1 IP协议"></a>1.1 IP协议</h3><p>IP协议是TCP&#x2F;IP协议的核心，所有的TCP，UDP，IMCP，IGMP的数据都以IP数据格式传输。要注意的是，IP不是可靠的协议，这是说，IP协议没有提供一种数据未传达以后的处理机制，这被认为是上层协议：TCP或UDP要做的事情。</p>
-<h4 id="1-1-1-IP地址"><a href="#1-1-1-IP地址" class="headerlink" title="1.1.1 IP地址"></a>1.1.1 IP地址</h4><p>在数据链路层中我们一般通过MAC地址来识别不同的节点，而在IP层我们也要有一个类似的地址标识，这就是IP地址。</p>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><h3 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h3><p>IP协议是TCP&#x2F;IP协议的核心，所有的TCP，UDP，IMCP，IGMP的数据都以IP数据格式传输。要注意的是，IP不是可靠的协议，这是说，IP协议没有提供一种数据未传达以后的处理机制，这被认为是上层协议：TCP或UDP要做的事情。</p>
+<h4 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h4><p>在数据链路层中我们一般通过MAC地址来识别不同的节点，而在IP层我们也要有一个类似的地址标识，这就是IP地址。</p>
 <p>32位IP地址分为网络位和地址位，这样做可以减少路由器中路由表记录的数目，有了网络地址，就可以限定拥有相同网络地址的终端都在同一个范围内，那么路由表只需要维护一条这个网络地址的方向，就可以找到相应的这些终端了。</p>
 <ul>
 <li>A类IP地址: 0.0.0.0~127.255.255.255    IP 地址的前 8 位代表网络 ID ，后 24 位代表主机 ＩＤ。</li>
@@ -611,18 +611,18 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
 <p>全是 0 的主机 ID 代表网络本身，比如说 IP 地址为 130.100.0.0 指的是网络 ID 为130.100 的 B 类地址。</p>
 <p>全是 1 的主机 ID 代表广播，是用于向该网络中的全部主机方法消息的。 IP 地址为 130.100.255.255 就是网络 ID 为 130.100 网络的广播地址（二进制 IP 地址中全是 1 ，转换为十进制就是 255 ）</p>
 <p>以十进制 127 开头的地址都是环回地址。目的地址是环回地址的消息，其实是由本地发送和接收的。主要是用于测试 TCP&#x2F;IP 软件是否正常工作。我们用 ping 功能的时候，一般用的环回地址是 127.0.0.1</p>
-<h4 id="1-1-2-IP协议头"><a href="#1-1-2-IP协议头" class="headerlink" title="1.1.2 IP协议头"></a>1.1.2 IP协议头</h4><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/025.2hkf0vw2kgw0.webp#pic_center" width = 48%>
+<h4 id="IP协议头"><a href="#IP协议头" class="headerlink" title="IP协议头"></a>IP协议头</h4><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/025.2hkf0vw2kgw0.webp#pic_center" width = 48%>
 
 <p>这里只介绍:八位的TTL字段。这个字段规定该数据包在穿过多少个路由之后才会被抛弃。某个IP数据包每穿过一个路由器，该数据包的TTL数值就会减少1，当该数据包的TTL成为零，它就会被自动抛弃。<br>这个字段的最大值也就是255，也就是说一个协议包也就在路由器里面穿行255次就会被抛弃了，根据系统的不同，这个数字也不一样，一般是32或者是64</p>
-<h3 id="1-2-ARP及RARP协议"><a href="#1-2-ARP及RARP协议" class="headerlink" title="1.2 ARP及RARP协议"></a>1.2 ARP及RARP协议</h3><p>ARP 是根据IP地址获取MAC地址的一种协议。</p>
+<h3 id="ARP及RARP协议"><a href="#ARP及RARP协议" class="headerlink" title="ARP及RARP协议"></a>ARP及RARP协议</h3><p>ARP 是根据IP地址获取MAC地址的一种协议。</p>
 <p>ARP（地址解析）协议是一种解析协议，本来主机是完全不知道这个IP对应的是哪个主机的哪个接口，当主机要发送一个IP包的时候，会首先查一下自己的ARP高速缓存（就是一个IP-MAC地址对应表缓存）。</p>
 <p>如果查询的IP－MAC值对不存在，那么主机就向网络发送一个ARP协议广播包，这个广播包里面就有待查询的IP地址，而直接收到这份广播的包的所有主机都会查询自己的IP地址，如果收到广播包的某一个主机发现自己符合条件，那么就准备好一个包含自己的MAC地址的ARP包传送给发送ARP广播的主机。</p>
 <p>而广播主机拿到ARP包后会更新自己的ARP缓存（就是存放IP-MAC对应表的地方）。发送广播的主机就会用新的ARP缓存数据准备好数据链路层的的数据包发送工作。</p>
 <p>RARP协议的工作与此相反，不做赘述。</p>
-<h3 id="1-3-ICMP协议"><a href="#1-3-ICMP协议" class="headerlink" title="1.3 ICMP协议"></a>1.3 ICMP协议</h3><p>IP协议并不是一个可靠的协议，它不保证数据被送达，那么，自然的，保证数据送达的工作应该由其他的模块来完成。其中一个重要的模块就是ICMP(网络控制报文)协议。ICMP不是高层协议，而是IP层的协议。</p>
+<h3 id="ICMP协议"><a href="#ICMP协议" class="headerlink" title="ICMP协议"></a>ICMP协议</h3><p>IP协议并不是一个可靠的协议，它不保证数据被送达，那么，自然的，保证数据送达的工作应该由其他的模块来完成。其中一个重要的模块就是ICMP(网络控制报文)协议。ICMP不是高层协议，而是IP层的协议。</p>
 <p>当传送IP数据包发生错误。比如主机不可达，路由不可达等等，ICMP协议将会把错误信息封包，然后传送回给主机。给主机一个处理错误的机会，这也就是为什么说建立在IP层以上的协议是可能做到安全的原因。</p>
 <hr>
-<h2 id="2-传输层"><a href="#2-传输层" class="headerlink" title="2 传输层"></a>2 传输层</h2><h3 id="2-1-TCP和UDP协议"><a href="#2-1-TCP和UDP协议" class="headerlink" title="2.1 TCP和UDP协议"></a>2.1 TCP和UDP协议</h3><p>TCP&#x2F;UDP都是是传输层协议，但是两者具有不同的特性，同时也具有不同的应用场景，下面以图表的形式对比分析。</p>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><h3 id="TCP和UDP协议"><a href="#TCP和UDP协议" class="headerlink" title="TCP和UDP协议"></a>TCP和UDP协议</h3><p>TCP&#x2F;UDP都是是传输层协议，但是两者具有不同的特性，同时也具有不同的应用场景，下面以图表的形式对比分析。</p>
 <img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/026.6oc8u9v1cf40.webp#pic_center" width = 48%>
 
 
@@ -631,14 +631,14 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
 <p><strong>面向字节流(TCP)</strong></p>
 <p>面向字节流的话，虽然应用程序和TCP的交互是一次一个数据块（大小不等），但TCP把应用程序看成是一连串的无结构的字节流。TCP有一个缓冲，当应用程序传送的数据块太长，TCP就可以把它划分短一些再传送。</p>
 <p>关于拥塞控制，流量控制，是TCP的重点，后面讲解。</p>
-<h3 id="2-2-TCP和UDP协议的一些应用"><a href="#2-2-TCP和UDP协议的一些应用" class="headerlink" title="2.2 TCP和UDP协议的一些应用"></a>2.2 TCP和UDP协议的一些应用</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/027.mwy4ndfwxgw.webp#pic_center" width = 48%>
+<h3 id="TCP和UDP协议的一些应用"><a href="#TCP和UDP协议的一些应用" class="headerlink" title="TCP和UDP协议的一些应用"></a>TCP和UDP协议的一些应用</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/027.mwy4ndfwxgw.webp#pic_center" width = 48%>
 
 <p><strong>什么时候应该使用TCP？</strong></p>
 <p>当对网络通讯质量有要求的时候，比如：整个数据要准确无误的传递给对方，这往往用于一些要求可靠的应用，比如HTTP、HTTPS、FTP等传输文件的协议，POP、SMTP等邮件传输的协议。</p>
 <p><strong>什么时候应该使用UDP？</strong></p>
 <p>当对网络通讯质量要求不高的时候，要求网络通讯速度能尽量的快，这时就可以使用UDP。</p>
 <hr>
-<h2 id="3-TCP“三次握手”和“四次挥手”"><a href="#3-TCP“三次握手”和“四次挥手”" class="headerlink" title="3 TCP“三次握手”和“四次挥手”"></a>3 TCP“三次握手”和“四次挥手”</h2><h3 id="3-1-三次握手"><a href="#3-1-三次握手" class="headerlink" title="3.1 三次握手"></a>3.1 三次握手</h3><p>TCP是面向连接的，无论哪一方向另一方发送数据之前，都必须先在双方之间建立一条连接。在TCP&#x2F;IP协议中，TCP协议提供可靠的连接服务，连接是通过三次握手进行初始化的。<font color=#9900CC><strong>三次握手的目的是同步连接双方的序列号和确认号并交换 TCP窗口大小信息。</font></strong></p>
+<h2 id="TCP“三次握手”和“四次挥手”"><a href="#TCP“三次握手”和“四次挥手”" class="headerlink" title="TCP“三次握手”和“四次挥手”"></a>TCP“三次握手”和“四次挥手”</h2><h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p>TCP是面向连接的，无论哪一方向另一方发送数据之前，都必须先在双方之间建立一条连接。在TCP&#x2F;IP协议中，TCP协议提供可靠的连接服务，连接是通过三次握手进行初始化的。<font color=#9900CC><strong>三次握手的目的是同步连接双方的序列号和确认号并交换 TCP窗口大小信息。</font></strong></p>
 <img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/028.3ue72zpsrbs0.webp#pic_center" width = 48%>
 
 <ol>
@@ -648,7 +648,7 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
 </ol>
 <p><strong>为什么要三次握手？</strong></p>
 <p>为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误。</p>
-<h3 id="3-2-四次挥手"><a href="#3-2-四次挥手" class="headerlink" title="3.2 四次挥手"></a>3.2 四次挥手</h3><p>当客户端和服务器通过三次握手建立了TCP连接以后，当数据传送完毕，肯定是要断开TCP连接的啊。那对于TCP的断开连接，这里就有了神秘的“四次分手”。</p>
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p>当客户端和服务器通过三次握手建立了TCP连接以后，当数据传送完毕，肯定是要断开TCP连接的啊。那对于TCP的断开连接，这里就有了神秘的“四次分手”。</p>
 <img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/029.4cz29awk4ty0.webp#pic_center" width = 40%>
 
 <ol>
@@ -663,7 +663,7 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
 <p>MSL是Maximum Segment Lifetime，最大报文段生存时间，2个MSL是报文段发送和接收的最长时间。</p>
 <p>假定网络不可靠，那么第四次发送的ACK可能丢失，即B端无法收到这个ACK，如果B端收不到这个确认ACK，B端会定时向A端重复发送FIN，直到B端收到A的确认ACK。所以这个2MSL就是用来处理这个可能丢失的ACK的。而且能确保下一个新的连接中没有这个旧连接的报文。</p>
 <hr>
-<h2 id="4-TCP流量控制"><a href="#4-TCP流量控制" class="headerlink" title="4 TCP流量控制"></a>4 TCP流量控制</h2><p>如果发送方把数据发送得过快，接收方可能会来不及接收，这就会造成数据的丢失。所谓流量控制就是让发送方的发送速率不要太快，要让接收方来得及接收。</p>
+<h2 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h2><p>如果发送方把数据发送得过快，接收方可能会来不及接收，这就会造成数据的丢失。所谓流量控制就是让发送方的发送速率不要太快，要让接收方来得及接收。</p>
 <p>利用滑动窗口机制可以很方便地在TCP连接上实现对发送方的流量控制。</p>
 <p>设A向B发送数据。在连接建立时，B告诉了A：“我的接收窗口是 rwnd &#x3D; 400 ”(这里的 rwnd 表示 receiver window) 。因此，发送方的发送窗口不能超过接收方给出的接收窗口的数值。请注意，TCP的窗口单位是字节，不是报文段。假设每一个报文段为100字节长，而数据报文段序号的初始值设为1。ACK表示首部中的确认位ACK，ack表示确认字段的值ack。</p>
 <img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/030.1txsbpry9oxs.webp#pic_center" width = 48%>
@@ -671,7 +671,7 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
 <p>从图中可以看出，B进行了三次流量控制。第一次把窗口减少到 rwnd &#x3D; 300 ，第二次又减到了 rwnd &#x3D; 100 ，最后减到 rwnd &#x3D; 0 ，即不允许发送方再发送数据了。这种使发送方暂停发送的状态将持续到主机B重新发出一个新的窗口值为止。B向A发送的三个报文段都设置了 ACK &#x3D; 1 ，只有在ACK&#x3D;1时确认号字段才有意义。</p>
 <p>TCP为每一个连接设有一个持续计时器(persistence timer)。只要TCP连接的一方收到对方的零窗口通知，就启动持续计时器。若持续计时器设置的时间到期，就发送一个零窗口控测报文段（携1字节的数据），那么收到这个报文段的一方就重新设置持续计时器。</p>
 <hr>
-<h2 id="5-TCP拥塞控制"><a href="#5-TCP拥塞控制" class="headerlink" title="5 TCP拥塞控制"></a>5 TCP拥塞控制</h2><h3 id="5-1-慢开始和拥塞避免"><a href="#5-1-慢开始和拥塞避免" class="headerlink" title="5.1 慢开始和拥塞避免"></a>5.1 慢开始和拥塞避免</h3><p>发送方维持一个拥塞窗口 cwnd ( congestion window )的状态变量。拥塞窗口的大小取决于网络的拥塞程度，并且动态地在变化。发送方让自己的发送窗口等于拥塞窗口。</p>
+<h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><h3 id="慢开始和拥塞避免"><a href="#慢开始和拥塞避免" class="headerlink" title="慢开始和拥塞避免"></a>慢开始和拥塞避免</h3><p>发送方维持一个拥塞窗口 cwnd ( congestion window )的状态变量。拥塞窗口的大小取决于网络的拥塞程度，并且动态地在变化。发送方让自己的发送窗口等于拥塞窗口。</p>
 <p>发送方控制拥塞窗口的原则是：只要网络没有出现拥塞，拥塞窗口就再增大一些，以便把更多的分组发送出去。但只要网络出现拥塞，拥塞窗口就减小一些，以减少注入到网络中的分组数。</p>
 <p><strong>慢开始算法</strong></p>
 <p>当主机开始发送数据时，如果立即所大量数据字节注入到网络，那么就有可能引起网络拥塞，因为现在并不清楚网络的负荷情况。<br>因此，较好的方法是 先探测一下，即由小到大逐渐增大发送窗口，也就是说，由小到大逐渐增大拥塞窗口数值。</p>
@@ -695,7 +695,7 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
 <p>如下图，用具体数值说明了上述拥塞控制的过程。现在发送窗口的大小和拥塞窗口一样大。</p>
 <img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/033.5kw010mrs6s0.webp#pic_center" width = 48%>
 
-<h3 id="5-2-快重传和快恢复"><a href="#5-2-快重传和快恢复" class="headerlink" title="5.2 快重传和快恢复"></a>5.2 快重传和快恢复</h3><p><strong>快重传</strong></p>
+<h3 id="快重传和快恢复"><a href="#快重传和快恢复" class="headerlink" title="快重传和快恢复"></a>快重传和快恢复</h3><p><strong>快重传</strong></p>
 <p>快重传算法首先要求接收方每收到一个失序的报文段后就立即发出重复确认（为的是使发送方及早知道有报文段没有到达对方）而不要等到自己发送数据时才进行捎带确认。</p>
 <img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/034.4np51k8fxnk0.webp#pic_center" width = 48%>
 
@@ -784,11 +784,11 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
     <a href="/article/84fa558.html" class="post-nav-link">
       <div class="title">
         <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">计算机网络篇（五）-- TCP套接字与UDP套接字编程</div>
+        <div class="title-text">计算机网络篇（五）-- TCP套接字编程</div>
       </div>
       
       <!-- <div class="content">
-        
+        1 Python3 网络编程1.1 介绍&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
       </div> -->
     </a>
   </div>
@@ -1033,7 +1033,7 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-text">1 网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-IP%E5%8D%8F%E8%AE%AE"><span class="toc-text">1.1 IP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-IP%E5%9C%B0%E5%9D%80"><span class="toc-text">1.1.1 IP地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-IP%E5%8D%8F%E8%AE%AE%E5%A4%B4"><span class="toc-text">1.1.2 IP协议头</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-ARP%E5%8F%8ARARP%E5%8D%8F%E8%AE%AE"><span class="toc-text">1.2 ARP及RARP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-ICMP%E5%8D%8F%E8%AE%AE"><span class="toc-text">1.3 ICMP协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-text">2 传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-TCP%E5%92%8CUDP%E5%8D%8F%E8%AE%AE"><span class="toc-text">2.1 TCP和UDP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-TCP%E5%92%8CUDP%E5%8D%8F%E8%AE%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BA%94%E7%94%A8"><span class="toc-text">2.2 TCP和UDP协议的一些应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-TCP%E2%80%9C%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E2%80%9D%E5%92%8C%E2%80%9C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E2%80%9D"><span class="toc-text">3 TCP“三次握手”和“四次挥手”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-text">3.1 三次握手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-text">3.2 四次挥手</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-text">4 TCP流量控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-text">5 TCP拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%85%A2%E5%BC%80%E5%A7%8B%E5%92%8C%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D"><span class="toc-text">5.1 慢开始和拥塞避免</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%BF%AB%E9%87%8D%E4%BC%A0%E5%92%8C%E5%BF%AB%E6%81%A2%E5%A4%8D"><span class="toc-text">5.2 快重传和快恢复</span></a></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-text">网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E5%8D%8F%E8%AE%AE"><span class="toc-text">IP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80"><span class="toc-text">IP地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E5%8D%8F%E8%AE%AE%E5%A4%B4"><span class="toc-text">IP协议头</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP%E5%8F%8ARARP%E5%8D%8F%E8%AE%AE"><span class="toc-text">ARP及RARP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ICMP%E5%8D%8F%E8%AE%AE"><span class="toc-text">ICMP协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-text">传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E5%92%8CUDP%E5%8D%8F%E8%AE%AE"><span class="toc-text">TCP和UDP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E5%92%8CUDP%E5%8D%8F%E8%AE%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BA%94%E7%94%A8"><span class="toc-text">TCP和UDP协议的一些应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E2%80%9C%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E2%80%9D%E5%92%8C%E2%80%9C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E2%80%9D"><span class="toc-text">TCP“三次握手”和“四次挥手”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-text">三次握手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-text">四次挥手</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-text">TCP流量控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-text">TCP拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%85%A2%E5%BC%80%E5%A7%8B%E5%92%8C%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D"><span class="toc-text">慢开始和拥塞避免</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%87%8D%E4%BC%A0%E5%92%8C%E5%BF%AB%E6%81%A2%E5%A4%8D"><span class="toc-text">快重传和快恢复</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1059,6 +1059,27 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
       <!-- hash算法 -->
       
       <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/article/929e2127.html" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">06-10</span>
+                
+              </div>
+              <a class="post-title" href="/article/929e2127.html">计算机网络篇（六）- UDP套接字编程</a>
+            </div>
+          </div>
         
           <div class="aside-list-item">
             
@@ -1119,7 +1140,7 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
                   <span class="post-date">06-08</span>
                 
               </div>
-              <a class="post-title" href="/article/84fa558.html">计算机网络篇（五）-- TCP套接字与UDP套接字编程</a>
+              <a class="post-title" href="/article/84fa558.html">计算机网络篇（五）-- TCP套接字编程</a>
             </div>
           </div>
         
@@ -1141,27 +1162,6 @@ dns服务器记录了常用的ip地址和域名的对应关系<li>icmp (ping 命
                 
               </div>
               <a class="post-title" href="/article/1ee3e5d0.html">计算机网络篇（四）-- TCP/IP协议族详解</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/ae7157b3.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-08</span>
-                
-              </div>
-              <a class="post-title" href="/article/ae7157b3.html">计算机网络篇（三）-- SSL/TLS协议运行机制的概述</a>
             </div>
           </div>
         

@@ -8,8 +8,14 @@
       <link href="/article/a0d5b4a3.html"/>
       <url>/article/a0d5b4a3.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>本篇文章是对计算机基础专栏下的文章进行汇总，方便系统地学习和复习。</p><span id="more"></span><h2 id="1-计算机"><a href="#1-计算机" class="headerlink" title="1 计算机"></a>1 计算机</h2><h3 id="1-1-网络篇"><a href="#1-1-网络篇" class="headerlink" title="1.1  网络篇"></a>1.1  网络篇</h3><ul><li><a href="https://qxienote.com/article/54ebc735.html">计算机网络篇（一）– 网络协议入门</a></li><li><a href="https://qxienote.com/article/279b4884.html">计算机网络篇（二）– HTTP 协议入门</a></li><li><a href="https://qxienote.com/article/ae7157b3.html">计算机网络篇（三）– SSL&#x2F;TLS 协议入门</a></li><li><a href="https://qxienote.com/article/1ee3e5d0.html">计算机网络篇（四）– TCP&#x2F;IP 协议族详解</a></li><li><a href="https://qxienote.com/article/84fa558.html">计算机网络篇（五）– TCP 套接字编程</a></li><li><a href="https://qxienote.com/article/929e2127.html">计算机网络篇（六）– UDP 套接字编程</a></li><li><a href="https://qxienote.com/article/24fe53d6.html">计算机网络篇（七）– ICMP-Ping 服务程序框架</a></li><li><a href="https://qxienote.com/article/ba7802fc.html">计算机网络篇（八）-邮件客户端实现与电子邮件发送</a></li></ul><h3 id="1-2-《计算机网络—自顶向下方法》-Wireshark实验"><a href="#1-2-《计算机网络—自顶向下方法》-Wireshark实验" class="headerlink" title="1.2 《计算机网络—自顶向下方法》 Wireshark实验"></a>1.2 《计算机网络—自顶向下方法》 Wireshark实验</h3><ul><li><a href="https://blog.csdn.net/xq151750111/article/details/130515236">《计算机网络—自顶向下方法》 Wireshark实验（一）：Wireshark软件的安装和入门</a></li><li><a href="https://blog.csdn.net/xq151750111/article/details/130536991">《计算机网络—自顶向下方法》 Wireshark实验（二）：HTTP协议分析</a></li><li><a href="https://blog.csdn.net/xq151750111/article/details/130576182">《计算机网络—自顶向下方法》 Wireshark实验（三）：DNS协议分析</a></li><li><a href="https://blog.csdn.net/xq151750111/article/details/130648866">《计算机网络—自顶向下方法》 Wireshark实验（四）：TCP 协议分析</a></li><li><a href="https://blog.csdn.net/xq151750111/article/details/130660079">《计算机网络—自顶向下方法》 Wireshark实验（五）：UDP 协议分析</a></li><li><a href="https://blog.csdn.net/xq151750111/article/details/130675220">《计算机网络—自顶向下方法》 Wireshark实验（六）：IP 协议分析</a></li><li><a href="https://blog.csdn.net/xq151750111/article/details/130663286">《计算机网络—自顶向下方法》 Wireshark实验（七）：以太网与ARP协议分析</a></li><li><a href="https://blog.csdn.net/xq151750111/article/details/130775056">《计算机网络—自顶向下方法》 Wireshark实验（八）：ICMP 协议分析</a></li><li><a href="https://blog.csdn.net/xq151750111/article/details/130769488">《计算机网络—自顶向下方法》 Wireshark实验（九）：DHCP 协议分析</a></li><li><a href="https://blog.csdn.net/xq151750111/article/details/130775356">《计算机网络—自顶向下方法》 Wireshark实验（十）：NAT 协议分析</a></li></ul>]]></content>
       
+      
+      <categories>
+          
+          <category> 计算机基础 </category>
+          
+      </categories>
       
       
     </entry>

@@ -532,15 +532,28 @@
       
 
       
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/Python/" class="post-detail-header_category">
+              Python
+            </a>
+          
+            <a href="/categories/Python/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-detail-header_category">
+              数据结构与算法
+            </a>
+          
+        </span>
+      
 
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 0 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 1.8k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 1分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 6分钟 |
           </span>
   
           
@@ -567,9 +580,47 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        
+        <p>本篇主要介绍Python数据结构篇队列和双端队列的定义与实现，最后用经典的约瑟夫问题和回文词判定来演示队列的应用。</p>
+<span id="more"></span>
+
+<h2 id="1-队列"><a href="#1-队列" class="headerlink" title="1 队列"></a>1 队列</h2><h3 id="1-1-简单队列"><a href="#1-1-简单队列" class="headerlink" title="1.1 简单队列"></a>1.1 简单队列</h3><p>队列是一种有次序的数据集合，其特征是新数据项的添加总发生在一端（通常称为“尾rear”端）；而现存数据项的移除总发生在另一端（通常称为“首front”端）。当一个元素被加入到队列之后，它就从队尾开始向队首前进，直到它成为下一个即将被移出队列的元素。</p>
+<p>最新被加入的元素必须处于队尾，在队列停留最长时间的元素处于队首。这种原则有时候叫做“先进先出”（FIFO, first-in first-out），有时候也叫做“先到先服务”。</p>
+<h3 id="1-2-双端队列"><a href="#1-2-双端队列" class="headerlink" title="1.2 双端队列"></a>1.2 双端队列</h3><p>双端队列（deque 或 double-ended queue）与队列类似，也是一系列元素的有序组合。其两端称为队首（front）和队尾（rear），元素在到达两端之前始终位于双端队列中。与队列不同的是，双端队列对元素添加和删除的限制不那么严格，元素可以从两端插入，也可以从两端删除。可以说，双端队列这种混合的线性数据结构拥有栈和队列各自拥有的所有功能。图3是一个由Python数据对象构成的双端队列。 应当指出，&#x3D;&#x3D;双端队列虽然具备栈和队列的许多特征，但其中的数据项不满足严格的“后进先出”或“先进先出”顺序，这使得插入和删除操作的规律性需要由用户自己维持。&#x3D;&#x3D;</p>
+<center> <img style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/014.11q15o2dt6y8.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/014.11q15o2dt6y8.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=48%><div style="color:orange; border-bottom: 1px solid #d9d9d9; display: inline-block; color: #999; padding: 2px;">图3 一个由 Python 数据对象构成的双端队列</div> </center>
+
+<h2 id="2-队列的抽象数据类型"><a href="#2-队列的抽象数据类型" class="headerlink" title="2 队列的抽象数据类型"></a>2 队列的抽象数据类型</h2><h3 id="2-1-简单队列"><a href="#2-1-简单队列" class="headerlink" title="2.1 简单队列"></a>2.1 简单队列</h3><p>抽象数据类型队列通过以下的一些结构和操作来定义。如前文所述，一个队列由一系列有序的元素构成，它们从叫做“队尾”的一端进入队列，再从叫做“队首”的另一端被移出队列。队列保持“先进先出”的特性。下面是队列的一些操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Queue()：创建一个空队列对象，返回值为Queue对象；</span><br><span class="line">enqueue(item)：将数据项item添加到队尾，无返回值；</span><br><span class="line">dequeue()：从队首移除数据项，返回值为队首数据项，队列被修改；</span><br><span class="line">isEmpty()：测试是否空队列，返回值为布尔值</span><br><span class="line">size()：返回队列中数据项的个数。</span><br></pre></td></tr></table></figure>
+
+<p>我们需要决定列表的哪一端做队尾，哪一端用来做队首。下面的一段代码设定队列的队尾在列表的0位置。这使得我们能够利用列表的insert 功能来向队列的队尾添加新的元素。而pop操作则可以用来移除队首的元素（也就是列表的最后一个元素）。这也意味着enqueue的复杂度是O(n)，而dequeue的复杂度是O(1)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Queue</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.items = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">is_empty</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.items == []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">enqueue</span>(<span class="params">self, item</span>):        <span class="comment"># 复杂度O(n)</span></span><br><span class="line">        self.items.insert(<span class="number">0</span>, item)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dequeue</span>(<span class="params">self</span>):      <span class="comment"># 复杂度O(1)</span></span><br><span class="line">        <span class="keyword">return</span> self.items.pop()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">size</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.items)</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-双端队列"><a href="#2-2-双端队列" class="headerlink" title="2.2 双端队列"></a>2.2 双端队列</h2><p>双端队列的定义的操作如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Deque()：创建一个空双端队列</span><br><span class="line">addFront(item)：将item加入队首</span><br><span class="line">addRear(item)：将item加入队尾</span><br><span class="line">removeFront()：从队首移除数据项，返回值为移除的数据项</span><br><span class="line">removeRear()：从队尾移除数据项，返回值为移除的数据项</span><br><span class="line">isEmpty()：返回deque是否为空</span><br><span class="line">size()：返回deque中包含数据项的个数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Deque</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.items = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isEmpty</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.items == []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addFront</span>(<span class="params">self, item</span>):</span><br><span class="line">        self.items.append(item)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addRear</span>(<span class="params">self, item</span>):</span><br><span class="line">        self.items.insert(<span class="number">0</span>,item)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeFront</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.items.pop()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeRear</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.items.pop(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">size</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.items)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-队列的应用"><a href="#3-队列的应用" class="headerlink" title="3 队列的应用"></a>3 队列的应用</h2><h3 id="3-1-热土豆问题"><a href="#3-1-热土豆问题" class="headerlink" title="3.1 热土豆问题"></a>3.1 热土豆问题</h3><p>首先，让我们来考虑一个叫做热土豆的儿童游戏。在这个游戏中（见图1）小孩子们围成一个圆圈并以最快的速度接连传递物品，并在游戏的一个特定时刻停止传递，这时手中拿着物品的小孩就离开圆圈，游戏进行至只剩下一个小孩。</p>
+<center> <img style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/015.43fpvi3k4ju0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/015.43fpvi3k4ju0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%><div style="color:orange; border-bottom: 1px solid #d9d9d9; display: inline-block; color: #999; padding: 2px;">图1 六人传土豆游戏</div> </center>
+
+
+<p>现在，我们也将热土豆问题称作Josephus问题。这个故事是关于公元1世纪著名历史学家Flavius Josephus 的，传说在犹太民族反抗罗马统治的战争中，Josephus 和他的39个同胞在一个洞穴中与罗马人相对抗。当注定的失败即将来临之时，他们决定宁可死也不投降罗马。于是他们围成一个圆圈，其中一个人被指定为第一位然后他们按照顺时针进行计数，每数到第七个人就把他杀死。传说中Josephus 除了熟知历史之外还是一个精通于数学的人。他迅速找出了那个能留到最后的位置。最后一刻，他没有选择自杀而是加入了罗马的阵营。这个故事还有许多不同的版本。有些是以三为单位进行计数，有些则是让最后一个留下的骑马逃走。但不管是哪个版本，其核心原理都是一致的。</p>
+<p>求解思路：1）模拟程序采用队列来存放所有参加游戏的人名，按照传递土豆方向从队首排到队尾；游戏时，队首始终是持有土豆的人。2）模拟游戏开始，只需要将队首的人出队，随即再到队尾入队，算是土豆的一次传递；传递了num次后，将队首的人移除，不再入队如此反复，直到队列中剩余1人。</p>
+<center> <img style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/016.18ra4wy738n4.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/016.18ra4wy738n4.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%><div style="color:orange; border-bottom: 1px solid #d9d9d9; display: inline-block; color: #999; padding: 2px;">图2 用队列模拟热土豆问题</div> </center>
+
+<p><strong>参考代码：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Queue</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hot_potato</span>(<span class="params">namelist, nums</span>):</span><br><span class="line">    sim_queue = queue.Queue()</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> namelist:</span><br><span class="line">        sim_queue.enqueue(name)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> sim_queue.size() &gt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(nums):</span><br><span class="line">            sim_queue.enqueue(sim_queue.dequeue())</span><br><span class="line">        sim_queue.dequeue()</span><br><span class="line">    <span class="keyword">return</span> sim_queue.dequeue()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(hot_potato([<span class="string">&quot;Bill&quot;</span>, <span class="string">&quot;David&quot;</span>, <span class="string">&quot;Susan&quot;</span>, <span class="string">&quot;Jane&quot;</span>, <span class="string">&quot;Kent&quot;</span>, <span class="string">&quot;Brad&quot;</span>], <span class="number">7</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-回文词判定"><a href="#3-2-回文词判定" class="headerlink" title="3.2 回文词判定"></a>3.2 回文词判定</h3><p>一个能用双端队列数据结构轻松解决的问题是经典的“回文词”问题。回文词指的是正读和反读都一样的词，如：radar、toot 和madam。我们想要编写一个算法来检查放入的字符串是否为回文词。</p>
+<p>这个问题的解决方案是用一个双端队列来存储这个字符串。我们遍历这个字符串并把它的每个字母添加到双端队列的尾端。现在这个双端队列看起来非常像一个普通队列，但我们可以利用双端队列两端的对称性。双端队列的首端用来存储第一个字符，尾端用来存储最后一个字符。(如下图所示)<br><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/017.1utvwd5eu35s.webp#pic_center" width = 36%></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Deque</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">palchecker</span>(<span class="params">aString</span>):</span><br><span class="line">    chardeque = Deque()</span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> aString:</span><br><span class="line">        chardeque.addRear(ch)</span><br><span class="line">    stillEqual = <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> chardeque.size() &gt; <span class="number">1</span> <span class="keyword">and</span> stillEqual:</span><br><span class="line">        first = chardeque.removeFront()</span><br><span class="line">        last = chardeque.removeRear()</span><br><span class="line">        <span class="keyword">if</span> first != last:</span><br><span class="line">            stillEqual = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> stillEqual</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(palchecker(<span class="string">&quot;lsdkjfskf&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(palchecker(<span class="string">&quot;radar&quot;</span>))</span><br></pre></td></tr></table></figure>
       </div>
       <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/%E9%98%9F%E5%88%97/" class="">
+              队列
+            </a>
+          
+        </div>
         
       </div>
       
@@ -611,7 +662,7 @@
       </div>
       
       <!-- <div class="content">
-        
+        本篇主要以LeetCode上题目为例，合适的数据结构可以有效地降低算法的复杂度，本文分析单调栈和单调队列的使用技巧，以及
       </div> -->
     </a>
   </div>
@@ -630,7 +681,7 @@
         <div class="title-text">Python数据结构与算法篇（七）-- 栈的实现与应用</div>
       </div>
       <!-- <div class="content">
-        
+        本节主要学习栈的抽象数据类型，主要包括出栈、进栈、栈的大小、栈顶元素、栈是否为空，最后实现括号匹配和十进制转换为二进制来
       </div> -->
     </a>
   </div>
@@ -851,7 +902,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!--  -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%98%9F%E5%88%97"><span class="toc-text">1 队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%AE%80%E5%8D%95%E9%98%9F%E5%88%97"><span class="toc-text">1.1 简单队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="toc-text">1.2 双端队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%98%9F%E5%88%97%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">2 队列的抽象数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%AE%80%E5%8D%95%E9%98%9F%E5%88%97"><span class="toc-text">2.1 简单队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="toc-text">2.2 双端队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">3 队列的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%83%AD%E5%9C%9F%E8%B1%86%E9%97%AE%E9%A2%98"><span class="toc-text">3.1 热土豆问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%9B%9E%E6%96%87%E8%AF%8D%E5%88%A4%E5%AE%9A"><span class="toc-text">3.2 回文词判定</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

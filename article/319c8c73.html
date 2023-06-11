@@ -646,7 +646,17 @@
 <p><strong>303. 区域和检索 - 数组不可变</strong></p>
 <p>题目描述：<br><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/046.4jq9oeam7mw0.webp#pic_center" width = 80%></p>
 <p><strong>一维前缀和</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>):</span><br><span class="line">        self.nums_array = [<span class="number">0</span>]            <span class="comment"># 便于计算累加和</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            self.nums_array.append(self.nums_array[i] + nums[i])  <span class="comment"># 计算nums累加和</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumRange</span>(<span class="params">self, left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> self.nums_array[right+<span class="number">1</span>] - self.nums_array[left]</span><br><span class="line">````</span><br><span class="line">&lt;img src =<span class="string">&quot;https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/047.xrjyxto1ocw.gif#pic_center&quot;</span> width = <span class="number">64</span>%&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**<span class="number">304.</span> 二维区域和检索 - 矩阵不可变**</span><br><span class="line"></span><br><span class="line">题目描述：</span><br><span class="line"></span><br><span class="line">&lt;img src =<span class="string">&quot;https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/048.6ey4bron1sg0.webp#pic_center&quot;</span> width = <span class="number">80</span>%&gt;</span><br><span class="line"></span><br><span class="line">**二维前缀和**</span><br><span class="line">```python</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NumMatrix</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, matrix: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>):</span><br><span class="line">        m, n = <span class="built_in">len</span>(matrix), <span class="built_in">len</span>(matrix[<span class="number">0</span>])                  <span class="comment"># 矩阵的行和列</span></span><br><span class="line">        self.pre_sum = [[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m+<span class="number">1</span>)]      <span class="comment"># 构造一维前缀和矩阵</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                self.pre_sum[i+<span class="number">1</span>][j+<span class="number">1</span>] = self.pre_sum[i+<span class="number">1</span>][j] + self.pre_sum[i][j+<span class="number">1</span>] - self.pre_sum[i][j] + matrix[i][j]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumRegion</span>(<span class="params">self, row1: <span class="built_in">int</span>, col1: <span class="built_in">int</span>, row2: <span class="built_in">int</span>, col2: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> (self.pre_sum[row2+<span class="number">1</span>][col2+<span class="number">1</span>] - self.pre_sum[row1][col2+<span class="number">1</span>] - self.pre_sum[row2+<span class="number">1</span>][col1] + self.pre_sum[row1][col1])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>):</span><br><span class="line">        self.nums_array = [<span class="number">0</span>]            <span class="comment"># 便于计算累加和</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            self.nums_array.append(self.nums_array[i] + nums[i])  <span class="comment"># 计算nums累加和</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumRange</span>(<span class="params">self, left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> self.nums_array[right+<span class="number">1</span>] - self.nums_array[left]</span><br></pre></td></tr></table></figure>
+
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/047.xrjyxto1ocw.gif#pic_center" width = 64%>
+
+
+<p><strong>304. 二维区域和检索 - 矩阵不可变</strong></p>
+<p>题目描述：</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/048.6ey4bron1sg0.webp#pic_center" width = 80%>
+
+<p><strong>二维前缀和</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumMatrix</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, matrix: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>):</span><br><span class="line">        m, n = <span class="built_in">len</span>(matrix), <span class="built_in">len</span>(matrix[<span class="number">0</span>])                  <span class="comment"># 矩阵的行和列</span></span><br><span class="line">        self.pre_sum = [[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m+<span class="number">1</span>)]      <span class="comment"># 构造一维前缀和矩阵</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                self.pre_sum[i+<span class="number">1</span>][j+<span class="number">1</span>] = self.pre_sum[i+<span class="number">1</span>][j] + self.pre_sum[i][j+<span class="number">1</span>] - self.pre_sum[i][j] + matrix[i][j]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumRegion</span>(<span class="params">self, row1: <span class="built_in">int</span>, col1: <span class="built_in">int</span>, row2: <span class="built_in">int</span>, col2: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> (self.pre_sum[row2+<span class="number">1</span>][col2+<span class="number">1</span>] - self.pre_sum[row1][col2+<span class="number">1</span>] - self.pre_sum[row2+<span class="number">1</span>][col1] + self.pre_sum[row1][col1])</span><br></pre></td></tr></table></figure>
 
 <p><strong>370. 区间加法</strong></p>
 <p>题目描述：假设你有一个长度为n的数组，初始情况下所有的数字均为0，你将会被给出k个更新的操作。其中，每个操作会被表示为一个三元组: [startIndex, endIndex, inc]，你需要将子数组 A[startIndex, endIndex]（包括startlndex和endIndex）增加 inc。<br>请你返回 k 次操作后的数组。</p>
@@ -1239,6 +1249,59 @@
 		height: 100%;
 	}
 </style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 

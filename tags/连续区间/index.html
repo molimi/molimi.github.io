@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Python数据结构与算法篇（二）-- 前缀和与差分数组 | CarpeDiem&#39;s Blog</title>
+  <title>标签: 连续区间 | CarpeDiem&#39;s Blog</title>
 
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -500,839 +500,109 @@
 </header>
         <!-- 内容区域 -->
         
- <!-- prismjs 代码高亮 -->
- 
 
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="bg-light-floor-tagDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
 
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        Python数据结构与算法篇（二）-- 前缀和与差分数组
-      </span>
-    </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2023-06-11 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> 分类：
-          
-            <a href="/categories/Python/" class="post-detail-header_category">
-              Python
-            </a>
-          
-            <a href="/categories/Python/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-detail-header_category">
-              数据结构与算法
-            </a>
-          
-        </span>
-      
-
-      
-        <div class="post-detail-header_wordcount">
-          <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2.3k |
-          </span>
-  
-          <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 9分钟 |
-          </span>
-  
-          
-            <span class="reading">
-              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-        </div>
-      
-    
+<div class="tag-header" style="background-image: url('https://pic1.zhimg.com/80/v2-604a15cef201cf177943af2d915eb2e7_1440w.jpg?source=1940ef5c');">
+  <div class="tag-header-title">
+    tag
   </div>
+  <div class="tag-header-desc">
   
-  
-    <script src="/js/bubble/bubble.js"></script>
-  
-</div>
-
-
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <p>前缀和主要适用的场景是原始数组不会被修改的情况下，适用于快速、频繁地计算一个索引区间内的元素之和以及频繁查询某个区间的累加；差分数组的主要适用场景是频繁对原始数组的某个区间的元素进行增减。本节主要学习算法的原理，结合LeetCode题目分析如何使用这些技巧。</p>
-<span id="more"></span>
-
-<p>数组和链表代表着计算机最基本的两种存储形式：顺序存储和链式存储，所以他俩可以算是最基本的数据结构。</p>
-<p>数组链表的主要算法技巧是双指针，双指针⼜分为中间向两端扩散的双指针、两端向中间收缩的双指针、快慢指针。</p>
-<p>此外，数组还有前缀和和差分数组也属于必知必会的算法技巧。本节主要讲解这两种算法。</p>
-<h2 id="1-前缀和与差分数组"><a href="#1-前缀和与差分数组" class="headerlink" title="1 前缀和与差分数组"></a>1 前缀和与差分数组</h2><p>前缀和是指某序列的前 n 项和，可以把它理解为数学上的数列的前 n 项和，差分数组是与前缀和数组所对应的一种逆操作，类似于求导和积分，也就是说，对差分数组求前缀和，可以得到原数组，同样的，对前缀和数组求差分，也可以得到原数组。合理的使用前缀和与差分，可以将某些复杂的问题简单化。</p>
-<h3 id="1-1-前缀和"><a href="#1-1-前缀和" class="headerlink" title="1.1 前缀和"></a>1.1 前缀和</h3><p>假设有一个序列 A，前缀和为 S。根据概念很容易知到公式</p>
-<p>$$S[i]&#x3D;\displaystyle \sum_{j&#x3D;1}^iA[j]$$</p>
-<p>如何求区间 $[l,r]$ 的和呢？</p>
-<p>$$sum[l,r]&#x3D;s[r]-s[l-1]$$</p>
-<h3 id="1-2-差分数组"><a href="#1-2-差分数组" class="headerlink" title="1.2 差分数组"></a>1.2 差分数组</h3><p>设原数组为 A[i],差分数组为 diff[i]，则：</p>
-<p>$$diff[i]&#x3D;\begin{cases} A[i]&amp;i&#x3D;1\ A[i]-A[i-1]&amp;i\geq2 \end{cases}$$</p>
-<p>差分数组的性质是：</p>
-<ul>
-<li>如果对区间 $[l,r]$ 进行修改，只需修改 $diff[l], diff[r+1]$（diff[l]加上修改值，diff[r+1] 减去修改值）</li>
-<li>$A[i]&#x3D;\displaystyle \sum_{j&#x3D;1}^{i}B[j]$（通过 $B[i]&#x3D;A[i]-A[i-1]$ 证明）</li>
-<li>$S[x]&#x3D;\displaystyle \sum_{i&#x3D;1}^{x}A[i]&#x3D;\displaystyle \sum_{i&#x3D;1}^{x} \displaystyle \sum_{j&#x3D;1}^{i}diff[j]&#x3D;\displaystyle \sum _{i&#x3D;1}^{x}(x-i+1)*diff[i]$$</li>
-</ul>
-<blockquote>
-<p>当我们希望对原数组的某一个区间 $[i, j]$ 施加一个增量 inc 时，差分数组 $d$ 对应的变化是：$d[i] 4$ 增加 inc，$d[j+1]$ 减少inc，并且这种操作是可以叠加的。</p>
-</blockquote>
-<p>下面举个例子：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/043.6lmgy6vjiyc0.webp#pic_center" width = 64%>
-
-<p>差分数组是一个辅助数组，从侧面来表示给定某一数组的变化，一般用来对数组进行区间修改的操作。</p>
-<p>还是上面那个表里的例子，我们需要进行以下操作：</p>
-<ol>
-<li>将区间[1，4]的数值全部加上3</li>
-<li>将区间[3，5]的数值全部减去5</li>
-</ol>
-<p>很简单对吧，你可以进行枚举。但是如果给你的数据量是 $1\times e^5$，操作量 $1\times e^5$，限时1000ms你暴力枚举能莽的过去吗？慢到你怀疑人生直接。这时我们就需要使用到差分数组了。</p>
-<p>其实当你将原始数组中元素同时加上或者减掉某个数，那么他们的差分数组其实是不会变化的。</p>
-<p>利用这个思想，咱们将区间缩小，缩小的例子中的区间 [1,4] 吧这是你会发现只有 d[1] 和 d[5] 发生了变化，而 d[2], d[3], d[4]却保持着原样，</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/044.125vurueqzr4.webp#pic_center" width = 64%>
-
-<p>进行下一个操作，</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/045.71279cxlwrs0.webp#pic_center" width = 64%>
-
-<p>这时我们就会发现这样一个规律，当对一个区间进行增减某个值的时候，他的差分数组对应的区间左端点的值会同步变化，而他的右端点的后一个值则会相反地变化，其实这个很好理解。</p>
-<p>本部分参考自：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44786250/article/details/100056975">差分详解+例题</a></p>
-<p>也就是说，当我们需要对原数组的不同区间施加不同的增量，我们只要按规则修改差分数组即可。所以，<font color=#9900CC><strong>差分数组的主要适⽤场景是频繁对原始数组的某个区间的元素进⾏增减，但只能是区间元素同时增加或减少相同的数的情况才能用。</font></strong></p>
-<p>有 $n$ 个数，$m$ 个操作，每一次操作，将 $x<del>y$ 区间的所有数增加 $z$；最后有 $q$ 个询问，每一次询问求出 $x</del>y$ 的区间和。设原数组为 $A[i]$。其步骤为：</p>
-<ul>
-<li>先求出差分数组 $B[i]&#x3D;A[i]−A[i−1]$</li>
-<li>在根据 $m$ 个造作修改 $B[i]$</li>
-<li>求修改后的 $A[i]&#x3D;A[i−1]+B[i]$</li>
-<li>求前缀和 $S[i]&#x3D;S[i−1]+A[i]$</li>
-<li>最后输出区间和 $sum[x,y]&#x3D;S[y]−S[x−1]$</li>
-</ul>
-<blockquote>
-<p><font color=#9900CC><strong>前缀和主要适用的场景是原始数组不会被修改的情况下，适用于快速、频繁地计算一个索引区间内的元素之和以及频繁查询某个区间的累加；差分数组的主要适用场景是频繁对原始数组的某个区间的元素进行增减。</font></strong></p>
-</blockquote>
-<hr>
-<h2 id="2-常见题型"><a href="#2-常见题型" class="headerlink" title="2 常见题型"></a>2 常见题型</h2><h3 id="2-1-题库列表"><a href="#2-1-题库列表" class="headerlink" title="2.1 题库列表"></a>2.1 题库列表</h3><blockquote> 
-<ul><li><p><a href="https://leetcode.cn/problems/range-sum-query-immutable/" target="_blank">303. 区域和检索 - 数组不可变</a>：<strong>一维前缀和</strong></p></li>
-<li><p><a href="https://leetcode.cn/problems/range-sum-query-2d-immutable/" target="_blank">304. 二维区域和检索 - 矩阵不可变</a>：<strong>二维前缀和</strong></p></li>
-<li><p><a href="https://leetcode.cn/problems/range-addition/" target="_blank">370. 区间加法</a>：<strong>差分数组</strong></p></li>
-<li><p><a href="https://leetcode.cn/problems/corporate-flight-bookings/" target="_blank">1109. 航班预订统计</a>：<strong>差分数组</strong></p></li>
-<li><p><a href="https://leetcode.cn/problems/car-pooling/" target="_blank">1094. 拼车</a>：<strong>差分数组</strong></p></li>
-</ul>
-</blockquote> 
-
-<p><strong>303. 区域和检索 - 数组不可变</strong></p>
-<p>题目描述：<br><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/046.4jq9oeam7mw0.webp#pic_center" width = 80%></p>
-<p><strong>一维前缀和</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>):</span><br><span class="line">        self.nums_array = [<span class="number">0</span>]            <span class="comment"># 便于计算累加和</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            self.nums_array.append(self.nums_array[i] + nums[i])  <span class="comment"># 计算nums累加和</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumRange</span>(<span class="params">self, left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> self.nums_array[right+<span class="number">1</span>] - self.nums_array[left]</span><br></pre></td></tr></table></figure>
-
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/047.xrjyxto1ocw.gif#pic_center" width = 64%>
-
-
-<p><strong>304. 二维区域和检索 - 矩阵不可变</strong></p>
-<p>题目描述：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/048.6ey4bron1sg0.webp#pic_center" width = 80%>
-
-<p><strong>二维前缀和</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumMatrix</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, matrix: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>):</span><br><span class="line">        m, n = <span class="built_in">len</span>(matrix), <span class="built_in">len</span>(matrix[<span class="number">0</span>])                  <span class="comment"># 矩阵的行和列</span></span><br><span class="line">        self.pre_sum = [[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m+<span class="number">1</span>)]      <span class="comment"># 构造一维前缀和矩阵</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                self.pre_sum[i+<span class="number">1</span>][j+<span class="number">1</span>] = self.pre_sum[i+<span class="number">1</span>][j] + self.pre_sum[i][j+<span class="number">1</span>] - self.pre_sum[i][j] + matrix[i][j]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumRegion</span>(<span class="params">self, row1: <span class="built_in">int</span>, col1: <span class="built_in">int</span>, row2: <span class="built_in">int</span>, col2: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> (self.pre_sum[row2+<span class="number">1</span>][col2+<span class="number">1</span>] - self.pre_sum[row1][col2+<span class="number">1</span>] - self.pre_sum[row2+<span class="number">1</span>][col1] + self.pre_sum[row1][col1])</span><br></pre></td></tr></table></figure>
-
-<p><strong>370. 区间加法</strong></p>
-<p>题目描述：假设你有一个长度为n的数组，初始情况下所有的数字均为0，你将会被给出k个更新的操作。其中，每个操作会被表示为一个三元组: [startIndex, endIndex, inc]，你需要将子数组 A[startIndex, endIndex]（包括startlndex和endIndex）增加 inc。<br>请你返回 k 次操作后的数组。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getModifiedArray</span>(<span class="params">self, length: <span class="built_in">int</span>, updates: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        diff = [<span class="number">0</span>] * (length+<span class="number">1</span>)  <span class="comment"># 末尾多个0，防止越界</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> update <span class="keyword">in</span> updates:</span><br><span class="line">            start, end, inc = update[<span class="number">0</span>], update[<span class="number">1</span>], update[<span class="number">2</span>]</span><br><span class="line">            diff[start] += inc</span><br><span class="line">            diff[end + <span class="number">1</span>] -= inc</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, length):</span><br><span class="line">            diff[i] += diff[i - <span class="number">1</span>]            <span class="comment"># 对差分数组求前缀和便可得到原数组</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> diff[:-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<p><strong>1109. 航班预订统计</strong></p>
-<p>题目描述：这里有 n 个航班，它们分别从 1 到 n 进行编号。有一份航班预订表 bookings ，表中第 $i$ 条预订记录 $bookings[i] &#x3D; [first_i, last_i, seats_i]$ 意味着在从 $first_i$ 到 $last_i$（包含 $first_i$ 和 $last_i$）的 每个航班 上预订了 $seats_i$ 个座位。请你返回一个长度为 n 的数组 answer，里面的元素是每个航班预定的座位总数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">corpFlightBookings</span>(<span class="params">self, bookings: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], n: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        diff = [<span class="number">0</span>] * (n+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> booking <span class="keyword">in</span> bookings:</span><br><span class="line">            start, end, inc = booking[<span class="number">0</span>], booking[<span class="number">1</span>], booking[<span class="number">2</span>]</span><br><span class="line">            diff[start] += inc</span><br><span class="line">            <span class="keyword">if</span> end &lt; n:             <span class="comment"># 没在末尾添加0，要判断一下边界</span></span><br><span class="line">                diff[end+<span class="number">1</span>] -= inc</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">            diff[i] += diff[i-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> diff[<span class="number">1</span>:]</span><br></pre></td></tr></table></figure>
-
-<center class = "half"><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/052.6gnyefuumd80.gif#pic_left" width = "40%"><img src = "https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/052.6gnyefuumd80.gif#pic_left"  width = "48%"></center></p>
-
-
-<p><strong>1094. 拼车</strong></p>
-<p>题目描述：车上最初有 capacity 个空座位。车只能向一个方向行驶（也就是说，不允许掉头或改变方向），给定整数 capacity 和一个数组 trips ,  $trip[i] &#x3D; [numPassengers_i, from_i, to_i]$ 表示第 $i$ 次旅行有 $numPassengers_i$ 乘客，接他们和放他们的位置分别是 $from_i$ 和 $to_i$。这些位置是从汽车的初始位置向东的公里数。当且仅当你可以在所有给定的行程中接送所有乘客时，返回 true，否则请返回 false。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">carPooling</span>(<span class="params">self, trips: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], capacity: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        diff = [<span class="number">0</span>] * (<span class="number">1001</span>)      					<span class="comment"># 题目中最多有1001个车站</span></span><br><span class="line">        max_station = <span class="number">0</span>          					<span class="comment"># 找到车站数</span></span><br><span class="line">        <span class="keyword">for</span> trip <span class="keyword">in</span> trips:</span><br><span class="line">            inc, start, end = trip[<span class="number">0</span>], trip[<span class="number">1</span>], trip[<span class="number">2</span>]</span><br><span class="line">            diff[start] += inc</span><br><span class="line">            diff[end] -= inc      					<span class="comment"># 第end站乘客已经下车，这里就不用end+1</span></span><br><span class="line">            max_station = <span class="built_in">max</span>(max_station, end)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, max_station+<span class="number">1</span>): 			<span class="comment"># 进行区间求和</span></span><br><span class="line">            diff[i] += diff[i-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">max</span>(diff[:max_station]) &gt; capacity:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/050.qso2bf25fv4.webp#pic_center" width = 80%>
-
-<hr>
-<blockquote>
-<p><font color=#9900CC><strong>欢迎各位大佬一起来学习前缀和与差分数组，希望本篇可以让你对前缀和和差分的概念及使用技巧有更清晰的理解，欢迎继续补充！</font></strong></p>
-</blockquote>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/051.4lt77415u1s0.gif#pic_center" width = 48%>
-
-<hr>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>数组+常见题型与解题策略：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42647903/article/details/120594856">https://blog.csdn.net/qq_42647903&#x2F;article&#x2F;details&#x2F;120594856</a></li>
-<li>差分详解+例题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44786250/article/details/100056975">https://blog.csdn.net/qq_44786250&#x2F;article&#x2F;details&#x2F;100056975</a></li>
-<li>数组（三）– LC[370]&amp;[1109]&amp;[1094] 区间加法：<a target="_blank" rel="noopener" href="https://blog.csdn.net/xq151750111/article/details/129243272?spm=1001.2014.3001.5502">https://blog.csdn.net/xq151750111/article/details/129243272?spm=1001.2014.3001.5502</a></li>
-</ul>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" class="">
-              前缀和
-            </a>
-          
-            <a href="/tags/%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84/" class="">
-              差分数组
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Carpe Diem</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/article/319c8c73.html" target="_blank" title="Python数据结构与算法篇（二）-- 前缀和与差分数组">https://qxienote.com/article/319c8c73.html</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/article/37ba44a4.html" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">Python数据结构与算法篇（三）-- 快慢指针与碰撞指针</div>
-      </div>
-      
-      <!-- <div class="content">
-        数组是一种基础数据结构，可以用来处理常见的排序和二分搜索问题，典型的处理技巧包括对双指针、滑动窗口等，数组是数据结构中的
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/article/b86971b3.html" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">数学（一）-- LC[12]&amp;[13] 整数转罗马数字</div>
-      </div>
-      <!-- <div class="content">
-        本篇以LeetCode[12]——整数转罗马数字为例，分析如何使用数学方法进行解题
-
-
-1 整数转罗马数字1.1 题目描
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-      <div id="appDonate" class="post-donate">
-  <div id="donate_board" class="donate_bar center" ref="donate">
-    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
-  </div>
-  <transition name="fade">
-    <div 
-      class="donate-box-mask"
-      v-cloak 
-      v-show="visible"
-      @click="cancelDialogDrawer()"
-    >
-    </div>
-  </transition>
-  <transition name="bounce">
-    <div class="donate-box" v-cloak v-show="visible">
-      <div class="donate-box_close">
-        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
-      </div>
-      <div class="donate-box_title">
-        <h4>
-          你的赏识是我前进的动力
-        </h4>
-      </div>
-      <div class="donate-box_tab">
-        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
-          支付宝
-        </div>
-        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
-          微信
-        </div>
-      </div>
-      <div class="donate-box_img">
-        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
-          <img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/alipay.514p32kvsig0.webp" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/alipay.514p32kvsig0.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
-        </div> 
-        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
-          <img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/wechatpay.33dgy81lgce0.webp" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/wechatpay.33dgy81lgce0.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
-        </div>
-      </div>
-    </div>
-  </transition>
-</div>
-
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDonate',
-    data: {
-      visible: false,
-      tabActive: 'Alipay',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        // function getScroll() {
-        //   return {
-        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
-        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-        //   };
-        // }
-        this.top = $(document).scrollTop() // or getScroll().top
-        // console.log('aa', $('.main-content'));
-        body.style.cssText = 'overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-      changeTabActive(name) {
-        this.tabActive = name;
-      }
-    },
-    created() {}
-  })
-</script>
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
+    <span class="title" id="tag-header-desc"></span>
+    <script>
+  function typedFn() {
+    const el = '#tag-header-desc';
+    const type = 'tagDetail';
+    let desc = '愿你如风，被人温柔以待'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
   }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
-      <div id="gitment-container"></div>
-
+  typedFn();
+</script>
     
   </div>
+  <div class="mask-box"></div>
+</div>
 
-<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
 
 
+<div class="tag">
+  <div class="tag-name">
+    <div class="name" style="background-color: #85C1E9;">连续区间 分类</div>
   </div>
+  <!-- 每一篇文章卡片 -->
+  <!-- hash算法 -->
 
-  <!-- 目录 -->
-  <aside id='l_side'>
+<section class="posts">
   
     
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img src='https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/001.6dgun3rgoxk0.webp'/>
+    <article class="post reveal" style="flex-direction: row-reverse;   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span class="post-time">2023-06-11</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/article/37ba44a4.html">Python数据结构与算法篇（三）-- 快慢指针与碰撞指针</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              <!-- 文章详情页的标签 -->
+
+    <i class="iconfont icontag"></i>
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/" rel="tag">快慢指针</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A2%B0%E6%92%9E%E6%8C%87%E9%92%88/" rel="tag">碰撞指针</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9E%E7%BB%AD%E5%8C%BA%E9%97%B4/" rel="tag">连续区间</a></li></ul>
+
+            </div>
+            <div class="post-categories">
+              <!-- 文章详情页的分类 -->
+
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/Python/">Python</a> <a class="article-category-link" href="/categories/Python/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+</div>
+
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            <a href="/article/37ba44a4.html" style="background-size: cover; 
+              background-position: center center;">
+              <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+            </a>
+          </div>
+          <div class="post-content">
+            <p>数组是一种基础数据结构，可以用来处理常见的排序和二分搜索问题，典型的处理技巧包括对双指针、滑动窗口等，数组是数据结构中的基本模块之一。因为字符串是由字符数组形成的，所以二者是相似的。双指针⼜分为中间向两端扩散的双指针、两端向中间收缩的双指针、快慢指针。本篇主要分析双指针在字符串数组中常用解题套路。</p>
+          </div>
+        </div>
+        <div class="post-more">
+          <a href="/article/37ba44a4.html">
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+          </a>
+        </div>
+      </div>
+      <div class="post-img">
+        <a href="/article/37ba44a4.html" style="background-size: cover; 
+          background-position: center center;">
+          <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
         </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>长路漫漫</h2>
-        
-        
-          <p>虽不能至，心向往之</p>
-
-        
-        
-          <p><span id="jinrishici-sentence">CarpeDiem's Blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
       </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:2265066536@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/molimi"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=2265066536"
-              class="social fab fa-qq flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
+    </article>
+  
 </section>
-
-    
-  
-  
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84"><span class="toc-text">1 前缀和与差分数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-text">1.1 前缀和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84"><span class="toc-text">1.2 差分数组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%B8%E8%A7%81%E9%A2%98%E5%9E%8B"><span class="toc-text">2 常见题型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%A2%98%E5%BA%93%E5%88%97%E8%A1%A8"><span class="toc-text">2.1 题库列表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
 
-      
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/212a3cab.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-11</span>
-                
-              </div>
-              <a class="post-title" href="/article/212a3cab.html">Python 文章汇总</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/37ba44a4.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-11</span>
-                
-              </div>
-              <a class="post-title" href="/article/37ba44a4.html">Python数据结构与算法篇（三）-- 快慢指针与碰撞指针</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/319c8c73.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-11</span>
-                
-              </div>
-              <a class="post-title" href="/article/319c8c73.html">Python数据结构与算法篇（二）-- 前缀和与差分数组</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/b86971b3.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-10</span>
-                
-              </div>
-              <a class="post-title" href="/article/b86971b3.html">数学（一）-- LC[12]&amp;[13] 整数转罗马数字</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/a0d5b4a3.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-10</span>
-                
-              </div>
-              <a class="post-title" href="/article/a0d5b4a3.html">计算机基础文章汇总</a>
-            </div>
-          </div>
-        
-      </div>
-    </div>
-  </section>
-
-    
-  </div>
-</aside>
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script src="/js/wrapImage.js"></script>
-</div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || 'https://pica.zhimg.com/80/v2-292e6340491bd97f9d014d6be3371c04_1440w.jpg';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
+<div class="w-70">
   
-</script>
-
+</div>
 
       </main>
     </div>

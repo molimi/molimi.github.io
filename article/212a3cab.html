@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Python数据结构与算法篇（二）-- 前缀和与差分数组 | CarpeDiem&#39;s Blog</title>
+  <title>Python 文章汇总 | CarpeDiem&#39;s Blog</title>
 
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -513,14 +513,14 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Python数据结构与算法篇（二）-- 前缀和与差分数组
+        Python 文章汇总
       </span>
     </div>
     
@@ -539,21 +539,17 @@
               Python
             </a>
           
-            <a href="/categories/Python/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-detail-header_category">
-              数据结构与算法
-            </a>
-          
         </span>
       
 
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2.3k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 562 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 9分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 2分钟 |
           </span>
   
           
@@ -580,128 +576,59 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>前缀和主要适用的场景是原始数组不会被修改的情况下，适用于快速、频繁地计算一个索引区间内的元素之和以及频繁查询某个区间的累加；差分数组的主要适用场景是频繁对原始数组的某个区间的元素进行增减。本节主要学习算法的原理，结合LeetCode题目分析如何使用这些技巧。</p>
+        <p>本篇文章是对Python专栏下的文章进行汇总，方便系统地学习和复习。</p>
 <span id="more"></span>
 
-<p>数组和链表代表着计算机最基本的两种存储形式：顺序存储和链式存储，所以他俩可以算是最基本的数据结构。</p>
-<p>数组链表的主要算法技巧是双指针，双指针⼜分为中间向两端扩散的双指针、两端向中间收缩的双指针、快慢指针。</p>
-<p>此外，数组还有前缀和和差分数组也属于必知必会的算法技巧。本节主要讲解这两种算法。</p>
-<h2 id="1-前缀和与差分数组"><a href="#1-前缀和与差分数组" class="headerlink" title="1 前缀和与差分数组"></a>1 前缀和与差分数组</h2><p>前缀和是指某序列的前 n 项和，可以把它理解为数学上的数列的前 n 项和，差分数组是与前缀和数组所对应的一种逆操作，类似于求导和积分，也就是说，对差分数组求前缀和，可以得到原数组，同样的，对前缀和数组求差分，也可以得到原数组。合理的使用前缀和与差分，可以将某些复杂的问题简单化。</p>
-<h3 id="1-1-前缀和"><a href="#1-1-前缀和" class="headerlink" title="1.1 前缀和"></a>1.1 前缀和</h3><p>假设有一个序列 A，前缀和为 S。根据概念很容易知到公式</p>
-<p>$$S[i]&#x3D;\displaystyle \sum_{j&#x3D;1}^iA[j]$$</p>
-<p>如何求区间 $[l,r]$ 的和呢？</p>
-<p>$$sum[l,r]&#x3D;s[r]-s[l-1]$$</p>
-<h3 id="1-2-差分数组"><a href="#1-2-差分数组" class="headerlink" title="1.2 差分数组"></a>1.2 差分数组</h3><p>设原数组为 A[i],差分数组为 diff[i]，则：</p>
-<p>$$diff[i]&#x3D;\begin{cases} A[i]&amp;i&#x3D;1\ A[i]-A[i-1]&amp;i\geq2 \end{cases}$$</p>
-<p>差分数组的性质是：</p>
-<ul>
-<li>如果对区间 $[l,r]$ 进行修改，只需修改 $diff[l], diff[r+1]$（diff[l]加上修改值，diff[r+1] 减去修改值）</li>
-<li>$A[i]&#x3D;\displaystyle \sum_{j&#x3D;1}^{i}B[j]$（通过 $B[i]&#x3D;A[i]-A[i-1]$ 证明）</li>
-<li>$S[x]&#x3D;\displaystyle \sum_{i&#x3D;1}^{x}A[i]&#x3D;\displaystyle \sum_{i&#x3D;1}^{x} \displaystyle \sum_{j&#x3D;1}^{i}diff[j]&#x3D;\displaystyle \sum _{i&#x3D;1}^{x}(x-i+1)*diff[i]$$</li>
+
+<h2 id="1-基础篇"><a href="#1-基础篇" class="headerlink" title="1 基础篇"></a>1 基础篇</h2><ul>
+<li><a href="https://qxienote.com/article/175d115.html">Python基础篇（一）– 十分钟学会基础语法</a></li>
+<li><a href="https://qxienote.com/article/8a42c3c2.html">Python基础篇（二）– 数据类型和运算符</a></li>
+<li><a href="">Python基础篇（三）– 列表、元组、字典、集合、字符串</a></li>
+<li><a href="">Python基础篇（四）– 流程控制</a></li>
+<li><a href="">Python基础篇（五）– 函数和表达式</a></li>
+<li><a href="">Python基础篇（六）– 类和对象</a></li>
+<li><a href="">Python基础篇（七）– 迭代器和生成器</a></li>
+<li><a href="">Python基础篇（八）– 文件操作</a></li>
+<li><a href="">Python基础篇（九）– 正则表达式</a></li>
+<li><a href="">Python基础篇（十）– 异常处理</a></li>
+<li><a href="">Python基础篇（十一）– 模块和包</a></li>
+<li><a href="">Python基础篇（十二）– 常用模块</a></li>
+<li><a href="">Python基础篇（十三）– 进程和线程</a></li>
+<li><a href="">Python基础篇（十四）– 数据类dataclass使用指南</a></li>
+<li><a href="">Python基础篇（十五）– Pygame游戏编程</a></li>
+<li><a href="">Python基础篇（十六）– Python标准库模块之heapq与bisect</a></li>
 </ul>
-<blockquote>
-<p>当我们希望对原数组的某一个区间 $[i, j]$ 施加一个增量 inc 时，差分数组 $d$ 对应的变化是：$d[i] 4$ 增加 inc，$d[j+1]$ 减少inc，并且这种操作是可以叠加的。</p>
-</blockquote>
-<p>下面举个例子：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/043.6lmgy6vjiyc0.webp#pic_center" width = 64%>
-
-<p>差分数组是一个辅助数组，从侧面来表示给定某一数组的变化，一般用来对数组进行区间修改的操作。</p>
-<p>还是上面那个表里的例子，我们需要进行以下操作：</p>
-<ol>
-<li>将区间[1，4]的数值全部加上3</li>
-<li>将区间[3，5]的数值全部减去5</li>
-</ol>
-<p>很简单对吧，你可以进行枚举。但是如果给你的数据量是 $1\times e^5$，操作量 $1\times e^5$，限时1000ms你暴力枚举能莽的过去吗？慢到你怀疑人生直接。这时我们就需要使用到差分数组了。</p>
-<p>其实当你将原始数组中元素同时加上或者减掉某个数，那么他们的差分数组其实是不会变化的。</p>
-<p>利用这个思想，咱们将区间缩小，缩小的例子中的区间 [1,4] 吧这是你会发现只有 d[1] 和 d[5] 发生了变化，而 d[2], d[3], d[4]却保持着原样，</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/044.125vurueqzr4.webp#pic_center" width = 64%>
-
-<p>进行下一个操作，</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/045.71279cxlwrs0.webp#pic_center" width = 64%>
-
-<p>这时我们就会发现这样一个规律，当对一个区间进行增减某个值的时候，他的差分数组对应的区间左端点的值会同步变化，而他的右端点的后一个值则会相反地变化，其实这个很好理解。</p>
-<p>本部分参考自：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44786250/article/details/100056975">差分详解+例题</a></p>
-<p>也就是说，当我们需要对原数组的不同区间施加不同的增量，我们只要按规则修改差分数组即可。所以，<font color=#9900CC><strong>差分数组的主要适⽤场景是频繁对原始数组的某个区间的元素进⾏增减，但只能是区间元素同时增加或减少相同的数的情况才能用。</font></strong></p>
-<p>有 $n$ 个数，$m$ 个操作，每一次操作，将 $x<del>y$ 区间的所有数增加 $z$；最后有 $q$ 个询问，每一次询问求出 $x</del>y$ 的区间和。设原数组为 $A[i]$。其步骤为：</p>
-<ul>
-<li>先求出差分数组 $B[i]&#x3D;A[i]−A[i−1]$</li>
-<li>在根据 $m$ 个造作修改 $B[i]$</li>
-<li>求修改后的 $A[i]&#x3D;A[i−1]+B[i]$</li>
-<li>求前缀和 $S[i]&#x3D;S[i−1]+A[i]$</li>
-<li>最后输出区间和 $sum[x,y]&#x3D;S[y]−S[x−1]$</li>
+<h2 id="2-进阶篇"><a href="#2-进阶篇" class="headerlink" title="2 进阶篇"></a>2 进阶篇</h2><ul>
+<li><a href="">Python进阶篇（一）– Django快速上手</a></li>
+<li><a href="">Python进阶篇（二）– Django 深入模型</a></li>
+<li><a href=""></a></li>
 </ul>
-<blockquote>
-<p><font color=#9900CC><strong>前缀和主要适用的场景是原始数组不会被修改的情况下，适用于快速、频繁地计算一个索引区间内的元素之和以及频繁查询某个区间的累加；差分数组的主要适用场景是频繁对原始数组的某个区间的元素进行增减。</font></strong></p>
-</blockquote>
-<hr>
-<h2 id="2-常见题型"><a href="#2-常见题型" class="headerlink" title="2 常见题型"></a>2 常见题型</h2><h3 id="2-1-题库列表"><a href="#2-1-题库列表" class="headerlink" title="2.1 题库列表"></a>2.1 题库列表</h3><blockquote> 
-<ul><li><p><a href="https://leetcode.cn/problems/range-sum-query-immutable/" target="_blank">303. 区域和检索 - 数组不可变</a>：<strong>一维前缀和</strong></p></li>
-<li><p><a href="https://leetcode.cn/problems/range-sum-query-2d-immutable/" target="_blank">304. 二维区域和检索 - 矩阵不可变</a>：<strong>二维前缀和</strong></p></li>
-<li><p><a href="https://leetcode.cn/problems/range-addition/" target="_blank">370. 区间加法</a>：<strong>差分数组</strong></p></li>
-<li><p><a href="https://leetcode.cn/problems/corporate-flight-bookings/" target="_blank">1109. 航班预订统计</a>：<strong>差分数组</strong></p></li>
-<li><p><a href="https://leetcode.cn/problems/car-pooling/" target="_blank">1094. 拼车</a>：<strong>差分数组</strong></p></li>
+<h2 id="3-数据结构与算法"><a href="#3-数据结构与算法" class="headerlink" title="3 数据结构与算法"></a>3 数据结构与算法</h2><ul>
+<li><a href="https://qxienote.com/article/d46e4964.html">Python数据结构与算法篇（一）– 算法分析基础</a></li>
+<li><a href="https://qxienote.com/article/319c8c73.html">Python数据结构与算法篇（二）– 前缀和与差分数组</a></li>
+<li><a href="https://qxienote.com/article/37ba44a4.html">Python数据结构与算法篇（三）– 快慢指针与碰撞指针</a></li>
+<li><a href="">Python数据结构与算法篇（四）– 滑动窗口算法</a></li>
+<li><a href="">Python数据结构与算法篇（五）– 二分查找与二分答案</a></li>
+<li><a href="">Python数据结构与算法篇（六）– 哈希表</a></li>
+<li><a href="">Python数据结构与算法篇（七）– 栈的实现与应用</a></li>
+<li><a href="">Python数据结构与算法篇（八）– 队列的实现与应用</a></li>
+<li><a href="">Python数据结构与算法篇（九）–单调栈与单调队列</a></li>
+<li><a href="">Python数据结构与算法篇（十）– 链表的实现</a></li>
+<li><a href="">Python数据结构与算法篇（十一）– 链表的应用与常见题型</a></li>
+<li><a href="">Python数据结构与算法篇（十二）– 树和二叉树</a></li>
+<li><a href="">Python数据结构与算法篇（十三）– 位运算与使用技巧</a></li>
+<li><a href="">Python数据结构与算法篇（十四）– 冒泡排序算法</a></li>
+<li><a href="">Python数据结构与算法篇（十五）– 二叉树的遍历：深度优先搜索与广度优先搜索</a></li>
 </ul>
-</blockquote> 
-
-<p><strong>303. 区域和检索 - 数组不可变</strong></p>
-<p>题目描述：<br><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/046.4jq9oeam7mw0.webp#pic_center" width = 80%></p>
-<p><strong>一维前缀和</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>):</span><br><span class="line">        self.nums_array = [<span class="number">0</span>]            <span class="comment"># 便于计算累加和</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            self.nums_array.append(self.nums_array[i] + nums[i])  <span class="comment"># 计算nums累加和</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumRange</span>(<span class="params">self, left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> self.nums_array[right+<span class="number">1</span>] - self.nums_array[left]</span><br></pre></td></tr></table></figure>
-
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/047.xrjyxto1ocw.gif#pic_center" width = 64%>
-
-
-<p><strong>304. 二维区域和检索 - 矩阵不可变</strong></p>
-<p>题目描述：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/048.6ey4bron1sg0.webp#pic_center" width = 80%>
-
-<p><strong>二维前缀和</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumMatrix</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, matrix: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>):</span><br><span class="line">        m, n = <span class="built_in">len</span>(matrix), <span class="built_in">len</span>(matrix[<span class="number">0</span>])                  <span class="comment"># 矩阵的行和列</span></span><br><span class="line">        self.pre_sum = [[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m+<span class="number">1</span>)]      <span class="comment"># 构造一维前缀和矩阵</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                self.pre_sum[i+<span class="number">1</span>][j+<span class="number">1</span>] = self.pre_sum[i+<span class="number">1</span>][j] + self.pre_sum[i][j+<span class="number">1</span>] - self.pre_sum[i][j] + matrix[i][j]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumRegion</span>(<span class="params">self, row1: <span class="built_in">int</span>, col1: <span class="built_in">int</span>, row2: <span class="built_in">int</span>, col2: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> (self.pre_sum[row2+<span class="number">1</span>][col2+<span class="number">1</span>] - self.pre_sum[row1][col2+<span class="number">1</span>] - self.pre_sum[row2+<span class="number">1</span>][col1] + self.pre_sum[row1][col1])</span><br></pre></td></tr></table></figure>
-
-<p><strong>370. 区间加法</strong></p>
-<p>题目描述：假设你有一个长度为n的数组，初始情况下所有的数字均为0，你将会被给出k个更新的操作。其中，每个操作会被表示为一个三元组: [startIndex, endIndex, inc]，你需要将子数组 A[startIndex, endIndex]（包括startlndex和endIndex）增加 inc。<br>请你返回 k 次操作后的数组。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getModifiedArray</span>(<span class="params">self, length: <span class="built_in">int</span>, updates: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        diff = [<span class="number">0</span>] * (length+<span class="number">1</span>)  <span class="comment"># 末尾多个0，防止越界</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> update <span class="keyword">in</span> updates:</span><br><span class="line">            start, end, inc = update[<span class="number">0</span>], update[<span class="number">1</span>], update[<span class="number">2</span>]</span><br><span class="line">            diff[start] += inc</span><br><span class="line">            diff[end + <span class="number">1</span>] -= inc</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, length):</span><br><span class="line">            diff[i] += diff[i - <span class="number">1</span>]            <span class="comment"># 对差分数组求前缀和便可得到原数组</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> diff[:-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<p><strong>1109. 航班预订统计</strong></p>
-<p>题目描述：这里有 n 个航班，它们分别从 1 到 n 进行编号。有一份航班预订表 bookings ，表中第 $i$ 条预订记录 $bookings[i] &#x3D; [first_i, last_i, seats_i]$ 意味着在从 $first_i$ 到 $last_i$（包含 $first_i$ 和 $last_i$）的 每个航班 上预订了 $seats_i$ 个座位。请你返回一个长度为 n 的数组 answer，里面的元素是每个航班预定的座位总数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">corpFlightBookings</span>(<span class="params">self, bookings: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], n: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        diff = [<span class="number">0</span>] * (n+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> booking <span class="keyword">in</span> bookings:</span><br><span class="line">            start, end, inc = booking[<span class="number">0</span>], booking[<span class="number">1</span>], booking[<span class="number">2</span>]</span><br><span class="line">            diff[start] += inc</span><br><span class="line">            <span class="keyword">if</span> end &lt; n:             <span class="comment"># 没在末尾添加0，要判断一下边界</span></span><br><span class="line">                diff[end+<span class="number">1</span>] -= inc</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">            diff[i] += diff[i-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> diff[<span class="number">1</span>:]</span><br></pre></td></tr></table></figure>
-
-<center class = "half"><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/052.6gnyefuumd80.gif#pic_left" width = "40%"><img src = "https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/052.6gnyefuumd80.gif#pic_left"  width = "48%"></center></p>
-
-
-<p><strong>1094. 拼车</strong></p>
-<p>题目描述：车上最初有 capacity 个空座位。车只能向一个方向行驶（也就是说，不允许掉头或改变方向），给定整数 capacity 和一个数组 trips ,  $trip[i] &#x3D; [numPassengers_i, from_i, to_i]$ 表示第 $i$ 次旅行有 $numPassengers_i$ 乘客，接他们和放他们的位置分别是 $from_i$ 和 $to_i$。这些位置是从汽车的初始位置向东的公里数。当且仅当你可以在所有给定的行程中接送所有乘客时，返回 true，否则请返回 false。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">carPooling</span>(<span class="params">self, trips: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], capacity: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        diff = [<span class="number">0</span>] * (<span class="number">1001</span>)      					<span class="comment"># 题目中最多有1001个车站</span></span><br><span class="line">        max_station = <span class="number">0</span>          					<span class="comment"># 找到车站数</span></span><br><span class="line">        <span class="keyword">for</span> trip <span class="keyword">in</span> trips:</span><br><span class="line">            inc, start, end = trip[<span class="number">0</span>], trip[<span class="number">1</span>], trip[<span class="number">2</span>]</span><br><span class="line">            diff[start] += inc</span><br><span class="line">            diff[end] -= inc      					<span class="comment"># 第end站乘客已经下车，这里就不用end+1</span></span><br><span class="line">            max_station = <span class="built_in">max</span>(max_station, end)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, max_station+<span class="number">1</span>): 			<span class="comment"># 进行区间求和</span></span><br><span class="line">            diff[i] += diff[i-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">max</span>(diff[:max_station]) &gt; capacity:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/050.qso2bf25fv4.webp#pic_center" width = 80%>
-
-<hr>
-<blockquote>
-<p><font color=#9900CC><strong>欢迎各位大佬一起来学习前缀和与差分数组，希望本篇可以让你对前缀和和差分的概念及使用技巧有更清晰的理解，欢迎继续补充！</font></strong></p>
-</blockquote>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/051.4lt77415u1s0.gif#pic_center" width = 48%>
-
-<hr>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>数组+常见题型与解题策略：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42647903/article/details/120594856">https://blog.csdn.net/qq_42647903&#x2F;article&#x2F;details&#x2F;120594856</a></li>
-<li>差分详解+例题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44786250/article/details/100056975">https://blog.csdn.net/qq_44786250&#x2F;article&#x2F;details&#x2F;100056975</a></li>
-<li>数组（三）– LC[370]&amp;[1109]&amp;[1094] 区间加法：<a target="_blank" rel="noopener" href="https://blog.csdn.net/xq151750111/article/details/129243272?spm=1001.2014.3001.5502">https://blog.csdn.net/xq151750111/article/details/129243272?spm=1001.2014.3001.5502</a></li>
+<h2 id="4-数据分析"><a href="#4-数据分析" class="headerlink" title="4 数据分析"></a>4 数据分析</h2><ul>
+<li><a href="">Python数据分析（一）– NumPy 学习笔记</a></li>
+<li><a href="">Python数据分析（二）– Matplotlib 学习笔记</a></li>
+<li><a href="">Python数据分析（三）– Matplotlib绘图进阶</a></li>
+<li><a href=""></a></li>
 </ul>
-
+<h2 id="5-网络爬虫"><a href="#5-网络爬虫" class="headerlink" title="5 网络爬虫"></a>5 网络爬虫</h2><h2 id="6-PyQt5"><a href="#6-PyQt5" class="headerlink" title="6 PyQt5"></a>6 PyQt5</h2>
       </div>
       <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" class="">
-              前缀和
-            </a>
-          
-            <a href="/tags/%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84/" class="">
-              差分数组
-            </a>
-          
-        </div>
         
       </div>
       
@@ -712,7 +639,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/article/319c8c73.html" target="_blank" title="Python数据结构与算法篇（二）-- 前缀和与差分数组">https://qxienote.com/article/319c8c73.html</a>
+    <a href="/article/212a3cab.html" target="_blank" title="Python 文章汇总">https://qxienote.com/article/212a3cab.html</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -730,42 +657,21 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/article/37ba44a4.html" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">Python数据结构与算法篇（三）-- 快慢指针与碰撞指针</div>
-      </div>
-      
-      <!-- <div class="content">
-        数组是一种基础数据结构，可以用来处理常见的排序和二分搜索问题，典型的处理技巧包括对双指针、滑动窗口等，数组是数据结构中的
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/article/b86971b3.html" class="post-nav-link">
+    <a href="/article/37ba44a4.html" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">数学（一）-- LC[12]&amp;[13] 整数转罗马数字</div>
+        <div class="title-text">Python数据结构与算法篇（三）-- 快慢指针与碰撞指针</div>
       </div>
       <!-- <div class="content">
-        本篇以LeetCode[12]——整数转罗马数字为例，分析如何使用数学方法进行解题
-
-
-1 整数转罗马数字1.1 题目描
+        数组是一种基础数据结构，可以用来处理常见的排序和二分搜索问题，典型的处理技巧包括对双指针、滑动窗口等，数组是数据结构中的
       </div> -->
     </a>
   </div>
@@ -986,7 +892,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84"><span class="toc-text">1 前缀和与差分数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-text">1.1 前缀和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84"><span class="toc-text">1.2 差分数组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%B8%E8%A7%81%E9%A2%98%E5%9E%8B"><span class="toc-text">2 常见题型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%A2%98%E5%BA%93%E5%88%97%E8%A1%A8"><span class="toc-text">2.1 题库列表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E7%AF%87"><span class="toc-text">1 基础篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%9B%E9%98%B6%E7%AF%87"><span class="toc-text">2 进阶篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="toc-text">3 数据结构与算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-text">4 数据分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB"><span class="toc-text">5 网络爬虫</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-PyQt5"><span class="toc-text">6 PyQt5</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

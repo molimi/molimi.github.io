@@ -549,7 +549,7 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 3.7k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 3.8k |
           </span>
   
           <span class="min2read">
@@ -580,7 +580,10 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>要深入理解网络协议，需要仔细观察协议实体之间交换的报文序列。为探究协议操作细节，可使协议实体执行某些动作，观察这些动作及其影响。这些任务可以在仿真环境下或在如因特网这样的真实网络环境中完成。观察在正在运行协议实体间交换报文的基本工具被称为分组嗅探器(<code>packet sniffer</code>)。顾名思义，一个分组嗅探器捕获（嗅探）计算机发送和接收的报文。一般情况下，分组嗅探器将存储和显示出被捕获报文的各协议头部字段内容。</p>
+        <p>Wireshark是一种免费的网络协议分析器，可在Windows，Mac和LinuxUnix计算机上运行，是进行网络实验的理想分组分析器。本篇主要通过该软件进行抓包实验。</p>
+<span id="more"></span>
+
+<p>要深入理解网络协议，需要仔细观察协议实体之间交换的报文序列。为探究协议操作细节，可使协议实体执行某些动作，观察这些动作及其影响。这些任务可以在仿真环境下或在如因特网这样的真实网络环境中完成。观察在正在运行协议实体间交换报文的基本工具被称为分组嗅探器(<code>packet sniffer</code>)。顾名思义，一个分组嗅探器捕获（嗅探）计算机发送和接收的报文。一般情况下，分组嗅探器将存储和显示出被捕获报文的各协议头部字段内容。</p>
 <img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/021.6gwpvo7pots0.webp#pic_center" width = 48%>
 
 <p>上图右边是计算机上正常运行的协议（在这里是因特网协议）和应用程序（如：<code>Web</code> 浏览器和 <code>ftp</code> 客户端）。分组嗅探器（虚线框中的部分）是附加在计算机普通软件上的，主要由两部分组成。分组捕获库接收计算机发送和接收的每一个链路层帧的拷贝。高层协议（如：<code>HTTP</code>、 <code>FTP</code>、 <code>TCP</code>、 <code>UDP</code>、 <code>DNS</code>、 <code>IP</code> 等）交换的报文都被封装在链路层帧(Frame)中，并沿着物理介质（如以太网的电缆）传输。上图假设所使用的物理媒体是以太网，上层协议的报文最终封装在以太网帧中。</p>

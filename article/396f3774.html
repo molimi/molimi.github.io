@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>归档 | CarpeDiem&#39;s Blog</title>
+  <title>《计算机网络-自顶向下方法》 Wireshark实验（一）：Wireshark软件的安装和入门 | CarpeDiem&#39;s Blog</title>
 
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -499,275 +499,888 @@
   
 </header>
         <!-- 内容区域 -->
-        <div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-<div class="bg-light-floor-archive" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
-<div class="archive-header" style="background-image:url('https://pic1.zhimg.com/80/v2-1414b3a4b205e19060db18a20d08723a_1440w.jpg?source=1940ef5c')">
-  <div class="archive-header-title">
-    archive
-  </div>
-  <div class="archive-header-desc">
-  
-  <span class="title" id="archive-header-desc"></span>
-  <script>
-  function typedFn() {
-    const el = '#archive-header-desc';
-    const type = 'archive';
-    let desc = '愿你如风，被人温柔以待'
-    var typed = new Typed(el, {
-      strings: [desc],
-      startDelay: 100,
-      typeSpeed: 100,
-      loop: true,
-      backSpeed: 50,
-      showCursor: true
-    });
-  }
-  typedFn();
-</script>
-  
-  </div>
-  <div class="mask-box"></div>
-</div>
+        
+ <!-- prismjs 代码高亮 -->
+ 
 
-<div class="archive-video">
-  <video class="full-video" autoplay loop muted>
-      <source style="width: 100%;height: 100vh;" src="/">
-  </video>
-  <div class="video-header-title">
-    archive
-  </div>
-  <div class="video-header-desc">
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
-      <span class="title" id="archive-video-header-desc"></span>
-      <script>
-  function typedFn() {
-    const el = '#archive-video-header-desc';
-    const type = 'archive';
-    let desc = '愿你如风，被人温柔以待'
-    var typed = new Typed(el, {
-      strings: [desc],
-      startDelay: 100,
-      typeSpeed: 100,
-      loop: true,
-      backSpeed: 50,
-      showCursor: true
-    });
-  }
-  typedFn();
-</script>
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        《计算机网络-自顶向下方法》 Wireshark实验（一）：Wireshark软件的安装和入门
+      </span>
+    </div>
+    
+    
       
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2023-06-11 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-detail-header_category">
+              计算机基础
+            </a>
+          
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95/" class="post-detail-header_category">
+              计算机网络-自顶向下方法
+            </a>
+          
+        </span>
+      
+
+      
+        <div class="post-detail-header_wordcount">
+          <span class="totalcount">
+            <i class="fas fa-file-text-o"></i> 字数统计: 3.7k |
+          </span>
+  
+          <span class="min2read">
+            <i class="fas fa-clock"></i> 阅读时长: 13分钟 |
+          </span>
+  
+          
+            <span class="reading">
+              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+        </div>
+      
+    
   </div>
-  <div class="mask-box"></div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
 </div>
 
-<!-- hash算法 -->
 
 
-<div class="archive-main">
-  <section class="archive">
-    <div class="archive-content">
-      <ul class="post-archive">
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <p>要深入理解网络协议，需要仔细观察协议实体之间交换的报文序列。为探究协议操作细节，可使协议实体执行某些动作，观察这些动作及其影响。这些任务可以在仿真环境下或在如因特网这样的真实网络环境中完成。观察在正在运行协议实体间交换报文的基本工具被称为分组嗅探器(<code>packet sniffer</code>)。顾名思义，一个分组嗅探器捕获（嗅探）计算机发送和接收的报文。一般情况下，分组嗅探器将存储和显示出被捕获报文的各协议头部字段内容。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/021.6gwpvo7pots0.webp#pic_center" width = 48%>
+
+<p>上图右边是计算机上正常运行的协议（在这里是因特网协议）和应用程序（如：<code>Web</code> 浏览器和 <code>ftp</code> 客户端）。分组嗅探器（虚线框中的部分）是附加在计算机普通软件上的，主要由两部分组成。分组捕获库接收计算机发送和接收的每一个链路层帧的拷贝。高层协议（如：<code>HTTP</code>、 <code>FTP</code>、 <code>TCP</code>、 <code>UDP</code>、 <code>DNS</code>、 <code>IP</code> 等）交换的报文都被封装在链路层帧(Frame)中，并沿着物理介质（如以太网的电缆）传输。上图假设所使用的物理媒体是以太网，上层协议的报文最终封装在以太网帧中。</p>
+<p>分组嗅探器的第二个组成部分是分析器。分析器用来显示协议报文所有字段的内容。为此，分析器必须能够理解协议所交换的所有报文的结构。例如：我们要显示上图中 HTTP 协议所交换的报文的各个字段。分组分析器理解以太网帧格式，能够识别包含在帧中的 IP 数据报。分组分析器也要理解 IP 数据报的格式，并能从 IP 数据报中提取出 TCP 报文段。然后，它需要理解 TCP 报文段，并能够从中提取出 HTTP 消息。最后，它需要理解 HTTP 消息。</p>
+<p>Wireshark是一种免费的网络协议分析器，可在Windows，Mac和Linux&#x2F;Unix计算机上运行，是进行网络实验的理想分组分析器。该软件具有庞大的用户基础，文档支持包括用户指南、手册和常见问题(详见<a target="_blank" rel="noopener" href="http://www.wireshark.org/docs">http://www.wireshark.org/docs</a>)，丰富的功能包括分析数百种协议，以及精心设计的用户界面。可以运行在使用以太网、串行(PPP和SLIP)、802.11无线局域网和许多其他链路层技术的计算机上。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/022.6fvhzc6qeb40.webp#pic_center" width = 48%>
+
+<p>wireshark是非常流行的网络封包分析软件，功能十分强大。可以截取各种网络封包，显示网络封包的详细信息。使用wireshark的人必须了解网络协议，否则就看不懂wireshark了。为了安全考虑，wireshark只能查看封包，而不能修改封包的内容，或者发送封包。</p>
+<p>wireshark能获取HTTP，也能获取HTTPS，但是不能解密HTTPS，所以wireshark看不懂HTTPS中的内容，总结，如果是处理HTTP,HTTPS 还是用Fiddler, 其他协议比如TCP,UDP 就用wireshark。</p>
+<h2 id="1-下载并安装Wireshark软件"><a href="#1-下载并安装Wireshark软件" class="headerlink" title="1 下载并安装Wireshark软件"></a>1 下载并安装Wireshark软件</h2><p>WireShark 是一种可以运行在 Windows，UNIX，Linux 等操作系统上的分组分析器。运行Wireshark，需要有一台支持Wireshark和libpcap或WinPCap分组捕获库的计算机。安装Wireshark时，如果操作系统中未安装libpcap软件，它将会自动安装。支持的操作系统和下载站点的列表，请访问[<a target="_blank" rel="noopener" href="http://www.wireshark.org/download.html]">http://www.wireshark.org/download.html]</a>(<a target="_blank" rel="noopener" href="http://www.wireshark.org/download.html%E3%80%82%E6%8C%89%E7%85%A7%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC%E9%80%89%E6%8B%A9%E4%B8%8B%E8%BD%BD%EF%BC%8C%E4%B8%8B%E8%BD%BD%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E6%8C%89%E7%85%A7%E8%BD%AF%E4%BB%B6%E6%8F%90%E7%A4%BA%E4%B8%80%E8%B7%AFNext%E5%AE%89%E8%A3%85%E3%80%82">http://www.wireshark.org/download.html。按照系统版本选择下载，下载完成后，按照软件提示一路Next安装。</a></p>
+<p> <strong>温馨提示：</strong> 当您在安装或运行Wireshark时遇到问题时，可以查看Wireshark FAQ，它包含一些有用的提示和信息。如果你是Win10系统，安装完成后，选择抓包但是不显示网卡，下载win10pcap兼容性安装包。下载路径：<a target="_blank" rel="noopener" href="http://www.win10pcap.org/download/">下载路径：win10pcap兼容性安装包</a></p>
+<h2 id="2-Wireshark-开始抓包示例"><a href="#2-Wireshark-开始抓包示例" class="headerlink" title="2 Wireshark 开始抓包示例"></a>2 Wireshark 开始抓包示例</h2><p>1、双击桌面上的图标，可启动Wireshark。启动后的用户界面如下图所示，中间列表部分列出了所有网络接口。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/023.38sj0cnbnum0.webp#pic_center" width = 48%>
+
+<p>2、选择菜单栏上捕获 -&gt; 选项，勾选WLAN网卡（这里需要根据各自电脑网卡使用情况选择，简单的办法可以看使用的IP对应的网卡）。点击Start。启动抓包。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/024.4qe115vaeae0.webp#pic_center" width = 48%>
+
+<p>3、wireshark启动后，wireshark处于抓包状态中。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/025.3la44n2lec40.webp#pic_center" width = 48%>
+
+
+<p>4、执行需要抓包的操作，如在cmd窗口下执行<code>ping www.baidu.com</code>。</p>
+<p>5、抓取分组操作</p>
+<p>A.单击中间网络接口列表中，某一网络接口如<code>eth0</code>，选中网络接口，通过菜单“捕获”-“开始”或工具栏中的<img src="https://data.educoder.net/api/attachments/448948" class="lazyload placeholder" data-srcset="https://data.educoder.net/api/attachments/448948" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=2% alt=""> 按钮，开始捕获选定接口中的网络分组；
+B．也可以双击中间网络接口列表中，某一网络接口如<code>eth0</code>，可以开始抓取分组；
+C．通过菜单“捕获”-“停止”或工具栏中的按钮<img src="https://data.educoder.net/api/attachments/448957" class="lazyload placeholder" data-srcset="https://data.educoder.net/api/attachments/448957" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=2% alt=""> 停止抓取分组。
+D．通过菜单“捕获”-“重新开始”或工具栏中的按钮<img src="https://data.educoder.net/api/attachments/448959" class="lazyload placeholder" data-srcset="https://data.educoder.net/api/attachments/448959" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=2% alt=""> 重新开始抓取。</p>
+
+
+<p>6、Wireshark窗口功能</p>
+<p><strong>A．命令菜单和工具栏</strong><br>命令菜单位于窗口的最顶部，是标准的下拉式菜单。最常用菜单命令有两个： 文件、 捕获。 文件 菜单允许你保存捕获的分组数据，或打开一个已被保存的捕获分组数据文件，或退出 WireShark 程序。 捕获 菜单允许你开始捕获分组。</p>
+<p>工具栏位于命令菜单的下方，提供常用功能的快捷方式。如<img src="https://data.educoder.net/api/attachments/448948" class="lazyload placeholder" data-srcset="https://data.educoder.net/api/attachments/448948" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=2% alt="">：开始捕获、<img src="https://data.educoder.net/api/attachments/448957" class="lazyload placeholder" data-srcset="https://data.educoder.net/api/attachments/448957" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=2% alt="">：停止捕获、<img src="https://data.educoder.net/api/attachments/448959" class="lazyload placeholder" data-srcset="https://data.educoder.net/api/attachments/448959" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=2% alt="">：重新抓取分组。</p>
+<p><strong>B．显示过滤规则</strong></p>
+<p>在该字段中，可以填写协议的名称或其他信息，根据此内容可以对分组列表窗口中的分组进行过滤。</p>
+<p><strong>C．捕获分组列表</strong></p>
+<p>按行显示已被捕获的分组内容，其中包括： WireShark 赋予的分组序号、捕获时间、分组的源地址和目的地址、协议类型、分组中所包含的协议说明信息。单击某一列的列名，可以使分组按指定列进行排序。 在该列表中，所显示的协议类型是发送或接收分组的最高层协议的类型。</p>
+<p><strong>D．分组头部明细</strong></p>
+<p>显示捕获分组列表窗口中被选中分组的头部详细信息。包括：与以太网帧有关的信息，与包含在该分组中的 IP 数据报有关的信息。</p>
+<p>单击以太网帧或 IP 数据报所在行左边的向右或向下的箭头可以展开或最小化相关信息。如果利用 TCP 或 UDP 承载分组， WireShark 也会显示 TCP 或 UDP 协议头部信息。分组最高层协议的头部字段也会显示在此窗口中。</p>
+<p><strong>E．分组内容窗口</strong></p>
+<p>以 ASCII 码和十六进制两种格式显示被捕获帧的完整内容。</p>
+<p>7、通常，分组列表窗口中会显示许多类型的分组。即使仅仅是下载了一个网页，但是还有许多其他协议在您的计算机上运行，只是用户所看不见。可以在中间过滤窗口中输入过滤的分组协议如http， 选择应用按钮，就可以只让HTTP分组消息显示在分组列表窗口。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/026.4x7p2hmwhiw0.webp#pic_center" width = 48%>
+
+<p>8、操作完成后相关数据包就抓取到了。为避免其他无用的数据包影响分析，可以通过在过滤栏设置过滤条件进行数据包列表过滤，获取结果如下。说明：<code>ip.addr == 119.75.217.26 and icmp</code> 表示只显示ICPM协议且源主机IP或者目的主机IP为<code>119.75.217.26</code>的数据包。说明：协议名称icmp要小写。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/027.sm5aj8usjww.webp#pic_center" width = 48%>
+
+
+<h2 id="3-Wireshakr抓包界面介绍"><a href="#3-Wireshakr抓包界面介绍" class="headerlink" title="3 Wireshakr抓包界面介绍"></a>3 Wireshakr抓包界面介绍</h2><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/028.61b2vxymuhg0.webp#pic_center" width = 36%>
+
+<p>说明：数据包列表区中不同的协议使用了不同的颜色区分。协议颜色标识定位在菜单栏 视图(View) –&gt; 着色规则(Coloring Rules)。如下所示</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/029.4owrci6ggh00.webp#pic_center" width = 48%>
+
+<ol>
+<li>显示过滤器(Display Filter)，用于设置过滤条件进行数据包列表过滤。菜单路径：分析(Analyze) –&gt; 显示过滤器(Display Filters)。</li>
+</ol>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/030.726v80qr0vg0.webp#pic_center" width = 48%>
+
+<ol>
+<li>数据包列表(Packet List Pane)， 显示捕获到的数据包，每个数据包包含编号，时间戳，源地址，目标地址，协议，长度，以及数据包信息。 不同协议的数据包使用了不同的颜色区分显示。</li>
+</ol>
+<p>Time:时间；Source:发送主机IP地址；Destination: 接收主机IP地址；Protocol：分组协议；Length：分组长度；Info：分组内容</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/031.7829pakw1us0.webp#pic_center" width = 48%>
+
+<ol>
+<li>数据包详细信息(Packet Details Pane), 在数据包列表中选择指定数据包，在数据包详细信息中会显示数据包的所有详细信息内容。数据包详细信息面板是最重要的，用来查看协议中的每一个字段。各行信息分别为<br>（1）Frame:   物理层的数据帧概况<br>（2）Ethernet II: 数据链路层以太网帧头部信息<br>（3）Internet Protocol Version 4: 互联网层IP包头部信息<br>（4）Transmission Control Protocol:  传输层T的数据段头部信息，此处是TCP<br>（5）Hypertext Transfer Protocol:  应用层的信息，此处是HTTP协议</li>
+</ol>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/032.4xs9wudqaak0.webp#pic_center" width = 48%>
+
+<p>TCP包的具体内容</p>
+<p>从下图可以看到wireshark捕获到的TCP包中的每个字段。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/033.2sybmlwvjy00.webp#pic_center" width = 48%>
+
+<ol>
+<li>数据包字节区(Dissector Pane)。</li>
+</ol>
+<p>在分组内容窗口中，可以显示出该分组内容的16进制和ASCII两种格式的内容。鼠标指向内容窗口，可以将分组中某一字段的内容突出显示。在分组头部信息窗口中，展开选择某一头部信息时，分组内容中相应内容同步突出显示。</p>
+<h2 id="4-Wireshark过滤器设置"><a href="#4-Wireshark过滤器设置" class="headerlink" title="4 Wireshark过滤器设置"></a>4 Wireshark过滤器设置</h2><p>初学者使用wireshark时，将会得到大量的冗余数据包列表，以至于很难找到自己需要抓取的数据包部分。wireshark工具中自带了两种类型的过滤器，学会使用这两种过滤器会帮助我们在大量的数据中迅速找到我们需要的信息。</p>
+<p><strong>1) 抓包过滤器</strong></p>
+<p>捕获过滤器的菜单栏路径为Capture –&gt; Capture Filters。用于在抓取数据包前设置。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/034.6uzm0lq7h800.webp#pic_center" width = 48%>
+
+<p>如何使用？可以在抓取数据包前设置如下。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/035.5zbhvy2gomw0.webp#pic_center" width = 48%>
+
+<p><code>ip host 60.207.246.216 and icmp</code> 表示只捕获主机IP为60.207.246.216的ICMP数据包。获取结果如下：</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/036.2k7fnwqaoo20.webp#pic_center" width = 48%>
+
+
+<p><strong>（2）显示过滤器</strong></p>
+<p>显示过滤器是用于在抓取数据包后设置过滤条件进行过滤数据包。通常是在抓取数据包时设置条件相对宽泛或者没有设置导致抓取的数据包内容较多时使用显示过滤器设置条件过滤以方便分析。同样上述场景，在捕获时未设置抓包过滤规则直接通过网卡进行抓取所有数据包，如下</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/037.1p43gtotb00w.webp#pic_center" width = 48%>
+
+<p>执行 <code>ping www.baidu.com</code> 获取的数据包列表如下</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/038.2hu9htl72eo0.webp#pic_center" width = 48%>
+
+<p>观察上述获取的数据包列表，含有大量的无效数据。这时可以通过设置显示器过滤条件进行提取分析信息。<code>ip.addr == 14.119.104.254 and icmp</code>。并进行过滤。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/039.4q6cjmtdeei0.webp#pic_center" width = 48%>
+
+<p>上述介绍了抓包过滤器和显示过滤器的基本使用方法。在组网不复杂或者流量不大情况下，使用显示器过滤器进行抓包后处理就可以满足我们使用。下面介绍一下两者间的语法以及它们的区别。</p>
+<h2 id="5-wireshark过滤器表达式的规则"><a href="#5-wireshark过滤器表达式的规则" class="headerlink" title="5 wireshark过滤器表达式的规则"></a>5 wireshark过滤器表达式的规则</h2><p>1、抓包过滤器语法和实例</p>
+<p>抓包过滤器类型Type（host、net、port）、方向Dir（src、dst）、协议Proto（ether、ip、tcp、udp、http、icmp、ftp等）、逻辑运算符（&amp;&amp; 与、|| 或、！非）</p>
+<p>(1) 协议过滤</p>
+<p>比较简单，直接在抓包过滤框中直接输入协议名即可。</p>
+<ul>
+<li>tcp，只显示TCP协议的数据包列表</li>
+<li>http，只查看HTTP协议的数据包列表</li>
+<li>icmp，只显示ICMP协议的数据包列表</li>
+</ul>
+<p>(2) IP过滤</p>
+<ul>
+<li>host 192.168.1.104</li>
+<li>src host 192.168.1.104</li>
+<li>dst host 192.168.1.104</li>
+</ul>
+<p>(3) 端口过滤</p>
+<ul>
+<li>port 80</li>
+<li>src port 80</li>
+<li>dst port 80</li>
+</ul>
+<p>(4) 逻辑运算符 &amp;&amp; 与、|| 或、！非</p>
+<ul>
+<li><code>src host 192.168.1.104 &amp;&amp; dst port 80</code> 抓取主机地址为192.168.1.80、目的端口为80的数据包</li>
+<li><code>host 192.168.1.104 || host 192.168.1.102</code> 抓取主机为192.168.1.104或者192.168.1.102的数据包</li>
+<li><code>!broadcast</code> 不抓取广播数据包</li>
+</ul>
+<p>2、显示过滤器语法和实例<br>(1) 比较操作符</p>
+<p>比较操作符有&#x3D;&#x3D; 等于、！&#x3D; 不等于、&gt; 大于、&lt; 小于、&gt;&#x3D; 大于等于、&lt;&#x3D;小于等于。</p>
+<p>(2) 协议过滤</p>
+<p>比较简单，直接在Filter框中直接输入协议名即可。注意：协议名称需要输入小写。</p>
+<ul>
+<li>tcp，只显示TCP协议的数据包列表</li>
+<li>http，只查看HTTP协议的数据包列表</li>
+<li>icmp，只显示ICMP协议的数据包列表</li>
+</ul>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/040.6fo7o8vomq80.webp#pic_center" width = 48%>
+
+<p>(3) ip过滤</p>
+<ul>
+<li><code>ip.src ==192.168.1.104</code>，显示源地址为192.168.1.104的数据包列表</li>
+<li><code>ip.dst==192.168.1.104</code>，显示目标地址为192.168.1.104的数据包列表</li>
+<li><code>ip.addr == 192.168.1.104</code>，显示源IP地址或目标IP地址为192.168.1.104的数据包列表</li>
+</ul>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/040.6fo7o8vomq80.webp#pic_center" width = 48%>
+
+<p>(4) 端口过滤</p>
+<ul>
+<li>tcp.port &#x3D;&#x3D;80,  显示源主机或者目的主机端口为80的数据包列表。</li>
+<li>tcp.srcport &#x3D;&#x3D; 80,  只显示TCP协议的源主机端口为80的数据包列表。</li>
+<li>tcp.dstport &#x3D;&#x3D; 80，只显示TCP协议的目的主机端口为80的数据包列表。</li>
+</ul>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/042.4ni1tou9im80.webp#pic_center" width = 48%>
+
+<p>(5) Http模式过滤</p>
+<p><code>http.request.method==&quot;GET&quot;</code>, 只显示HTTP GET方法的。</p>
+<p>(6) 逻辑运算符为 and&#x2F;or&#x2F;not</p>
+<p>过滤多个条件组合时，使用and&#x2F;or。比如获取IP地址为192.168.1.104的ICMP数据包表达式为 <code>ip.addr == 14.119.104.254 and icmp</code></p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/043.oe0q389yzmo.webp#pic_center" width = 48%>
+
+<p>(7) 按照数据包内容过滤。假设我要以IMCP层中的内容进行过滤，可以单击选中界面中的码流，在下方进行选中数据。如下</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/044.2eq42rto5h34.webp#pic_center" width = 48%>
+
+<p>右键单击选中后出现如下界面</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/045.9tlmp06f5y8.webp#pic_center" width = 48%>
+
+<p>选中Select后在过滤器中显示如下，后面条件表达式就需要自己填写。如下我想过滤出data数据包中包含”abcd”内容的数据流。包含的关键词是contains 后面跟上内容。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/046.4v5jwne3bpq0.webp#pic_center" width = 48%>
+
+<p>调整数据包列表中时间戳显示格式。调整方法为View –&gt;Time Display Format –&gt; Date and Time of Day。调整后格式如下：</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230610/047.3f70teoime8.webp#pic_center" width = 48%>
+
+
+<hr>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>wireshark 基本使用：<a target="_blank" rel="noopener" href="https://www.educoder.net/shixuns/5kuyi2hn/challenges">https://www.educoder.net/shixuns/5kuyi2hn/challenges</a></li>
+<li>wireshark抓包新手使用教程：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/linyfeng/p/9496126.html">https://www.cnblogs.com/linyfeng/p/9496126.html</a></li>
+<li>《计算机网络－自顶向下方法》笔记：<a target="_blank" rel="noopener" href="https://github.com/moranzcw/Computer-Networking-A-Top-Down-Approach-NOTES">https://github.com/moranzcw/Computer-Networking-A-Top-Down-Approach-NOTES</a></li>
+</ul>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/Wireshark/" class="">
+              Wireshark
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>Carpe Diem</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/article/396f3774.html" target="_blank" title="《计算机网络-自顶向下方法》 Wireshark实验（一）：Wireshark软件的安装和入门">https://qxienote.com/article/396f3774.html</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/article/4e528de2.html" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">Python数据结构与算法篇（十）-- 链表的实现</div>
+      </div>
+      <!-- <div class="content">
+        
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+      <div id="appDonate" class="post-donate">
+  <div id="donate_board" class="donate_bar center" ref="donate">
+    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
+  </div>
+  <transition name="fade">
+    <div 
+      class="donate-box-mask"
+      v-cloak 
+      v-show="visible"
+      @click="cancelDialogDrawer()"
+    >
+    </div>
+  </transition>
+  <transition name="bounce">
+    <div class="donate-box" v-cloak v-show="visible">
+      <div class="donate-box_close">
+        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
+      </div>
+      <div class="donate-box_title">
+        <h4>
+          你的赏识是我前进的动力
+        </h4>
+      </div>
+      <div class="donate-box_tab">
+        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
+          支付宝
+        </div>
+        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
+          微信
+        </div>
+      </div>
+      <div class="donate-box_img">
+        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
+          <img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/alipay.514p32kvsig0.webp" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/alipay.514p32kvsig0.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
+        </div> 
+        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
+          <img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/wechatpay.33dgy81lgce0.webp" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/wechatpay.33dgy81lgce0.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDonate',
+    data: {
+      visible: false,
+      tabActive: 'Alipay',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        // function getScroll() {
+        //   return {
+        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        //   };
+        // }
+        this.top = $(document).scrollTop() // or getScroll().top
+        // console.log('aa', $('.main-content'));
+        body.style.cssText = 'overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+      changeTabActive(name) {
+        this.tabActive = name;
+      }
+    },
+    created() {}
+  })
+</script>
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      <div id="gitment-container"></div>
+
+    
+  </div>
+
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/001.6dgun3rgoxk0.webp'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>长路漫漫</h2>
         
         
+          <p>虽不能至，心向往之</p>
+
+        
+        
+          <p><span id="jinrishici-sentence">CarpeDiem's Blog</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
           
-            
-            <div class="year" data-aos="zoom-in-up">
-                <div class="bullet"></div>
-                <a href="/archives/2023">2023</a>
-            </div>
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
           
-          <li class="post-item" data-aos="fade-left">
+        
+          
+            <a href="mailto:2265066536@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/molimi"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=2265066536"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85Wireshark%E8%BD%AF%E4%BB%B6"><span class="toc-text">1 下载并安装Wireshark软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Wireshark-%E5%BC%80%E5%A7%8B%E6%8A%93%E5%8C%85%E7%A4%BA%E4%BE%8B"><span class="toc-text">2 Wireshark 开始抓包示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Wireshakr%E6%8A%93%E5%8C%85%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D"><span class="toc-text">3 Wireshakr抓包界面介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Wireshark%E8%BF%87%E6%BB%A4%E5%99%A8%E8%AE%BE%E7%BD%AE"><span class="toc-text">4 Wireshark过滤器设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-wireshark%E8%BF%87%E6%BB%A4%E5%99%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E8%A7%84%E5%88%99"><span class="toc-text">5 wireshark过滤器表达式的规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
             
+            
+            
+
             <div class="post-img-box">
               <a href="/article/396f3774.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                <span class="post-date">06-11</span>
+                
+                  <span class="post-date">06-11</span>
+                
               </div>
               <a class="post-title" href="/article/396f3774.html">《计算机网络-自顶向下方法》 Wireshark实验（一）：Wireshark软件的安装和入门</a>
             </div>
-          </li>
+          </div>
         
-          
-          <li class="post-item" data-aos="fade-left">
+          <div class="aside-list-item">
             
+            
+            
+
             <div class="post-img-box">
               <a href="/article/4e528de2.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                <span class="post-date">06-11</span>
+                
+                  <span class="post-date">06-11</span>
+                
               </div>
               <a class="post-title" href="/article/4e528de2.html">Python数据结构与算法篇（十）-- 链表的实现</a>
             </div>
-          </li>
+          </div>
         
-          
-          <li class="post-item" data-aos="fade-left">
+          <div class="aside-list-item">
             
+            
+            
+
             <div class="post-img-box">
               <a href="/article/933f1d8e.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                <span class="post-date">06-11</span>
+                
+                  <span class="post-date">06-11</span>
+                
               </div>
               <a class="post-title" href="/article/933f1d8e.html">Python数据结构与算法篇（九）--单调栈与单调队列</a>
             </div>
-          </li>
+          </div>
         
-          
-          <li class="post-item" data-aos="fade-left">
+          <div class="aside-list-item">
             
+            
+            
+
             <div class="post-img-box">
               <a href="/article/1515a7fd.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                <span class="post-date">06-11</span>
+                
+                  <span class="post-date">06-11</span>
+                
               </div>
               <a class="post-title" href="/article/1515a7fd.html">Python数据结构与算法篇（八）-- 队列的实现与应用</a>
             </div>
-          </li>
+          </div>
         
-          
-          <li class="post-item" data-aos="fade-left">
+          <div class="aside-list-item">
             
+            
+            
+
             <div class="post-img-box">
               <a href="/article/fa4199ab.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                <span class="post-date">06-11</span>
+                
+                  <span class="post-date">06-11</span>
+                
               </div>
               <a class="post-title" href="/article/fa4199ab.html">Python数据结构与算法篇（七）-- 栈的实现与应用</a>
             </div>
-          </li>
+          </div>
         
-          
-          <li class="post-item" data-aos="fade-left">
-            
-            <div class="post-img-box">
-              <a href="/article/83d55e57.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                <span class="post-date">06-11</span>
-              </div>
-              <a class="post-title" href="/article/83d55e57.html">Python数据结构与算法篇（六）-- 哈希表</a>
-            </div>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            
-            <div class="post-img-box">
-              <a href="/article/25d31d17.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                <span class="post-date">06-11</span>
-              </div>
-              <a class="post-title" href="/article/25d31d17.html">Python数据结构与算法篇（五）-- 二分查找与二分答案</a>
-            </div>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            
-            <div class="post-img-box">
-              <a href="/article/f08fb2ff.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                <span class="post-date">06-11</span>
-              </div>
-              <a class="post-title" href="/article/f08fb2ff.html">Python数据结构与算法篇（四）-- 滑动窗口算法</a>
-            </div>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            
-            <div class="post-img-box">
-              <a href="/article/212a3cab.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                <span class="post-date">06-11</span>
-              </div>
-              <a class="post-title" href="/article/212a3cab.html">Python 文章汇总</a>
-            </div>
-          </li>
-        
-          
-          <li class="post-item" data-aos="fade-left">
-            
-            <div class="post-img-box">
-              <a href="/article/37ba44a4.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                <span class="post-date">06-11</span>
-              </div>
-              <a class="post-title" href="/article/37ba44a4.html">Python数据结构与算法篇（三）-- 快慢指针与碰撞指针</a>
-            </div>
-          </li>
-        
-      </ul>
+      </div>
     </div>
   </section>
-  <div class="w-70">
-    
-  <!-- <nav class="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/2/">下一页</a>
-  </nav> -->
-  <div class="page-nav">
-    
-    <div class="page-info">
-        <div class="page-info-text">1 / 4</div>
-    </div>
-    
-      <a href="/archives/page/2/"
-         class="page-nav-next">
-          <span class="mr-5">下一页</span><i class="fas fa-angle-right"></i>
-      </a>
-      
-  </div>
 
+    
   </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
 </div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || 'https://pica.zhimg.com/80/v2-292e6340491bd97f9d014d6be3371c04_1440w.jpg';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
 
       </main>
     </div>

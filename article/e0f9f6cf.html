@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>使用 PicX 创建免费的图床神器 | CarpeDiem&#39;s Blog</title>
+  <title>数学(三) -- LC[1010]&amp;[1015] 可被 K 整除的最小整数 | CarpeDiem&#39;s Blog</title>
 
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -513,21 +513,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        使用 PicX 创建免费的图床神器
+        数学(三) -- LC[1010]&amp;[1015] 可被 K 整除的最小整数
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2023-05-28 |
+          <i class="fas fa-calendar"></i> 发表于：2023-06-14 |
         </span>
       
 
@@ -535,8 +535,12 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> 分类：
           
-            <a href="/categories/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="post-detail-header_category">
-              常用工具
+            <a href="/categories/LeetCode/" class="post-detail-header_category">
+              LeetCode
+            </a>
+          
+            <a href="/categories/LeetCode/Math/" class="post-detail-header_category">
+              Math
             </a>
           
         </span>
@@ -545,11 +549,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 1.3k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 1.9k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 4分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 8分钟 |
           </span>
   
           
@@ -576,97 +580,97 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>写博客文章时，图片的上传和存放是一个问题，我们也许会在不同的平台发布同一篇文章，这样一来每个平台都要上传图片。为了解决这些问题，做法是把图片统一上传到一个在线的第三方静态资源库中，我们把这个资源库称为图床。其返回一个图片的URL，使用 <code>markdown+图片url</code> 的方式写作文章，然后就可以直接使用链接引入图片。最后，整篇文章复制即可，再也不用担心图片的问题了。</p>
+        <p>本篇主要结合LeetCode上的题目分析常用的取模运算、带余除法、鸽巢定理、组合数学的解题技巧。</p>
 <span id="more"></span>
 
-<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h2><p>PicX，基于 GitHub API 开发的图床管理神器，图片外链使用 jsDelivr 进行全球 CDN 加速。免费、稳定、高效。免下载、免安装，只需一个 <strong>GitHub 账号</strong>，打开网站即可进行配置使用，轻松解决图床难题。</p>
-<p>一共3个步骤就完成设置了</p>
-<ol>
-<li>创建 GitHub 仓库</li>
-<li>获取 GitHub Token</li>
-<li>配置图床</li>
-</ol>
-<p>网站：<a href="https://link.juejin.cn?target=https%3A%2F%2Fpicx.xpoet.cn%2F" target="_blank" title="https://picx.xpoet.cn/" ref="nofollow noopener noreferrer">picx.xpoet.cn/</a></p>
-<p>仓库：<a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FXPoet%2Fpicx" target="_blank" title="https://github.com/XPoet/picx" ref="nofollow noopener noreferrer">github.com/XPoet/picx</a></p>
-<p>文档：<a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FXPoet%2Fpicx%2Fblob%2Fmaster%2FREADME.md" target="_blank" title="https://github.com/XPoet/picx/blob/master/README.md" ref="nofollow noopener noreferrer">github.com/XPoet/picx/…</a></p>
+<h2 id="1-可被-K-整除的最小整数"><a href="#1-可被-K-整除的最小整数" class="headerlink" title="1 可被 K 整除的最小整数"></a>1 可被 K 整除的最小整数</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/004.4r4wqioa0sk0.webp#pic_center" width = 64%>
 
-<p><strong>1. 创建 GitHub 仓库</strong></p>
-<p>创建 一个用来存储图片的 GitHub 仓库，仓库属性必须选 Public 。</p>
-<p>点击链接 <a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a> 快速新建仓库</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/123.5icizwyveeg0.webp#pic_center" width = 48%/>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/smallest-integer-divisible-by-k/description/">https://leetcode.cn/problems/smallest-integer-divisible-by-k/description/</a></p>
+<h3 id="1-2-思路分析"><a href="#1-2-思路分析" class="headerlink" title="1.2 思路分析"></a>1.2 思路分析</h3><p><strong>模运算</strong></p>
+<p>如果让你计算 $1234 \cdot 6789$ 的个位数，你会如何计算？</p>
+<p>由于只有个位数会影响到乘积的个位数，那么 $4\cdot 9&#x3D;36$ 的个位数 $6$ 就是答案。</p>
+<p>对于 $1234+6789$ 的个位数，同理，$4+9&#x3D;13$ 的个位数 $3$ 就是答案。</p>
+<p>你能把这个结论抽象成数学等式吗？</p>
+<p>一般地，涉及到取模的题目，通常会用到如下等式(上面计算的是 $m&#x3D;10$):</p>
+<p>$$<br>(a+b)\bmod m &#x3D; ((a\bmod m) + (b\bmod m)) \bmod m \<br>(a\cdot b) \bmod m&#x3D;((a\bmod m)\cdot  (b\bmod m)) \bmod m<br>$$</p>
+<p>证明：根据<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/147079013">带余除法</a>，任意整数 $a$ 都可以表示为 $a&#x3D;km+r$，这里 $r$ 相当于 $a mod m$。那么设 $a&#x3D;k_1m+r_1,\ b&#x3D;k_2m+r_2$。</p>
+<p><strong>第一个等式：</strong><br>$$<br>\begin{aligned}<br>&amp;(a+b) \bmod m\<br>&#x3D;&amp;((k_1+k_2) m+r_1+r_2)\bmod m\<br>&#x3D;&amp;(r_1+r_2)\bmod m\<br>&#x3D;&amp;((a\bmod m) + (b\bmod m)) \bmod m<br>\end{aligned}<br>$$</p>
+<p>即：两个数相加对某个数求余等于两个数分别求余相加之后再求余。</p>
+<p><strong>第二个等式：</strong><br>$$<br>\begin{aligned}<br>&amp;(a\cdot b) \bmod m\<br>&#x3D;&amp;(k_1k_2m^2+(k_1r_2+k_2r_1)m+r_1r_2)\bmod m\<br>&#x3D;&amp;(r_1r_2)\bmod m\<br>&#x3D;&amp;((a\bmod m)\cdot  (b\bmod m)) \bmod m<br>\end{aligned}<br>$$</p>
+<p><strong>举例一: $k &#x3D; 7$</strong></p>
+<p>从小到大枚举$n$，第一个能被 $k$ 整除的数的长度即为答案。</p>
+<p>$$1 \rightarrow 11 \rightarrow 111 \rightarrow 1111 \rightarrow 11111 \rightarrow 111111$$</p>
+<p>根据前置知识，设 $x$ 是上一次运算的结果(初始为1)，则下一个 $n$ 模 $k$ 的结果为 $(10x + 1) mod k$，看它是否为0。</p>
+<p>$$1 \rightarrow 4 \longrightarrow 6 \longrightarrow 5 \longrightarrow 2 \longrightarrow 0$$</p>
+<p><strong>举例二: $k&#x3D;24$</strong></p>
+<p>如果计算结果和之前的某个数相同，由于计算规则不变，后面会无限重复下去，无法得到0。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/005.54n4hhi87cg0.webp#pic_center" width = 48%>
 
 
-<p><strong>2. 创建 GitHub Token</strong></p>
-<p>PicX 的图床服务依赖于 <code>GitHub Token</code>，在开始使用之前，你必须先 创建 一个带有 repo 权限的 <code>GitHub Token</code>。</p>
-<p>点击 <a target="_blank" rel="noopener" href="https://github.com/settings/tokens/new">https://github.com/settings/tokens/new</a> 快速新建 GitHub Token</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/124.25nlu5i5j1ds.webp#pic_center" width = 48%/>
+<p><strong>方法一：哈希表</strong></p>
+<p>用哈希表记录计算结果。如果在算出0之前就遇到了在哈希表中的数字，则返回-1。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">smallestRepunitDivByK</span>(<span class="params">self, k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        x = <span class="number">1</span> % k           <span class="comment">#  x 为余数</span></span><br><span class="line">        seen = <span class="built_in">set</span>()        <span class="comment">#  创建一个无序集合，用于存储余数</span></span><br><span class="line">        <span class="keyword">while</span> x <span class="keyword">and</span> x <span class="keyword">not</span> <span class="keyword">in</span> seen:      <span class="comment"># 当余数为0或者余数重复出现，退出循环</span></span><br><span class="line">            seen.add(x)</span><br><span class="line">            x = (<span class="number">10</span> * x + <span class="number">1</span>) % k</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span> <span class="keyword">if</span> x <span class="keyword">else</span> <span class="built_in">len</span>(seen) + <span class="number">1</span>   <span class="comment"># 余数不为0，返回-1，余数为0，返回len(seen)+1    </span></span><br></pre></td></tr></table></figure>
 
-<p>这里我们填完名称和勾选上repo选项之后呢，然后直接点击 Generate token 按钮，即可生成一个token，如下图：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/001.6lklllgnfxc0.webp#pic_center" width = 48%/>
-
-<p>注意：这里英文的意思是：确保立即复制您的个人访问令牌。你将无法再看到它！那万一没了重新生成一个就行。</p>
-<p><strong>3. 配置图床</strong></p>
-<p><strong>1) 一键自动配置</strong></p>
-<p>填写 GitHub Token，点击 “一键自动配置” 按钮会自动创建 GitHub 仓库，并完成仓库、分支和目录之间的绑定。</p>
+<p><strong>复杂度分析</strong></p>
 <ul>
-<li>一键自动配置 &gt; 创建的仓库：picx-images-hosting</li>
-<li>一键自动配置 &gt; 创建的分支：master</li>
-<li>一键自动配置 &gt; 创建的目录：yyyyMMdd (当天日期，例如：20230403)</li>
+<li>时间复杂度：$\mathcal{O}(k)$。</li>
+<li>空间复杂度：$\mathcal{O}(k)$。</li>
 </ul>
-<p>如果你刚开始使用 PicX，那么推荐使用一键自动配置，非常方便。当然你也可以随时切换成手动配置。</p>
-<p><strong>2) 手动配置</strong></p>
-<p>填入刚刚在Github生成的Token，点击确认Token。会自动获取该用户下的仓库</p>
-<p>如果你绑定的仓库有多个分支，那么会出现选择分支的下拉列表，否则直接进入选择目录。</p>
-<p>多个分支情况，选择其中一个即可。PicX 暂时不支持新建分支，需要你手动去创建。只有一个分支情况，无分支下拉列表。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/128.62w39qmdbb00.webp#pic_center" width = 48% />
+<p><strong>方法二：抽屉原理</strong></p>
+<p>循环 $k$ 次，如果没有算出0，则返回-1。为什么？模 $k$ 的结果在 $[0, k-1]$ 中，这有 $k$ 个数字。如果循环 $k$ 次还没有找到0,根据<a target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/fermat/#%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86">鸽巢原理(抽屉原理)</a>，必然有重复的数字。这也同时说明算法一的时间复杂度为 $O(k)$。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">smallestRepunitDivByK</span>(<span class="params">self, k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> k % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">or</span> k % <span class="number">5</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        x = <span class="number">1</span> % k</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> count(<span class="number">1</span>):              <span class="comment"># 一定有解</span></span><br><span class="line">            <span class="keyword">if</span> x == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> i</span><br><span class="line">            x = (x * <span class="number">10</span> + <span class="number">1</span>) % k</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<p><strong>复杂度分析</strong></p>
 <ul>
-<li>新建目录：需手动输入一个新目录。</li>
-<li>根目录：图片将直接存储在仓库根目录下。</li>
-<li>自动目录：自动生成日期格式 YYYYMMDD 的目录。例如：20230526</li>
-<li>选择仓库目录：自动获取仓库下所有目录，选择一个即可。</li>
+<li>时间复杂度：$\mathcal{O}(k)$。</li>
+<li>空间复杂度：$\mathcal{O}(1)$，仅用到若干额外变量。</li>
 </ul>
-<p>至此，完成图床配置，点击 “确认” 按钮即可跳转到图片上传界面。</p>
-<blockquote>
-<p>如果想对图片进行一个分类怎么办呢？<br>这个也很简单，新建一个文件夹然后再上传，等到下次还要上传到这个文件夹，我们在目录方式中勾选选择仓库目录，就会展示你创建的所有文件夹。然后进行选择。</p>
-</blockquote>
-<p><a href="https://qxienote.com/">https://qxienote.com/</a></p>
-<p><strong>4. 上传图片</strong></p>
-<p>在上传图片界面，你可以使用 拖拽文件、复制粘贴、选择文件 这三种方式选择你的图片到上传区域。</p>
+<p><code>itertools.count(start=0, step=1)</code></p>
+<p>创建一个迭代器，它从 start 值开始，返回均匀间隔的值。常用于 <code>map()</code> 中的实参来生成连续的数据点。此外，还用于 <code>zip()</code> 来添加序列号。大致相当于：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">count</span>(<span class="params">start=<span class="number">0</span>, step=<span class="number">1</span></span>):</span><br><span class="line">    <span class="comment"># count(10) --&gt; 10 11 12 13 14 ...</span></span><br><span class="line">    <span class="comment"># count(2.5, 0.5) --&gt; 2.5 3.0 3.5 ...</span></span><br><span class="line">    n = start</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">yield</span> n</span><br><span class="line">        n += step</span><br></pre></td></tr></table></figure>
+
+<p>当对浮点数计数时，替换为乘法代码有时精度会更好，例如：<code>(start + step * i for i in count())</code>。</p>
+<p><strong>方法三：数学推导</strong></p>
+<p>设 $n$ 的长度为 $x$，那么 $n&#x3D;\frac{10^x-1}{9}$。$n$ 是 $k$ 的倍数，等价于 $10^x-1$ 是 $9k$ 的倍数，即 $10^x \equiv 1(mod 9k)$ 。</p>
 <ul>
-<li>你可以拖拽 一张 或 多张 图片到上传区域。</li>
-<li>你可以先将一张图片复制（快捷键 Ctrl+C &#x2F; Command+C）到系统剪贴板，然后在 PicX 上传界面通过按下快捷键 Ctrl+V &#x2F; Command+V 将图片粘贴到上传区域。</li>
-<li>你可以选择 一张 或 多张 图片到上传区域。</li>
+<li>结论：最小的 $x$ 必然是 $\phi(9k)$ 的因子。</li>
+<li>反证：如果 $\phi(9k) &#x3D; px + r (0 &lt; r &lt;x)$，根据欧拉定理，$10^{\phi(9k)}&#x3D;(10)P﹒10”&#x3D;10”&#x3D; 1(mod 9k)$，这说明有一个比 $x$ 更小的 $r$，矛盾。</li>
 </ul>
-<p>选择图片完成后，在上传之前，可以自由修改图片名。</p>
-<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/131.1zt39d3iin5s.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/131.1zt39d3iin5s.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="131" width=48% />
+<p>那么计算 $\phi(9k)$ 并枚举其因子 $d$，用快速幂判断 $10^d mod (9k)$ 是否等于1。这一做法只需要 $(\sqrt(k)log k )$ 的时间。</p>
+<p><strong>一点优化</strong></p>
+<p>由于 $n$ 的个位数是1，所以必然不是 2 的倍数和 5 的倍数。如果 $k$ 是 2 的倍数或 5 的倍数，那么必然无解，返回 —1。否则一定有解。</p>
+<p>证明：根据算法二，在计算过程中必然会出现两个数模 $k$ 同余。设这两个数为 $a&#x3D;\frac{10^x-1}{9}$ 和 $b&#x3D;\frac{10^y-1}{9}$，且 $a &gt; b$。那么 $a-b$ 是 $k$ 的倍数。</p>
+<p>注意 $a-b&#x3D;\frac{10^x-10^y}{9}&#x3D;10^y\cdot\frac{10^{x-y}-1}{9}$。$k$在没有因子 2 和 5 的情况下，要想整除上式，必须要整除 $\frac{10^{x-y}-1}{9}$，这说明 $n$ 的长度可以是 $x-y$。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算欧拉函数（n 以内的与 n 互质的数的个数）</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">phi</span>(<span class="params">n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    res = n</span><br><span class="line">    i = <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> i * i &lt;= n:</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            res = res // i * (i - <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">while</span> n % i == <span class="number">0</span>:</span><br><span class="line">                n //= i</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> n &gt; <span class="number">1</span>:</span><br><span class="line">        res = res // n * (n - <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">smallestRepunitDivByK</span>(<span class="params">self, k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> k % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">or</span> k % <span class="number">5</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        m = phi(k * <span class="number">9</span>)</span><br><span class="line">        <span class="comment"># 从小到大枚举不超过 sqrt(m) 的因子</span></span><br><span class="line">        i = <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> i * i &lt;= m:</span><br><span class="line">            <span class="keyword">if</span> m % i == <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">pow</span>(<span class="number">10</span>, i, k * <span class="number">9</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> i</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="comment"># 从小到大枚举不低于 sqrt(m) 的因子</span></span><br><span class="line">        i -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">if</span> m % i == <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">pow</span>(<span class="number">10</span>, m // i, k * <span class="number">9</span>) == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> m // i</span><br><span class="line">            i -= <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
-
-<p>勾选中哈希化，会在图片名称加上一串哈希值，确保图片名的唯一性，强烈建议开启。</p>
-<p>图片上传成功之后，会自动复制图片链接到系统剪贴板，也可以点击 “复制链接” 按钮进行复制。</p>
-<p><strong>5. 图床管理</strong></p>
-<p>点击左侧菜单栏的图床管理，我们可以看到当前目录是我们选择的 2230526</p>
-<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/132.3r5biof03tg0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/132.3r5biof03tg0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="132" width=48% />
-
-<p>双击目录图标，可进入下一级目录，点击图片，可放大预览。</p>
-<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/133.94otifievhs.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/133.94otifievhs.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="133" width=48% />
-
-<p>支持的操作：</p>
+<p><strong>复杂度分析</strong></p>
 <ul>
-<li>在属性面板，可以查看到图片名称和图片大小。</li>
-<li>在重命名输入框键入新名称后，按回车键确认。</li>
-<li>删除单张图片&#x2F;批量删除多张图床</li>
-<li>复制&#x2F;批量复制链接</li>
+<li>时间复杂度：$\mathcal{O}(\sqrt{k}\log k)$。计算 $\phi(9k)$ 和枚举 $\phi(9k)$ 的因子都需要 $\mathcal{O}(\sqrt{k})$ 的时间，对每个因子计算快速幂需要 $\mathcal{O}(\log k)$ 的时间，所以时间复杂度为 $\mathcal{O}(\sqrt{k}\log k)$。</li>
+<li>空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。</li>
 </ul>
-<p><strong>6. 我的设置</strong></p>
-<p>在我的设置界面，你可以体验到 PicX 图床丰富多彩的功能，根据自己需求调整最佳配置。</p>
-<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/130.6ywi4j6ahwc.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/130.6ywi4j6ahwc.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="130" width=48% />
+<h2 id="2-总持续时间可被-60-整除的歌曲"><a href="#2-总持续时间可被-60-整除的歌曲" class="headerlink" title="2 总持续时间可被 60 整除的歌曲"></a>2 总持续时间可被 60 整除的歌曲</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/006.3bcoupelrdk0.webp#pic_center" width = 64%>
 
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/pairs-of-songs-with-total-durations-divisible-by-60/description/">https://leetcode.cn/problems/pairs-of-songs-with-total-durations-divisible-by-60/description/</a></p>
+<h3 id="2-2-思路分析"><a href="#2-2-思路分析" class="headerlink" title="2.2 思路分析"></a>2.2 思路分析</h3><p><strong>1. 组合数学</strong></p>
+<p>遍历数组的同时用一个哈希表（或者数组）记录元素的出现次数。</p>
+<p>遍历 $\textit{time}$：</p>
+<ul>
+<li>举例，如果 $\textit{time}[i]&#x3D;1$，那么需要知道左边有多少个模 60 余数是 59 的数。</li>
+<li>举例，如果 $\textit{time}[i]&#x3D;62$，那么需要知道左边有多少个模 60 余数是 58 的数。</li>
+<li>一般地，对于 $\textit{time}[i]$，需要知道左边有多少个模 60 余数是 $60-\textit{time}[i] mod 60$ 的数。<br>特别地，如果 $\textit{time}[i]$ 模 60 的余数是 0，那么需要知道左边有多少个模 60 余数也是 0 的数。<br>这两种情况可以合并为：累加左边 $(60-\textit{time}[i] mod 60) mod 60$ 的出现次数。</li>
+</ul>
+<p>代码实现时，用一个长为 60 的数组 $\textit{cnt}$ 维护 $\textit{time}[i] mod 60$ 的出现次数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numPairsDivisibleBy60</span>(<span class="params">self, time: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        cnt = [<span class="number">0</span>] * <span class="number">60</span></span><br><span class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> time:</span><br><span class="line">            <span class="comment"># 先查询 cnt，再更新 cnt，因为题目要求 i&lt;j</span></span><br><span class="line">            <span class="comment"># 如果先更新，再查询，就把 i=j 的情况也考虑进去了</span></span><br><span class="line">            ans += cnt[(<span class="number">60</span> - t % <span class="number">60</span>) % <span class="number">60</span>]</span><br><span class="line">            cnt[t % <span class="number">60</span>] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
 
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：$\mathcal{O}(n+U)$，其中 $n$ 为 $\textit{nums}$ 的长度，$U&#x3D;60$。</li>
+<li>空间复杂度：$\mathcal{O}(U)$。</li>
+</ul>
 <hr>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>使用 PicX 创建免费的图床神器：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6991273636493524999">https://juejin.cn/post/6991273636493524999</a></li>
-<li>图床配置：<a target="_blank" rel="noopener" href="https://picx-docs.xpoet.cn/usage-guide/config.html">https://picx-docs.xpoet.cn/usage-guide/config.html</a></li>
+<li>三种算法+优化：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/smallest-integer-divisible-by-k/solutions/2263780/san-chong-suan-fa-you-hua-pythonjavacgo-tk4cj/">https://leetcode.cn/problems/smallest-integer-divisible-by-k/solutions/2263780/san-chong-suan-fa-you-hua-pythonjavacgo-tk4cj/</a></li>
+<li>「两数之和」的本质是什么？：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/pairs-of-songs-with-total-durations-divisible-by-60/solutions/2259343/liang-shu-zhi-he-de-ben-zhi-shi-shi-yao-bd0r1/">https://leetcode.cn/problems/pairs-of-songs-with-total-durations-divisible-by-60/solutions/2259343/liang-shu-zhi-he-de-ben-zhi-shi-shi-yao-bd0r1/</a></li>
 </ul>
 
       </div>
@@ -674,8 +678,8 @@
         
         <div class="tags">
           
-            <a href="/tags/%E5%9B%BE%E5%BA%8A/" class="">
-              图床
+            <a href="/tags/LeetCode/" class="">
+              LeetCode
             </a>
           
         </div>
@@ -689,7 +693,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/article/a559cbc7.html" target="_blank" title="使用 PicX 创建免费的图床神器">https://qxienote.com/article/a559cbc7.html</a>
+    <a href="/article/e0f9f6cf.html" target="_blank" title="数学(三) -- LC[1010]&amp;[1015] 可被 K 整除的最小整数">https://qxienote.com/article/e0f9f6cf.html</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -711,16 +715,19 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
     </div>
-    <a href="/article/6c09ec5e.html" class="post-nav-link">
+    <a href="/article/77d95398.html" class="post-nav-link">
       <div class="title">
         <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">Markdown 基本使用</div>
+        <div class="title-text">数学(四) -- LC[29]&amp;[166] 两数相除与分数到小数</div>
       </div>
       
       <!-- <div class="content">
-        本文主要介绍 Markdown 基本使用，主要包括文本格式，如标题设置、加粗文本、斜体、下划线、删除线、引用、列表等；接
+        LC[1574] 删除最短的子数组使剩余数组有序，通过题目深入理解滑动窗口的思想
+
+
+1  删除最短的子数组使剩余数组有
       </div> -->
     </a>
   </div>
@@ -731,15 +738,18 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/article/ad3c5526.html" class="post-nav-link">
+    <a href="/article/d3e16ec0.html" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">AIGC使用教程（一）-- ChatGPT 注册与基本使用</div>
+        <div class="title-text">数学（二）-- LC[204] 计数质数</div>
       </div>
       <!-- <div class="content">
-        本篇带你走进 AIGC 的基本使用，一步一步注册 ChatGPT，申请自己的 API 进行使用，解决代理的问题，最后介绍
+        LeetCode[204] 计数质数，涉及的知识主要有质数的判断、枚举法、厄拉多塞筛算法
+
+
+1 计数质数1.1 题目描
       </div> -->
     </a>
   </div>
@@ -960,7 +970,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="toc-text">1 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8F%AF%E8%A2%AB-K-%E6%95%B4%E9%99%A4%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B4%E6%95%B0"><span class="toc-text">1 可被 K 整除的最小整数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">1.1 题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-text">1.2 思路分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%80%BB%E6%8C%81%E7%BB%AD%E6%97%B6%E9%97%B4%E5%8F%AF%E8%A2%AB-60-%E6%95%B4%E9%99%A4%E7%9A%84%E6%AD%8C%E6%9B%B2"><span class="toc-text">2 总持续时间可被 60 整除的歌曲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">2.1 题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-text">2.2 思路分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1223,6 +1233,59 @@
 		height: 100%;
 	}
 </style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 

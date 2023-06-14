@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>使用 PicX 创建免费的图床神器 | CarpeDiem&#39;s Blog</title>
+  <title>归档 | CarpeDiem&#39;s Blog</title>
 
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -499,761 +499,156 @@
   
 </header>
         <!-- 内容区域 -->
-        
- <!-- prismjs 代码高亮 -->
- 
-
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        使用 PicX 创建免费的图床神器
-      </span>
-    </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2023-05-28 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> 分类：
-          
-            <a href="/categories/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" class="post-detail-header_category">
-              常用工具
-            </a>
-          
-        </span>
-      
-
-      
-        <div class="post-detail-header_wordcount">
-          <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 1.3k |
-          </span>
-  
-          <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 4分钟 |
-          </span>
-  
-          
-            <span class="reading">
-              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-        </div>
-      
-    
+        <div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="bg-light-floor-archive" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
+<div class="archive-header" style="background-image:url('https://pic1.zhimg.com/80/v2-1414b3a4b205e19060db18a20d08723a_1440w.jpg?source=1940ef5c')">
+  <div class="archive-header-title">
+    archive
   </div>
+  <div class="archive-header-desc">
   
-  
-    <script src="/js/bubble/bubble.js"></script>
-  
-</div>
-
-
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <p>写博客文章时，图片的上传和存放是一个问题，我们也许会在不同的平台发布同一篇文章，这样一来每个平台都要上传图片。为了解决这些问题，做法是把图片统一上传到一个在线的第三方静态资源库中，我们把这个资源库称为图床。其返回一个图片的URL，使用 <code>markdown+图片url</code> 的方式写作文章，然后就可以直接使用链接引入图片。最后，整篇文章复制即可，再也不用担心图片的问题了。</p>
-<span id="more"></span>
-
-<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h2><p>PicX，基于 GitHub API 开发的图床管理神器，图片外链使用 jsDelivr 进行全球 CDN 加速。免费、稳定、高效。免下载、免安装，只需一个 <strong>GitHub 账号</strong>，打开网站即可进行配置使用，轻松解决图床难题。</p>
-<p>一共3个步骤就完成设置了</p>
-<ol>
-<li>创建 GitHub 仓库</li>
-<li>获取 GitHub Token</li>
-<li>配置图床</li>
-</ol>
-<p>网站：<a href="https://link.juejin.cn?target=https%3A%2F%2Fpicx.xpoet.cn%2F" target="_blank" title="https://picx.xpoet.cn/" ref="nofollow noopener noreferrer">picx.xpoet.cn/</a></p>
-<p>仓库：<a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FXPoet%2Fpicx" target="_blank" title="https://github.com/XPoet/picx" ref="nofollow noopener noreferrer">github.com/XPoet/picx</a></p>
-<p>文档：<a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2FXPoet%2Fpicx%2Fblob%2Fmaster%2FREADME.md" target="_blank" title="https://github.com/XPoet/picx/blob/master/README.md" ref="nofollow noopener noreferrer">github.com/XPoet/picx/…</a></p>
-
-<p><strong>1. 创建 GitHub 仓库</strong></p>
-<p>创建 一个用来存储图片的 GitHub 仓库，仓库属性必须选 Public 。</p>
-<p>点击链接 <a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a> 快速新建仓库</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/123.5icizwyveeg0.webp#pic_center" width = 48%/>
-
-
-<p><strong>2. 创建 GitHub Token</strong></p>
-<p>PicX 的图床服务依赖于 <code>GitHub Token</code>，在开始使用之前，你必须先 创建 一个带有 repo 权限的 <code>GitHub Token</code>。</p>
-<p>点击 <a target="_blank" rel="noopener" href="https://github.com/settings/tokens/new">https://github.com/settings/tokens/new</a> 快速新建 GitHub Token</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/124.25nlu5i5j1ds.webp#pic_center" width = 48%/>
-
-<p>这里我们填完名称和勾选上repo选项之后呢，然后直接点击 Generate token 按钮，即可生成一个token，如下图：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/001.6lklllgnfxc0.webp#pic_center" width = 48%/>
-
-<p>注意：这里英文的意思是：确保立即复制您的个人访问令牌。你将无法再看到它！那万一没了重新生成一个就行。</p>
-<p><strong>3. 配置图床</strong></p>
-<p><strong>1) 一键自动配置</strong></p>
-<p>填写 GitHub Token，点击 “一键自动配置” 按钮会自动创建 GitHub 仓库，并完成仓库、分支和目录之间的绑定。</p>
-<ul>
-<li>一键自动配置 &gt; 创建的仓库：picx-images-hosting</li>
-<li>一键自动配置 &gt; 创建的分支：master</li>
-<li>一键自动配置 &gt; 创建的目录：yyyyMMdd (当天日期，例如：20230403)</li>
-</ul>
-<p>如果你刚开始使用 PicX，那么推荐使用一键自动配置，非常方便。当然你也可以随时切换成手动配置。</p>
-<p><strong>2) 手动配置</strong></p>
-<p>填入刚刚在Github生成的Token，点击确认Token。会自动获取该用户下的仓库</p>
-<p>如果你绑定的仓库有多个分支，那么会出现选择分支的下拉列表，否则直接进入选择目录。</p>
-<p>多个分支情况，选择其中一个即可。PicX 暂时不支持新建分支，需要你手动去创建。只有一个分支情况，无分支下拉列表。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/128.62w39qmdbb00.webp#pic_center" width = 48% />
-
-<ul>
-<li>新建目录：需手动输入一个新目录。</li>
-<li>根目录：图片将直接存储在仓库根目录下。</li>
-<li>自动目录：自动生成日期格式 YYYYMMDD 的目录。例如：20230526</li>
-<li>选择仓库目录：自动获取仓库下所有目录，选择一个即可。</li>
-</ul>
-<p>至此，完成图床配置，点击 “确认” 按钮即可跳转到图片上传界面。</p>
-<blockquote>
-<p>如果想对图片进行一个分类怎么办呢？<br>这个也很简单，新建一个文件夹然后再上传，等到下次还要上传到这个文件夹，我们在目录方式中勾选选择仓库目录，就会展示你创建的所有文件夹。然后进行选择。</p>
-</blockquote>
-<p><a href="https://qxienote.com/">https://qxienote.com/</a></p>
-<p><strong>4. 上传图片</strong></p>
-<p>在上传图片界面，你可以使用 拖拽文件、复制粘贴、选择文件 这三种方式选择你的图片到上传区域。</p>
-<ul>
-<li>你可以拖拽 一张 或 多张 图片到上传区域。</li>
-<li>你可以先将一张图片复制（快捷键 Ctrl+C &#x2F; Command+C）到系统剪贴板，然后在 PicX 上传界面通过按下快捷键 Ctrl+V &#x2F; Command+V 将图片粘贴到上传区域。</li>
-<li>你可以选择 一张 或 多张 图片到上传区域。</li>
-</ul>
-<p>选择图片完成后，在上传之前，可以自由修改图片名。</p>
-<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/131.1zt39d3iin5s.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/131.1zt39d3iin5s.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="131" width=48% />
-
-
-<p>勾选中哈希化，会在图片名称加上一串哈希值，确保图片名的唯一性，强烈建议开启。</p>
-<p>图片上传成功之后，会自动复制图片链接到系统剪贴板，也可以点击 “复制链接” 按钮进行复制。</p>
-<p><strong>5. 图床管理</strong></p>
-<p>点击左侧菜单栏的图床管理，我们可以看到当前目录是我们选择的 2230526</p>
-<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/132.3r5biof03tg0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/132.3r5biof03tg0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="132" width=48% />
-
-<p>双击目录图标，可进入下一级目录，点击图片，可放大预览。</p>
-<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/133.94otifievhs.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/133.94otifievhs.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="133" width=48% />
-
-<p>支持的操作：</p>
-<ul>
-<li>在属性面板，可以查看到图片名称和图片大小。</li>
-<li>在重命名输入框键入新名称后，按回车键确认。</li>
-<li>删除单张图片&#x2F;批量删除多张图床</li>
-<li>复制&#x2F;批量复制链接</li>
-</ul>
-<p><strong>6. 我的设置</strong></p>
-<p>在我的设置界面，你可以体验到 PicX 图床丰富多彩的功能，根据自己需求调整最佳配置。</p>
-<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/130.6ywi4j6ahwc.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/130.6ywi4j6ahwc.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="130" width=48% />
-
-
-<hr>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>使用 PicX 创建免费的图床神器：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6991273636493524999">https://juejin.cn/post/6991273636493524999</a></li>
-<li>图床配置：<a target="_blank" rel="noopener" href="https://picx-docs.xpoet.cn/usage-guide/config.html">https://picx-docs.xpoet.cn/usage-guide/config.html</a></li>
-</ul>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/%E5%9B%BE%E5%BA%8A/" class="">
-              图床
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Carpe Diem</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/article/a559cbc7.html" target="_blank" title="使用 PicX 创建免费的图床神器">https://qxienote.com/article/a559cbc7.html</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/article/6c09ec5e.html" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">Markdown 基本使用</div>
-      </div>
-      
-      <!-- <div class="content">
-        本文主要介绍 Markdown 基本使用，主要包括文本格式，如标题设置、加粗文本、斜体、下划线、删除线、引用、列表等；接
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/article/ad3c5526.html" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">AIGC使用教程（一）-- ChatGPT 注册与基本使用</div>
-      </div>
-      <!-- <div class="content">
-        本篇带你走进 AIGC 的基本使用，一步一步注册 ChatGPT，申请自己的 API 进行使用，解决代理的问题，最后介绍
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-      <div id="appDonate" class="post-donate">
-  <div id="donate_board" class="donate_bar center" ref="donate">
-    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
-  </div>
-  <transition name="fade">
-    <div 
-      class="donate-box-mask"
-      v-cloak 
-      v-show="visible"
-      @click="cancelDialogDrawer()"
-    >
-    </div>
-  </transition>
-  <transition name="bounce">
-    <div class="donate-box" v-cloak v-show="visible">
-      <div class="donate-box_close">
-        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
-      </div>
-      <div class="donate-box_title">
-        <h4>
-          你的赏识是我前进的动力
-        </h4>
-      </div>
-      <div class="donate-box_tab">
-        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
-          支付宝
-        </div>
-        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
-          微信
-        </div>
-      </div>
-      <div class="donate-box_img">
-        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
-          <img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/alipay.514p32kvsig0.webp" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/alipay.514p32kvsig0.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
-        </div> 
-        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
-          <img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/wechatpay.33dgy81lgce0.webp" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/wechatpay.33dgy81lgce0.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
-        </div>
-      </div>
-    </div>
-  </transition>
-</div>
-
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDonate',
-    data: {
-      visible: false,
-      tabActive: 'Alipay',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        // function getScroll() {
-        //   return {
-        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
-        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-        //   };
-        // }
-        this.top = $(document).scrollTop() // or getScroll().top
-        // console.log('aa', $('.main-content'));
-        body.style.cssText = 'overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-      changeTabActive(name) {
-        this.tabActive = name;
-      }
-    },
-    created() {}
-  })
-</script>
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
+  <span class="title" id="archive-header-desc"></span>
+  <script>
+  function typedFn() {
+    const el = '#archive-header-desc';
+    const type = 'archive';
+    let desc = '愿你如风，被人温柔以待'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
   }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
-      <div id="gitment-container"></div>
-
-    
+  typedFn();
+</script>
+  
   </div>
-
-<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
-
-
-  </div>
-
-  <!-- 目录 -->
-  <aside id='l_side'>
-  
-    
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img src='https://cdn.staticaly.com/gh/molimi/image-hosting@main/博客图库/001.6dgun3rgoxk0.webp'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>长路漫漫</h2>
-        
-        
-          <p>虽不能至，心向往之</p>
-
-        
-        
-          <p><span id="jinrishici-sentence">CarpeDiem's Blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:2265066536@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/molimi"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=2265066536"
-              class="social fab fa-qq flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-  
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="toc-text">1 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
+  <div class="mask-box"></div>
 </div>
 
+<div class="archive-video">
+  <video class="full-video" autoplay loop muted>
+      <source style="width: 100%;height: 100vh;" src="/">
+  </video>
+  <div class="video-header-title">
+    archive
+  </div>
+  <div class="video-header-desc">
+  
+      <span class="title" id="archive-video-header-desc"></span>
+      <script>
+  function typedFn() {
+    const el = '#archive-video-header-desc';
+    const type = 'archive';
+    let desc = '愿你如风，被人温柔以待'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
+  }
+  typedFn();
+</script>
       
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
+  </div>
+  <div class="mask-box"></div>
+</div>
+
+<!-- hash算法 -->
 
 
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
+<div class="archive-main">
+  <section class="archive">
+    <div class="archive-content">
+      <ul class="post-archive">
         
-          <div class="aside-list-item">
+        
+          
             
+            <div class="year" data-aos="zoom-in-up">
+                <div class="bullet"></div>
+                <a href="/archives/2023">2023</a>
+            </div>
+          
+          <li class="post-item" data-aos="fade-left">
             
-            
-
             <div class="post-img-box">
-              <a href="/article/77d95398.html" class="post-img " style="background-size: cover; 
+              <a href="/article/6c09ec5e.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                
-                  <span class="post-date">06-14</span>
-                
+                <span class="post-date">05-31</span>
               </div>
-              <a class="post-title" href="/article/77d95398.html">数学(四) -- LC[29]&amp;[166] 两数相除与分数到小数</a>
+              <a class="post-title" href="/article/6c09ec5e.html">Markdown 基本使用</a>
             </div>
-          </div>
+          </li>
         
-          <div class="aside-list-item">
+          
+          <li class="post-item" data-aos="fade-left">
             
-            
-            
-
             <div class="post-img-box">
-              <a href="/article/e0f9f6cf.html" class="post-img " style="background-size: cover; 
+              <a href="/article/a559cbc7.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                
-                  <span class="post-date">06-14</span>
-                
+                <span class="post-date">05-28</span>
               </div>
-              <a class="post-title" href="/article/e0f9f6cf.html">数学(三) -- LC[1010]&amp;[1015] 可被 K 整除的最小整数</a>
+              <a class="post-title" href="/article/a559cbc7.html">使用 PicX 创建免费的图床神器</a>
             </div>
-          </div>
+          </li>
         
-          <div class="aside-list-item">
+          
+          <li class="post-item" data-aos="fade-left">
             
-            
-            
-
             <div class="post-img-box">
-              <a href="/article/d3e16ec0.html" class="post-img " style="background-size: cover; 
+              <a href="/article/ad3c5526.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
               <div>
-                
-                  <span class="post-date">06-14</span>
-                
+                <span class="post-date">05-28</span>
               </div>
-              <a class="post-title" href="/article/d3e16ec0.html">数学（二）-- LC[204] 计数质数</a>
+              <a class="post-title" href="/article/ad3c5526.html">AIGC使用教程（一）-- ChatGPT 注册与基本使用</a>
             </div>
-          </div>
+          </li>
         
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/49dac87b.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-11</span>
-                
-              </div>
-              <a class="post-title" href="/article/49dac87b.html">Python数据结构与算法篇（十五）-- 二叉树的遍历：深度优先搜索与广度优先搜索</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/234fdd80.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-11</span>
-                
-              </div>
-              <a class="post-title" href="/article/234fdd80.html">Python数据结构与算法篇（十四）-- 冒泡排序算法</a>
-            </div>
-          </div>
-        
-      </div>
+      </ul>
     </div>
   </section>
-
+  <div class="w-70">
+    
+  <!-- <nav class="page-nav">
+    <a class="extend prev" rel="prev" href="/archives/page/4/">上一页</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><span class="page-number current">5</span>
+  </nav> -->
+  <div class="page-nav">
+    
+      <a href="/archives/page/4/"
+         class="page-nav-pre">
+         <i class="fas fa-angle-left"></i><span class="ml-5">上一页</span>
+      </a>
+    
+    <div class="page-info">
+        <div class="page-info-text">5 / 5</div>
+    </div>
     
   </div>
-</aside>
 
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script src="/js/wrapImage.js"></script>
+  </div>
 </div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || 'https://pica.zhimg.com/80/v2-292e6340491bd97f9d014d6be3371c04_1440w.jpg';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
-  
-</script>
-
 
       </main>
     </div>

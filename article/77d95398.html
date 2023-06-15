@@ -549,11 +549,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 1.2k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 3.2k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 5分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 13分钟 |
           </span>
   
           
@@ -580,52 +580,93 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>LC[1574] 删除最短的子数组使剩余数组有序，通过题目深入理解滑动窗口的思想</p>
+        <p>本篇主要学习LeetCode两数相除里面用到的快速乘和二分查找的算法进行两数的相除，同时学习长除法的解题技巧</p>
 <span id="more"></span>
 
-<h2 id="1-删除最短的子数组使剩余数组有序"><a href="#1-删除最短的子数组使剩余数组有序" class="headerlink" title="1  删除最短的子数组使剩余数组有序"></a>1  删除最短的子数组使剩余数组有序</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/007.7kh3kiwddww0.webp#pic_center" width = 80%>
+<h2 id="1-分数到小数"><a href="#1-分数到小数" class="headerlink" title="1 分数到小数"></a>1 分数到小数</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/010.7da1gbtbx5c0.webp#pic_center" width = 64%>
 
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fraction-to-recurring-decimal/description/">https://leetcode.cn/problems/fraction-to-recurring-decimal/description/</a></p>
+<h3 id="1-2-思路分析"><a href="#1-2-思路分析" class="headerlink" title="1.2 思路分析"></a>1.2 思路分析</h3><p><strong>1. 长除法</strong></p>
+<p>题目要求根据给定的分子和分母，将分数转成整数或小数。由于给定的分子和分母的取值范围都是 $[-2^{31}, 2^{31}-1]$，为了防止计算过程中产生溢出，需要将分子和分母转成 64 位整数表示。</p>
+<p>将分数转成整数或小数，做法是计算分子和分母相除的结果。可能的结果有三种：整数、有限小数、无限循环小数。</p>
+<p>如果分子可以被分母整除，则结果是整数，将分子除以分母的商以字符串的形式返回即可。</p>
+<p>如果分子不能被分母整除，则结果是有限小数或无限循环小数，需要通过模拟长除法的方式计算结果。为了方便处理，首先根据分子和分母的正负决定结果的正负（注意此时分子和分母都不为 0），然后将分子和分母都转成正数，再计算长除法。</p>
+<p>计算长除法时，首先计算结果的整数部分，将以下部分依次拼接到结果中：</p>
+<ol>
+<li>如果结果是负数则将负号拼接到结果中，如果结果是正数则跳过这一步；</li>
+<li>将整数部分拼接到结果中；</li>
+<li>将小数点拼接到结果中。</li>
+</ol>
+<p>完成上述拼接之后，根据余数计算小数部分。</p>
+<p>计算小数部分时，每次将余数乘以 10，然后计算小数的下一位数字，并得到新的余数。重复上述操作直到余数变成 0 或者找到循环节。</p>
+<ul>
+<li>如果余数变成 0，则结果是有限小数，将小数部分拼接到结果中。</li>
+<li>如果找到循环节，则找到循环节的开始位置和结束位置并加上括号，然后将小数部分拼接到结果中。</li>
+</ul>
+<p>如何判断是否找到循环节？注意到对于相同的余数，计算得到的小数的下一位数字一定是相同的，因此如果计算过程中发现某一位的余数在之前已经出现过，则为找到循环节。为了记录每个余数是否已经出现过，需要使用哈希表存储每个余数在小数部分第一次出现的下标。</p>
+<p>假设在计算小数部分的第 $i$ 位之前，余数为 $\textit{remainder}<em>i$，则在计算小数部分的第 $i$ 位之后，余数为 $\textit{remainder}</em>{i+1}$。</p>
+<p>假设存在下标 $j$ 和 $k$，满足 $j \le k$ 且 $\textit{remainder}<em>j &#x3D; \textit{remainder}</em>{k+1}$，则小数部分的第 $k+1$ 位和小数部分的第 $j$ 位相同，因此小数部分的第 $j$ 位到第 $k$ 位是一个循环节。在计算小数部分的第 $k$ 位之后就会发现这个循环节的存在，因此在小数部分的第 $j$ 位之前加上左括号，在小数部分的末尾（即第 $k$ 位之后）加上右括号。</p>
+<p><center class = "half"><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/011.1g836fzb4800.webp#pic_left" width = "50%"><img src = "https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/012.1ysut58coneo.webp#pic_left"  width = "48%"></center></p>
 
-<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-subarray-to-be-removed-to-make-array-sorted/description/">https://leetcode.cn/problems/shortest-subarray-to-be-removed-to-make-array-sorted/description/</a></p>
-<h3 id="1-2-滑动窗口"><a href="#1-2-滑动窗口" class="headerlink" title="1.2 滑动窗口"></a>1.2 滑动窗口</h3><p><strong>1. 枚举左端点，移动右端点</strong></p>
-<p>核心思路：枚举 $\textit{left}$，增大 $\textit{right}$ 直到 $\textit{arr}[\textit{left}]\le\textit{arr}[\textit{right}]$，此时更新子数组长度的最小值。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/008.5l5gbipb9ik0.gif#pic_center" width = 36%>
-
-<p><strong>解疑答惑：</strong></p>
-<p>问：为什么枚举一个新的 $\textit{left}$ 时，$\textit{right}$ 不会往左移？或者说，是否需要再次枚举之前枚举过的 $\textit{arr}[\textit{right}]$？</p>
-<p>答：在向右移动时，由于 $\textit{arr}[\textit{left}]$ 和 $\textit{arr}[\textit{right}]$ 都是非递减的，所以 $\textit{right}$ 左侧之前枚举过的元素必然小于 $\textit{arr}[\textit{left}]$，无需再次枚举。这也是本题可以使用同向双指针（不定长滑动窗口）的前提。</p>
-<p>问：在计算子数组长度时，我经常分不清下标是否要 +1 或 −1，请问如何解决？</p>
-<p>答：第一，时刻把握住 $\textit{left}$ 和 $\textit{right}$ 的含义，对于本题来说是开区间 $(\textit{left},\textit{right})$，这两个指针指向的元素不能删除。第二，可以代入一些数据来验证，比如代入 $\textit{left}&#x3D;1, \textit{right}&#x3D;3$，此时只需要删除一个 $\textit{arr}[2]$，所以公式 $\textit{right}-\textit{left}-1$ 才是符合要求的。</p>
-<p>问：为什么不用判断$\textit{left}&lt;\textit{right}$，难道不会出现 $\textit{left}\ge\textit{right}$ 的情况吗？</p>
-<p>答：由于提前判断了 $\textit{arr}$ 是非递减数组的情况，后面的循环 $\textit{left}$ 必定小于 $\textit{right}$。反证：如果某个时刻 $\textit{left}$ 达到了 $\textit{right}$，就说明整个数组是有序的，但这种情况已经提前判断了。</p>
-<p>问：能不能先把 $\textit{left}$ 的最大值算出来，然后再去枚举 $\textit{left}$ 或 $\textit{right}$？</p>
-<p>答：可以。根据对称性，这种做法和先算 $\textit{right}$ 的最小值的做法是一样的，只不过枚举的顺序相反而已。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findLengthOfShortestSubarray</span>(<span class="params">self, arr: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(arr)</span><br><span class="line">        right = n - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> right <span class="keyword">and</span> arr[right - <span class="number">1</span>] &lt;= arr[right]:</span><br><span class="line">            right -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> right == <span class="number">0</span>:  <span class="comment"># arr 已经是非递减数组</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment"># 此时 arr[right-1] &gt; arr[right]</span></span><br><span class="line">        ans = right  <span class="comment"># 删除 arr[:right]</span></span><br><span class="line">        left = <span class="number">0</span>  <span class="comment"># 枚举 left</span></span><br><span class="line">        <span class="keyword">while</span> left == <span class="number">0</span> <span class="keyword">or</span> arr[left - <span class="number">1</span>] &lt;= arr[left]:</span><br><span class="line">            <span class="keyword">while</span> right &lt; n <span class="keyword">and</span> arr[right] &lt; arr[left]:</span><br><span class="line">                right += <span class="number">1</span></span><br><span class="line">            <span class="comment"># 此时 arr[left] &lt;= arr[right]，删除 arr[left+1:right]</span></span><br><span class="line">            ans = <span class="built_in">min</span>(ans, right - left - <span class="number">1</span>)</span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fractionToDecimal</span>(<span class="params">self, numerator: <span class="built_in">int</span>, denominator: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="comment"># 如果本身能够整除，直接返回计算结果</span></span><br><span class="line">        <span class="keyword">if</span> numerator % denominator == <span class="number">0</span>: <span class="keyword">return</span> <span class="built_in">str</span>(numerator//denominator)</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">if</span> numerator * denominator &lt; <span class="number">0</span>:             <span class="comment"># 如果其一为负数，先追加负号</span></span><br><span class="line">            res.append(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        numerator, denominator = <span class="built_in">abs</span>(numerator), <span class="built_in">abs</span>(denominator)</span><br><span class="line">        res.append(<span class="built_in">str</span>(numerator//denominator))     <span class="comment">#  计算整数部分，并将余数赋值给 remainder</span></span><br><span class="line">        res.append(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">        remainder = numerator % denominator</span><br><span class="line">        index_map = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">while</span> remainder <span class="keyword">and</span> remainder <span class="keyword">not</span> <span class="keyword">in</span> index_map:</span><br><span class="line">            index_map[remainder] = <span class="built_in">len</span>(res)         <span class="comment"># 记录当前余数所在答案的位置，并继续模拟除法运算</span></span><br><span class="line">            remainder *= <span class="number">10</span></span><br><span class="line">            res.append(<span class="built_in">str</span>(remainder//denominator))</span><br><span class="line">            remainder %= denominator</span><br><span class="line">        <span class="keyword">if</span> remainder:                   <span class="comment"># 当前余数之前出现过，则将出现位置和最后位置添加&#x27;()&#x27;</span></span><br><span class="line">            ind = index_map[remainder]</span><br><span class="line">            res.insert(ind, <span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">            res.append(<span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(res)</span><br></pre></td></tr></table></figure>
 
 <p><strong>复杂度分析</strong></p>
 <ul>
-<li>时间复杂度：$O(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。虽然写了个二重循环，但是内层循环中对 $\textit{right}$ 加一的总执行次数不会超过 $n$ 次，所以总的时间复杂度为 $O(n)$。</li>
-<li>空间复杂度：$O(1)$，仅用到若干额外变量。</li>
+<li>时间复杂度：$O(l)$，其中 $l$ 是答案字符串的长度，这道题中 $l \le 10^4$。对于答案字符串中的每一个字符，计算时间都是 $O(1)$。</li>
+<li>空间复杂度：$O(l)$，其中 $l$ 是答案字符串的长度，这道题中 $l \le 10^4$。空间复杂度主要取决于答案字符串和哈希表，哈希表中的每个键值对所对应的下标各不相同，因此键值对的数量不会超过 $l$。</li>
 </ul>
-<p><strong>2. 枚举右端点，移动左端点</strong></p>
-<p>核心思路：枚举 $\textit{right}$，增大 $\textit{left}$ 直到 $\textit{arr}[\textit{left}]&gt;\textit{arr}[\textit{right}]$。在增大过程中去更新子数组长度的最小值。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/009.5lk4hb94lr80.gif#pic_center" width = 36%>
+<h2 id="2-两数相除"><a href="#2-两数相除" class="headerlink" title="2 两数相除"></a>2 两数相除</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/013.6o6qc5moj0c0.webp#pic_center" width = 64%>
 
-<p>问：为什么枚举一个新的 $\textit{right}$ 时，$\textit{left}$ 不会往左移？或者说，是否需要再次枚举之前枚举过的 $\textit{arr}[\textit{left}]$？</p>
-<p>答：在向右移动时，由于 $\textit{arr}[\textit{left}]$ 和 $\textit{arr}[\textit{right}]$ 都是非递减的，所以 $\textit{left}$ 左侧之前枚举过的元素必然小于等于 $\textit{arr}[\textit{right}]$，由于这样的子数组长度更长，无需再次枚举。这也是本题可以使用同向双指针（不定长滑动窗口）的前提。</p>
-<p>问：为什么循环一定会结束？</p>
-<p>答：代码中提前判断了 $\textit{arr}$ 已经是非递减数组的情况，所以后面的循环一定存在 $\textit{left}$，使得 $\textit{arr}[\textit{left}]&gt;\textit{arr}[\textit{left}+1]$ 成立。</p>
-<p>注：最坏情况下，当 $\textit{right}&#x3D;n$ 时才会去移动 $\textit{left}$。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findLengthOfShortestSubarray</span>(<span class="params">self, arr: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(arr)</span><br><span class="line">        right = n - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> right <span class="keyword">and</span> arr[right - <span class="number">1</span>] &lt;= arr[right]:</span><br><span class="line">            right -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> right == <span class="number">0</span>:  <span class="comment"># arr 已经是非递减数组</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment"># 此时 arr[right-1] &gt; arr[right]</span></span><br><span class="line">        ans = right  <span class="comment"># 删除 arr[:right]</span></span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:  <span class="comment"># 枚举 right</span></span><br><span class="line">            <span class="keyword">while</span> right == n <span class="keyword">or</span> arr[left] &lt;= arr[right]:</span><br><span class="line">                ans = <span class="built_in">min</span>(ans, right - left - <span class="number">1</span>)  <span class="comment"># 删除 arr[left+1:right]</span></span><br><span class="line">                <span class="keyword">if</span> arr[left] &gt; arr[left + <span class="number">1</span>]:</span><br><span class="line">                    <span class="keyword">return</span> ans</span><br><span class="line">                left += <span class="number">1</span></span><br><span class="line">            right += <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>复杂度分析</strong></p>
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/divide-two-integers/description/">https://leetcode.cn/problems/divide-two-integers/description/</a></p>
+<h3 id="2-2-思路分析"><a href="#2-2-思路分析" class="headerlink" title="2.2 思路分析"></a>2.2 思路分析</h3><p><strong>1. 二分查找</strong></p>
+<p>如果除法结果溢出，那么我们需要返回 $2^{31}-1$ 作为答案。因此在编码之前，我们可以首先对于溢出或者容易出错的边界情况进行讨论：</p>
 <ul>
-<li>时间复杂度：$O(n)$，其中 $n$ 为 $\textit{nums}$ 的长度。虽然写了个二重循环，但是内层循环中对 $\textit{left}$ 加一的总执行次数不会超过 $n$ 次，所以总的时间复杂度为 $O(n)$。</li>
-<li>空间复杂度：$O(1)$，仅用到若干额外变量。</li>
+<li>当被除数为 32 位有符号整数的最小值 $-2^{31}$ 时：<ul>
+<li>如果除数为 1，那么我们可以直接返回答案 $-2^{31}$；</li>
+<li>如果除数为 −1，那么答案为 $2^{31}$，产生了溢出。此时我们需要返回 $2^{31} - 1$。</li>
 </ul>
+</li>
+<li>当除数为 32 位有符号整数的最小值 $s-2^{31}$ 时：<ul>
+<li>如果被除数同样为 $-2^{31}$，那么我们可以直接返回答案 111；</li>
+<li>对于其余的情况，我们返回答案 0。</li>
+</ul>
+</li>
+<li>当被除数为 0 时，我们可以直接返回答案 0。</li>
+</ul>
+<p>对于一般的情况，根据除数和被除数的符号，我们需要考虑 444 种不同的可能性。因此，为了方便编码，我们可以将被除数或者除数取相反数，使得它们符号相同。</p>
+<p>如果我们将被除数和除数都变为正数，那么可能会导致溢出。例如当被除数为 $-2^{31}$ 时，它的相反数 $2^{31}$ 产生了溢出。因此，我们可以考虑将被除数和除数都变为负数，这样就不会有溢出的问题，在编码时只需要考虑 1 种情况了。</p>
+<p>如果我们将被除数和除数的其中（恰好）一个变为了正数，那么在返回答案之前，我们需要对答案也取相反数。</p>
+<p><strong>方法一：二分查找</strong></p>
+<p>根据「前言」部分的讨论，我们记被除数为 X，除数为 Y，并且 X 和 Y 都是负数。我们需要找出 X&#x2F;Y 的结果 Z。Z 一定是正数或 0。</p>
+<p>根据除法以及余数的定义，我们可以将其改成乘法的等价形式，即：</p>
+<p>$$Z\times Y \geq X \geq (Z+1) \times Y$$</p>
+<p>因此，我们可以使用二分查找的方法得到 ZZZ，即找出最大的 ZZZ 使得 Z×Y≥XZ \times Y \geq XZ×Y≥X 成立。</p>
+<p>由于我们不能使用乘法运算符，因此我们需要使用「快速乘」算法得到 $Z \times Y$ 的值。</p>
+<p>由于我们只能使用 32 位整数，因此二分查找中会有很多细节。</p>
+<p>首先，二分查找的下界为 1，上界为 $2^{31} - 1$。唯一可能出现的答案为 $2^{31}$ 的情况已经被我们在「前言」部分进行了特殊处理，因此答案的最大值为 $2^{31} - 1$。如果二分查找失败，那么答案一定为 0。</p>
+<p>在实现「快速乘」时，我们需要使用加法运算，然而较大的 Z 也会导致加法运算溢出。例如我们要判断 A + B 是否小于 C 时（其中 A,B,C 均为负数），A + B 可能会产生溢出，因此我们必须将判断改为 $A &lt; C - B$ 是否成立。由于任意两个负数的差一定在 $[-2^{31} + 1, 2^{31} - 1]$ 范围内，这样就不会产生溢出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">divide</span>(<span class="params">self, dividend: <span class="built_in">int</span>, divisor: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        INT_MIN, INT_MAX = -<span class="number">2</span>**<span class="number">31</span>, <span class="number">2</span>**<span class="number">31</span> - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 考虑被除数为最小值的情况</span></span><br><span class="line">        <span class="keyword">if</span> dividend == INT_MIN:</span><br><span class="line">            <span class="keyword">if</span> divisor == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> INT_MIN</span><br><span class="line">            <span class="keyword">if</span> divisor == -<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> INT_MAX</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 考虑除数为最小值的情况</span></span><br><span class="line">        <span class="keyword">if</span> divisor == INT_MIN:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span> <span class="keyword">if</span> dividend == INT_MIN <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">        <span class="comment"># 考虑被除数为 0 的情况</span></span><br><span class="line">        <span class="keyword">if</span> dividend == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 一般情况，使用二分查找</span></span><br><span class="line">        <span class="comment"># 将所有的正数取相反数，这样就只需要考虑一种情况</span></span><br><span class="line">        rev = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> dividend &gt; <span class="number">0</span>:</span><br><span class="line">            dividend = -dividend</span><br><span class="line">            rev = <span class="keyword">not</span> rev</span><br><span class="line">        <span class="keyword">if</span> divisor &gt; <span class="number">0</span>:</span><br><span class="line">            divisor = -divisor</span><br><span class="line">            rev = <span class="keyword">not</span> rev</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 快速乘</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">quickAdd</span>(<span class="params">y: <span class="built_in">int</span>, z: <span class="built_in">int</span>, x: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">            <span class="comment"># x 和 y 是负数，z 是正数</span></span><br><span class="line">            <span class="comment"># 需要判断 z * y &gt;= x 是否成立</span></span><br><span class="line">            result, add = <span class="number">0</span>, y</span><br><span class="line">            <span class="keyword">while</span> z &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> (z &amp; <span class="number">1</span>) == <span class="number">1</span>:</span><br><span class="line">                    <span class="comment"># 需要保证 result + add &gt;= x</span></span><br><span class="line">                    <span class="keyword">if</span> result &lt; x - add:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                    result += add</span><br><span class="line">                <span class="keyword">if</span> z != <span class="number">1</span>:</span><br><span class="line">                    <span class="comment"># 需要保证 add + add &gt;= x</span></span><br><span class="line">                    <span class="keyword">if</span> add &lt; x - add:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                    add += add</span><br><span class="line">                <span class="comment"># 不能使用除法</span></span><br><span class="line">                z &gt;&gt;= <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">        left, right, ans = <span class="number">1</span>, INT_MAX, <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">            <span class="comment"># 注意溢出，并且不能使用除法</span></span><br><span class="line">            mid = left + ((right - left) &gt;&gt; <span class="number">1</span>)</span><br><span class="line">            check = quickAdd(divisor, mid, dividend)</span><br><span class="line">            <span class="keyword">if</span> check:</span><br><span class="line">                ans = mid</span><br><span class="line">                <span class="comment"># 注意溢出</span></span><br><span class="line">                <span class="keyword">if</span> mid == INT_MAX:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                left = mid + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                right = mid - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -ans <span class="keyword">if</span> rev <span class="keyword">else</span> ans</span><br></pre></td></tr></table></figure>
+
+<p>复杂度分析</p>
+<ul>
+<li>时间复杂度：$O(\log^2 C)$，其中 $C$ 表示 32 位整数的范围。二分查找的次数为 $O(\log C)$，其中的每一步我们都需要 $O(\log C)$ 使用「快速乘」算法判断 $Z \times Y \geq X$ 是否成立，因此总时间复杂度为 $O(\log^2 C)$。</li>
+<li>空间复杂度：$O(1)$。</li>
+</ul>
+<p><strong>2. 减法试除</strong><br><strong>思路一</strong><br>首先需要考虑正负号，处理为分子分母全是正数， 其次在返回的时候要注意是否溢出，如果溢出要判断。</p>
+<p>核心是div函数怎么写？例如方法1中的div函数， 利用二进制搜索的思想就是， 每次利用加法，将当前的 divisor 乘以两倍，并同时用 multiple 记录下乘以了 2 的多少次方， multiple 的变化过程是1，2，4，8，16 。。。</p>
+<p>因为任何一个数都可以用二进制的方法得到，所以我们可以利用二进制的思想来代表乘数 multiple， 最终能够得到一个 <code>divisor * multiple = dividend</code> 的multiple。</p>
+<p>举例：算 $63 &#x2F; 8$ 过程为：$63 &#x2F; 8 &#x3D; (63-32) &#x2F; 8 + 4 &#x3D; (63-32-16) &#x2F; 8 + 2 + 4 &#x3D; (63-32-16-8) &#x2F; 8 + 1+ 2 + 4 &#x3D; 7$ 其中 $(63-32-16-8) &#x2F; 8 &#x3D; 7 &#x2F; 8 &#x3D; 0$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法1：递归</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">divide</span>(<span class="params">self, dividend: <span class="built_in">int</span>, divisor: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        MIN_INT, MAX_INT = -<span class="number">2147483648</span>, <span class="number">2147483647</span>  <span class="comment"># [−2**31, 2**31−1]</span></span><br><span class="line">        flag = <span class="number">1</span>                                    <span class="comment"># 存储正负号，并将分子分母转化为正数</span></span><br><span class="line">        <span class="keyword">if</span> dividend &lt; <span class="number">0</span>: flag, dividend = -flag, -dividend</span><br><span class="line">        <span class="keyword">if</span> divisor &lt; <span class="number">0</span>: flag, divisor  = -flag, -divisor </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">div</span>(<span class="params">dividend, divisor</span>):                 <span class="comment"># 例：1023 / 1 = 512 + 256 + 128 + 64 + 32 + 16 + 8 + 4 + 1</span></span><br><span class="line">            <span class="keyword">if</span> dividend &lt; divisor:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            cur = divisor</span><br><span class="line">            multiple = <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> cur + cur &lt; dividend:             <span class="comment"># 用加法求出保证divisor * multiple &lt;= dividend的最大multiple</span></span><br><span class="line">                cur += cur                          <span class="comment"># 即cur分别乘以1, 2, 4, 8, 16...2^n，即二进制搜索</span></span><br><span class="line">                multiple += multiple</span><br><span class="line">            <span class="keyword">return</span> multiple + div(dividend - cur, divisor)</span><br><span class="line">        res = div(dividend, divisor)</span><br><span class="line"></span><br><span class="line">        res = res <span class="keyword">if</span> flag &gt; <span class="number">0</span> <span class="keyword">else</span> -res             <span class="comment"># 恢复正负号</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> res &lt; MIN_INT:                           <span class="comment"># 根据是否溢出返回结果</span></span><br><span class="line">            <span class="keyword">return</span> MIN_INT</span><br><span class="line">        <span class="keyword">elif</span> MIN_INT &lt;= res &lt;= MAX_INT:</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> MAX_INT</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法2：迭代</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">divide</span>(<span class="params">self, dividend: <span class="built_in">int</span>, divisor: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        MIN_INT, MAX_INT = -<span class="number">2147483648</span>, <span class="number">2147483647</span>  <span class="comment"># [−2**31, 2**31−1]</span></span><br><span class="line">        flag = <span class="number">1</span>                                    <span class="comment"># 存储正负号，并将分子分母转化为正数</span></span><br><span class="line">        <span class="keyword">if</span> dividend &lt; <span class="number">0</span>: flag, dividend = -flag, -dividend</span><br><span class="line">        <span class="keyword">if</span> divisor &lt; <span class="number">0</span>: flag, divisor  = -flag, -divisor </span><br><span class="line">        </span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> dividend &gt;= divisor:                  <span class="comment"># 例：1023 / 1 = 512 + 256 + 128 + 64 + 32 + 16 + 8 + 4 + 1</span></span><br><span class="line">            cur = divisor</span><br><span class="line">            multiple = <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> cur + cur &lt; dividend:             <span class="comment"># 用加法求出保证divisor * multiple &lt;= dividend的最大multiple</span></span><br><span class="line">                cur += cur                          <span class="comment"># 即cur分别乘以1, 2, 4, 8, 16...2^n，即二进制搜索</span></span><br><span class="line">                multiple += multiple</span><br><span class="line">            dividend -= cur                         <span class="comment"># 辗转相减法</span></span><br><span class="line">            res += multiple</span><br><span class="line">        </span><br><span class="line">        res = res <span class="keyword">if</span> flag &gt; <span class="number">0</span> <span class="keyword">else</span> -res             <span class="comment"># 恢复正负号</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> res &lt; MIN_INT:                           <span class="comment"># 根据是否溢出返回结果</span></span><br><span class="line">            <span class="keyword">return</span> MIN_INT</span><br><span class="line">        <span class="keyword">elif</span> MIN_INT &lt;= res &lt;= MAX_INT:</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> MAX_INT</span><br></pre></td></tr></table></figure>
+
+<p><strong>思路二</strong></p>
+<p>用 $2^i$ 去作为乘法基数, $x * 2^i &#x3D; x &lt;&lt; i$。 从 $2^{31}$ 试到 $2^0$ 直到被除数被减到比除数小， 每个能满足除出来的最大的 2 的幂都加入答案, 也可以理解为每次计算出答案的 32 位中的某一位</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">divide</span>(<span class="params">self, dividend: <span class="built_in">int</span>, divisor: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> dividend == -<span class="number">2147483648</span> <span class="keyword">and</span> divisor == -<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2147483647</span></span><br><span class="line">        a, b, res = <span class="built_in">abs</span>(dividend), <span class="built_in">abs</span>(divisor), <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">31</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="comment"># 2^i * b &lt;= a 换句话说 a/b = 2^i + (a-2^i*b)/b</span></span><br><span class="line">            <span class="keyword">if</span> (b &lt;&lt; i) &lt;= a:</span><br><span class="line">                res += <span class="number">1</span> &lt;&lt; i</span><br><span class="line">                a -= b &lt;&lt; i</span><br><span class="line">        <span class="keyword">return</span> res <span class="keyword">if</span> (dividend &gt; <span class="number">0</span>) == (divisor &gt; <span class="number">0</span>) <span class="keyword">else</span> -res</span><br></pre></td></tr></table></figure>
+
 <hr>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>删除最短的子数组使剩余数组有序：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-subarray-to-be-removed-to-make-array-sorted/solutions/2189149/dong-hua-yi-xie-jiu-cuo-liang-chong-xie-iijwz/">https://leetcode.cn/problems/shortest-subarray-to-be-removed-to-make-array-sorted/solutions/2189149/dong-hua-yi-xie-jiu-cuo-liang-chong-xie-iijwz/</a></li>
+<li>两数相除——官方题解：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/divide-two-integers/solutions/1041939/liang-shu-xiang-chu-by-leetcode-solution-5hic/">https://leetcode.cn/problems/divide-two-integers/solutions/1041939/liang-shu-xiang-chu-by-leetcode-solution-5hic/</a></li>
+<li>减法试除：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/divide-two-integers/solutions/1042741/pythonjavajavascript-jian-fa-shi-chu-by-amrow/">https://leetcode.cn/problems/divide-two-integers/solutions/1042741/pythonjavajavascript-jian-fa-shi-chu-by-amrow/</a></li>
+<li>二进制搜索的思想：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/divide-two-integers/solutions/458026/29-python3-li-yong-er-jin-zhi-sou-suo-de-si-xiang-/">https://leetcode.cn/problems/divide-two-integers/solutions/458026/29-python3-li-yong-er-jin-zhi-sou-suo-de-si-xiang-/</a></li>
 </ul>
 
       </div>
@@ -633,8 +674,16 @@
         
         <div class="tags">
           
-            <a href="/tags/LeetCode/" class="">
-              LeetCode
+            <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="">
+              二分查找
+            </a>
+          
+            <a href="/tags/%E9%95%BF%E9%99%A4%E6%B3%95/" class="">
+              长除法
+            </a>
+          
+            <a href="/tags/%E5%BF%AB%E9%80%9F%E4%B9%98/" class="">
+              快速乘
             </a>
           
         </div>
@@ -665,6 +714,24 @@
 <div class="post-nav">
 
 
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/article/284005f2.html" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> 上一篇:
+        <div class="title-text">字符串（一）-- LC[3] 无重复字符的最长子串</div>
+      </div>
+      
+      <!-- <div class="content">
+        LeetCode[3] 无重复字符的最长子串使用滑动窗口，就是使用两个指针，指针头和指针尾依次遍历，当指针尾遍历到的字母
+      </div> -->
+    </a>
+  </div>
 
 
 
@@ -904,7 +971,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%A0%E9%99%A4%E6%9C%80%E7%9F%AD%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E4%BD%BF%E5%89%A9%E4%BD%99%E6%95%B0%E7%BB%84%E6%9C%89%E5%BA%8F"><span class="toc-text">1  删除最短的子数组使剩余数组有序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">1.1 题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="toc-text">1.2 滑动窗口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%86%E6%95%B0%E5%88%B0%E5%B0%8F%E6%95%B0"><span class="toc-text">1 分数到小数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">1.1 题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-text">1.2 思路分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E9%99%A4"><span class="toc-text">2 两数相除</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">2.1 题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-text">2.2 思路分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -930,6 +997,69 @@
       <!-- hash算法 -->
       
       <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/article/cce29ffb.html" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">06-15</span>
+                
+              </div>
+              <a class="post-title" href="/article/cce29ffb.html">数组（一）-- LC[26]&amp;[80] 删除有序数组中的重复元素</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/article/6b74a168.html" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">06-15</span>
+                
+              </div>
+              <a class="post-title" href="/article/6b74a168.html">字符串（二）-- LC[17] 电话号码的字母组合</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/article/284005f2.html" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">06-15</span>
+                
+              </div>
+              <a class="post-title" href="/article/284005f2.html">字符串（一）-- LC[3] 无重复字符的最长子串</a>
+            </div>
+          </div>
         
           <div class="aside-list-item">
             
@@ -970,69 +1100,6 @@
                 
               </div>
               <a class="post-title" href="/article/e0f9f6cf.html">数学(三) -- LC[1010]&amp;[1015] 可被 K 整除的最小整数</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/d3e16ec0.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-14</span>
-                
-              </div>
-              <a class="post-title" href="/article/d3e16ec0.html">数学（二）-- LC[204] 计数质数</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/49dac87b.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-11</span>
-                
-              </div>
-              <a class="post-title" href="/article/49dac87b.html">Python数据结构与算法篇（十五）-- 二叉树的遍历：深度优先搜索与广度优先搜索</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/article/234fdd80.html" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-11</span>
-                
-              </div>
-              <a class="post-title" href="/article/234fdd80.html">Python数据结构与算法篇（十四）-- 冒泡排序算法</a>
             </div>
           </div>
         

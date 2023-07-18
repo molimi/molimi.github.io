@@ -532,15 +532,28 @@
       
 
       
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/LeetCode/" class="post-detail-header_category">
+              LeetCode
+            </a>
+          
+            <a href="/categories/LeetCode/Array/" class="post-detail-header_category">
+              Array
+            </a>
+          
+        </span>
+      
 
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 0 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 1.1k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 1分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 4分钟 |
           </span>
   
           
@@ -567,9 +580,64 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        
+        <p>本篇主要以LeetCode[1851] 包含每个查询的最小区间为例，学习排序算法、优先队列、并查集的使用。</p>
+<span id="more"></span>
+
+<h2 id="1-包含每个查询的最小区间"><a href="#1-包含每个查询的最小区间" class="headerlink" title="1 包含每个查询的最小区间"></a>1 包含每个查询的最小区间</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><p>给你一个二维整数数组 intervals ，其中 $intervals[i] &#x3D; [left_i, right_i]$ 表示第 $i$ 个区间开始于 $left_i$ 、结束于 $right_i$（包含两侧取值，闭区间）。区间的 长度 定义为区间中包含的整数数目，更正式地表达是 $right_i - left_i + 1$。</p>
+<p>再给你一个整数数组 queries 。第 j 个查询的答案是满足 $left_i &lt;&#x3D; queries[j] &lt;&#x3D; right_i$ 的 长度最小区间 i 的长度 。如果不存在这样的区间，那么答案是 -1 。</p>
+<p>以数组形式返回对应查询的所有答案。</p>
+<blockquote>
+<p>示例 1：<br>输入：intervals &#x3D; [[1,4],[2,4],[3,6],[4,4]], queries &#x3D; [2,3,4,5]<br>输出：[3,3,1,4]<br>解释：查询处理如下：</p>
+<ul>
+<li>Query &#x3D; 2 ：区间 [2,4] 是包含 2 的最小区间，答案为 4 - 2 + 1 &#x3D; 3 。</li>
+<li>Query &#x3D; 3 ：区间 [2,4] 是包含 3 的最小区间，答案为 4 - 2 + 1 &#x3D; 3 。</li>
+<li>Query &#x3D; 4 ：区间 [4,4] 是包含 4 的最小区间，答案为 4 - 4 + 1 &#x3D; 1 。</li>
+<li>Query &#x3D; 5 ：区间 [3,6] 是包含 5 的最小区间，答案为 6 - 3 + 1 &#x3D; 4 。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>示例 2<br>输入：intervals &#x3D; [[2,3],[2,5],[1,8],[20,25]], queries &#x3D; [2,19,5,22]<br>输出：[2,-1,4,6]<br>解释：查询处理如下：</p>
+<ul>
+<li>Query &#x3D; 2 ：区间 [2,3] 是包含 2 的最小区间，答案为 3 - 2 + 1 &#x3D; 2 。</li>
+<li>Query &#x3D; 19：不存在包含 19 的区间，答案为 -1 。</li>
+<li>Query &#x3D; 5 ：区间 [2,5] 是包含 5 的最小区间，答案为 5 - 2 + 1 &#x3D; 4 。</li>
+<li>Query &#x3D; 22：区间 [20,25] 是包含 22 的最小区间，答案为 25 - 20 + 1 &#x3D; 6 。</li>
+</ul>
+</blockquote>
+<p><strong>解法一：区间端点排序+离线查询+优先队列（小根堆）</strong></p>
+<p>首先我们对问题进行分析，对于第 $j$ 个查询，可以遍历 $\textit{intervals}$，找到满足 $\textit{left}_i \le \textit{queries}_j \le \textit{right}_i$ 的长度最小区间 $i$ 的长度。以上思路对于每个查询，都需要重新遍历 $\textit{intervals}$。</p>
+<p>如果查询是递增的，那么我们可以对 $\textit{intervals}$ 按左端点 $\textit{left}$ 从小到大进行排序，使用一个指针 $i$ 记录下一个要访问的区间 $\textit{intervals}[i]$，初始时 $i &#x3D; 0$，使用优先队列 $\textit{pq}$ 保存区间（优先队列的比较 $\textit{key}$ 为区间的长度，队首元素为长度最小的区间）。对于第 $j$ 个查询，我们执行以下步骤：</p>
+<ol>
+<li>如果 $i$ 等于 $\textit{intervals}$ 的长度或 $\textit{left}_i \gt \textit{queries}[j]$，终止步骤；</li>
+<li>将 $\textit{intervals}[i]$ 添加到优先队列 $\textit{pq}$，将 $i$ 的值加 1，继续执行步骤 1。</li>
+</ol>
+<p>此时所有符合 $\textit{left} \le \textit{queries}_j \le \textit{right}$ 的区间都在 $\textit{pq}$，我们不断地获取优先队列 $\textit{pq}$ 的队首区间：</p>
+<ul>
+<li>如果队首区间的右端点 $\textit{right} \lt \textit{queries}[j]$，那么说明该区间不满足条件，从 $\textit{pq}$ 中出队；</li>
+</ul>
+<p>如果队首区间的右端点 $\textit{right} \ge \textit{queries}[j]$，那么该区间为第 $j$ 个查询的最小区间，终止过程。</p>
+<p>对于第 $j+1$ 个查询，因为查询是递增的，所以有 $\textit{queries}[j + 1] \ge \textit{queries}[j]$，那么此时 $\textit{pq}$ 中的区间都满足 $\textit{left} \le \textit{queries}[j + 1]$。在第 $j$ 个查询中丢弃的区间有 $ \textit{right} \lt \textit{queries}[j] \le \textit{queries}[j + 1]$，因此丢弃的区间不满足第 $j + 1$ 个查询。同样在第 $j + 1$ 个查询执行与第 $j$ 个查询类似的步骤，将可能满足条件的区间加入优先队列 $\textit{pq}$ 中，那么此时所有满足条件的区间都在优先队列 $\textit{pq}$ 中，执行类似第 $j$ 个查询的出队操作。</p>
+<p>由以上分析，如果查询满足递增的条件，那么可以利用优先队列进行优化。题目一次性提供所有的查询，基于离线原理，我们对所有查询从小到大进行排序，然后执行以上算法。</p>
+<p><strong>解法二：区间长度排序+离线询问+并查集</strong></p>
+
       </div>
       <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F/" class="">
+              排序
+            </a>
+          
+            <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" class="">
+              优先队列
+            </a>
+          
+            <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="">
+              并查集
+            </a>
+          
+        </div>
         
       </div>
       
@@ -612,8 +680,11 @@
         <div class="title-text">数学(五) -- LC[415] 字符串相加</div>
       </div>
       <!-- <div class="content">
-        本篇主要学习
-1 字符串相加1.1 题目描述给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和并同样以字
+        本篇主要学习按位相加，采用模拟法进行数字字符串、数字链表的相加
+
+
+
+1 字符串相加1.1 题目描述给定两个字符串形式的
       </div> -->
     </a>
   </div>
@@ -834,7 +905,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!--  -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8C%85%E5%90%AB%E6%AF%8F%E4%B8%AA%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8C%BA%E9%97%B4"><span class="toc-text">1 包含每个查询的最小区间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">1.1 题目描述</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

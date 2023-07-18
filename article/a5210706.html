@@ -549,11 +549,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 456 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 1.3k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 1分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 5分钟 |
           </span>
   
           
@@ -580,7 +580,10 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>本篇主要学习</p>
+        <p>本篇主要学习按位相加，采用模拟法进行数字字符串、数字链表的相加</p>
+<span id="more"></span>
+
+
 <h2 id="1-字符串相加"><a href="#1-字符串相加" class="headerlink" title="1 字符串相加"></a>1 字符串相加</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><p>给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和并同样以字符串形式返回。</p>
 <p>你不能使用任何內建的用于处理大整数的库（比如 BigInteger）， 也不能直接将输入的字符串转换为整数形式。</p>
 <blockquote>
@@ -601,13 +604,62 @@
 </ul>
 </li>
 </ul>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230701/001.4s173f3j2n8.gif#pic_center" width = 64%>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230701/001.4s173f3j2n8.gif#pic_center" width = 80%>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addStrings</span>(<span class="params">self, num1: <span class="built_in">str</span>, num2: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        i, j, carry = <span class="built_in">len</span>(num1)-<span class="number">1</span>, <span class="built_in">len</span>(num2)-<span class="number">1</span>, <span class="number">0</span></span><br><span class="line">        res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">or</span> j &gt;= <span class="number">0</span>:</span><br><span class="line">            n1 = <span class="built_in">int</span>(num1[i]) <span class="keyword">if</span> i &gt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            n2 = <span class="built_in">int</span>(num2[j]) <span class="keyword">if</span> j &gt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            n = n1 + n2 + carry</span><br><span class="line">            carry = n // <span class="number">10</span></span><br><span class="line">            res = <span class="built_in">str</span>(n%<span class="number">10</span>) + res</span><br><span class="line">            i, j = i-<span class="number">1</span>, j-<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;1&#x27;</span>+res <span class="keyword">if</span> carry <span class="keyword">else</span> res</span><br></pre></td></tr></table></figure>
 
 
 <p><strong>复杂度分析：</strong><br>    - 时间复杂度 $O(max(M,N))$：其中 $M，N$ 为 $2$ 数字长度，按位遍历一遍数字（以较长的数字为准）；<br>    - 空间复杂度 $O(1)$：指针与变量使用常数大小空间。</p>
-<h2 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2 两数相加"></a>2 两数相加</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><h3 id="2-2-思路分析"><a href="#2-2-思路分析" class="headerlink" title="2.2 思路分析"></a>2.2 思路分析</h3>
+<h2 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2 两数相加"></a>2 两数相加</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><p>给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<blockquote>
+<p>示例 1：<br>输入：l1 &#x3D; [2,4,3], l2 &#x3D; [5,6,4]<br>输出：[7,0,8]<br>解释：342 + 465 &#x3D; 807.</p>
+</blockquote>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230701/001.4r3fkezt2uu0.webp#pic_center" width = 64%>
+
+<blockquote>
+<p>示例 2：<br>输入：l1 &#x3D; [0], l2 &#x3D; [0]<br>输出：[0]</p>
+</blockquote>
+<blockquote>
+<p>示例 3：<br>输入：l1 &#x3D; [9,9,9,9,9,9,9], l2 &#x3D; [9,9,9,9]<br>输出：[8,9,9,9,0,0,0,1]</p>
+</blockquote>
+<h3 id="2-2-思路分析"><a href="#2-2-思路分析" class="headerlink" title="2.2 思路分析"></a>2.2 思路分析</h3><p>由于输入的两个链表都是逆序存储数字的位数的，因此两个链表中同一位置的数字可以直接相加。</p>
+<p>我们同时遍历两个链表，逐位计算它们的和，并与当前位置的进位值相加。具体而言，如果当前两个链表处相应位置的数字为 $n1,n2$，进位值为 $\textit{carry}$，则它们的和为 $n1+n2+\textit{carry}$；其中，答案链表处相应位置的数字为 $(n1+n2+\textit{carry}) \bmod 10$，而新的进位值为 $\lfloor\frac{n1+n2+\textit{carry}}{10}\rfloor$。</p>
+<p>如果两个链表的长度不同，则可以认为长度短的链表的后面有若干个 0 。</p>
+<p>此外，如果链表遍历结束后，有 $\textit{carry} &gt; 0$，还需要在答案链表的后面附加一个节点，节点的值为 $\textit{carry}$。</p>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230701/002.3n0qk884hs80.gif#pic_center" width = 64%>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: <span class="type">Optional</span>[ListNode], l2: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        head = current = ListNode()</span><br><span class="line">        res, newval = <span class="number">0</span>, <span class="number">0</span>          <span class="comment"># 进位值和余数</span></span><br><span class="line">        <span class="keyword">while</span> res <span class="keyword">or</span> l1 <span class="keyword">or</span> l2:</span><br><span class="line">            <span class="keyword">if</span> l1: l1, newval = l1.<span class="built_in">next</span>, l1.val + newval</span><br><span class="line">            <span class="keyword">if</span> l2: l2, newval = l2.<span class="built_in">next</span>, l2.val + newval</span><br><span class="line">            res, newval = <span class="built_in">divmod</span>(newval,<span class="number">10</span>)</span><br><span class="line">            current.<span class="built_in">next</span> = current = ListNode(newval)</span><br><span class="line">            newval = res</span><br><span class="line">        <span class="keyword">return</span> head.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：$O(\max(m,n))$，其中 $m$ 和 $n$ 分别为两个链表的长度。我们要遍历两个链表的全部位置，而处理每个位置只需要 $O(1)$ 的时间。</li>
+<li>空间复杂度：$O(1)$。注意返回值不计入空间复杂度。</li>
+</ul>
+<h2 id="3-两数相加-II"><a href="#3-两数相加-II" class="headerlink" title="3 两数相加 II"></a>3 两数相加 II</h2><h3 id="3-1-题目描述"><a href="#3-1-题目描述" class="headerlink" title="3.1 题目描述"></a>3.1 题目描述</h3><p>给你两个 非空 链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储一位数字。将这两数相加会返回一个新的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数字都不会以零开头。</p>
+<blockquote>
+<p>示例1：<br>输入：l1 &#x3D; [7,2,4,3], l2 &#x3D; [5,6,4]<br>输出：[7,8,0,7]</p>
+</blockquote>
+<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230701/017.3ayevdyxwku0.webp#pic_center" width = 64%>
+
+<blockquote>
+<p>示例2：<br>输入：l1 &#x3D; [2,4,3], l2 &#x3D; [5,6,4]<br>输出：[8,0,7]</p>
+</blockquote>
+<blockquote>
+<p>示例3：<br>输入：l1 &#x3D; [0], l2 &#x3D; [0]<br>输出：[0]</p>
+</blockquote>
+<h3 id="3-2-思路分析"><a href="#3-2-思路分析" class="headerlink" title="3.2 思路分析"></a>3.2 思路分析</h3><ul>
+<li>反转链表 $l_1$</li>
+<li>反转链表 $l_2$</li>
+<li>调用 2. 两数相加 的代码，得到链表 $l_3$</li>
+<li>反转链表 $l_3$ 返回 $l_3$ 作为答案。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: <span class="type">Optional</span>[ListNode], l2: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">list_reverse</span>(<span class="params">l</span>):</span><br><span class="line">            prev, curr = <span class="literal">None</span>, l</span><br><span class="line">            <span class="keyword">while</span> curr:</span><br><span class="line">                temp = curr.<span class="built_in">next</span></span><br><span class="line">                curr.<span class="built_in">next</span> = prev</span><br><span class="line">                prev = curr</span><br><span class="line">                curr = temp</span><br><span class="line">            <span class="keyword">return</span> prev</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">two_numbers</span>(<span class="params">l1: <span class="type">Optional</span>[ListNode], l2: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">            head = current = ListNode()</span><br><span class="line">            res, newval = <span class="number">0</span>, <span class="number">0</span>          <span class="comment"># 进位值和余数</span></span><br><span class="line">            <span class="keyword">while</span> res <span class="keyword">or</span> l1 <span class="keyword">or</span> l2:</span><br><span class="line">                <span class="keyword">if</span> l1: l1, newval = l1.<span class="built_in">next</span>, l1.val + newval</span><br><span class="line">                <span class="keyword">if</span> l2: l2, newval = l2.<span class="built_in">next</span>, l2.val + newval</span><br><span class="line">                res, newval = <span class="built_in">divmod</span>(newval,<span class="number">10</span>)</span><br><span class="line">                <span class="comment"># current.next = current = ListNode(newval)</span></span><br><span class="line">                current.<span class="built_in">next</span> = current = ListNode(newval)</span><br><span class="line">                newval = res</span><br><span class="line">            <span class="keyword">return</span> head.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        dummy = ListNode(-<span class="number">1</span>)</span><br><span class="line">        l1, l2 = list_reverse(l1), list_reverse(l2)</span><br><span class="line">        <span class="keyword">return</span> list_reverse(two_numbers(l1, l2))</span><br></pre></td></tr></table></figure>
+
+
+
       </div>
       <div class="post-tags-categories">
         
@@ -659,7 +711,10 @@
       </div>
       
       <!-- <div class="content">
-        
+        本篇主要以LeetCode[1851] 包含每个查询的最小区间为例，学习排序算法、优先队列、并查集的使用。
+
+
+1 包含
       </div> -->
     </a>
   </div>
@@ -899,7 +954,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%8A%A0"><span class="toc-text">1 字符串相加</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">1.1 题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-text">1.2 思路分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0"><span class="toc-text">2 两数相加</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">2.1 题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-text">2.2 思路分析</span></a></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%8A%A0"><span class="toc-text">1 字符串相加</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">1.1 题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-text">1.2 思路分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0"><span class="toc-text">2 两数相加</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">2.1 题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-text">2.2 思路分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0-II"><span class="toc-text">3 两数相加 II</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">3.1 题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-text">3.2 思路分析</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

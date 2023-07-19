@@ -549,11 +549,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 1.1k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 1.3k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 4分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 5分钟 |
           </span>
   
           
@@ -618,7 +618,20 @@
 <p>如果队首区间的右端点 $\textit{right} \ge \textit{queries}[j]$，那么该区间为第 $j$ 个查询的最小区间，终止过程。</p>
 <p>对于第 $j+1$ 个查询，因为查询是递增的，所以有 $\textit{queries}[j + 1] \ge \textit{queries}[j]$，那么此时 $\textit{pq}$ 中的区间都满足 $\textit{left} \le \textit{queries}[j + 1]$。在第 $j$ 个查询中丢弃的区间有 $ \textit{right} \lt \textit{queries}[j] \le \textit{queries}[j + 1]$，因此丢弃的区间不满足第 $j + 1$ 个查询。同样在第 $j + 1$ 个查询执行与第 $j$ 个查询类似的步骤，将可能满足条件的区间加入优先队列 $\textit{pq}$ 中，那么此时所有满足条件的区间都在优先队列 $\textit{pq}$ 中，执行类似第 $j$ 个查询的出队操作。</p>
 <p>由以上分析，如果查询满足递增的条件，那么可以利用优先队列进行优化。题目一次性提供所有的查询，基于离线原理，我们对所有查询从小到大进行排序，然后执行以上算法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minInterval</span>(<span class="params">self, intervals: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], queries: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        n, m = <span class="built_in">len</span>(intervals), <span class="built_in">len</span>(queries)</span><br><span class="line">        intervals.sort()</span><br><span class="line">        queries = <span class="built_in">sorted</span>((x, i) <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(queries))</span><br><span class="line">        ans = [-<span class="number">1</span>] * m</span><br><span class="line">        pq = []</span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> x, j <span class="keyword">in</span> queries:</span><br><span class="line">            <span class="keyword">while</span> i &lt; n <span class="keyword">and</span> intervals[i][<span class="number">0</span>] &lt;= x:</span><br><span class="line">                a, b = intervals[i]</span><br><span class="line">                heappush(pq, (b - a + <span class="number">1</span>, b))</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> pq <span class="keyword">and</span> pq[<span class="number">0</span>][<span class="number">1</span>] &lt; x:</span><br><span class="line">                heappop(pq)</span><br><span class="line">            <span class="keyword">if</span> pq:</span><br><span class="line">                ans[j] = pq[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度 $O(n \times \log n + m \times \log m)$</li>
+<li>空间复杂度 $O(n + m)$。其中 n 和 m 分别是数组 intervals 和 queries 的长度。</li>
+</ul>
 <p><strong>解法二：区间长度排序+离线询问+并查集</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minInterval</span>(<span class="params">self, intervals: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], queries: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        m, n = <span class="built_in">len</span>(intervals), <span class="built_in">len</span>(queries)</span><br><span class="line"></span><br><span class="line">        intervals.sort(key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>] - x[<span class="number">0</span>])</span><br><span class="line">        queries = <span class="built_in">sorted</span>([(q, i) <span class="keyword">for</span> i, q <span class="keyword">in</span> <span class="built_in">enumerate</span>(queries)])</span><br><span class="line"></span><br><span class="line">        fa = <span class="built_in">list</span>(<span class="built_in">range</span>(n + <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">find</span>(<span class="params">x</span>):</span><br><span class="line">            <span class="keyword">if</span> x != fa[x]:</span><br><span class="line">                fa[x] = find(fa[x])</span><br><span class="line">            <span class="keyword">return</span> fa[x]</span><br><span class="line"></span><br><span class="line">        ans = [-<span class="number">1</span>] * n</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> l, r <span class="keyword">in</span> intervals:</span><br><span class="line">            length = r - l + <span class="number">1</span></span><br><span class="line">            pos = bisect_left(queries, (l, -<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">            idx = find(pos)</span><br><span class="line">            <span class="keyword">while</span> idx &lt; n <span class="keyword">and</span> queries[idx][<span class="number">0</span>] &lt;= r:</span><br><span class="line">                ans[queries[idx][<span class="number">1</span>]] = length</span><br><span class="line">                fa[idx] = idx + <span class="number">1</span></span><br><span class="line">                idx = find(idx + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 
       </div>
       <div class="post-tags-categories">
@@ -680,11 +693,11 @@
         <div class="title-text">数学(五) -- LC[415] 字符串相加</div>
       </div>
       <!-- <div class="content">
-        本篇主要学习按位相加，采用模拟法进行数字字符串、数字链表的相加
+        本篇主要学习按位相加，采用模拟法进行数字字符串、数字链表的相加。
 
 
 
-1 字符串相加1.1 题目描述给定两个字符串形式的
+1 字符串相加1.1 题目描述给定两个字符串形式
       </div> -->
     </a>
   </div>

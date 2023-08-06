@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>数据表的基本操作 | CarpeDiem&#39;s Blog</title>
+  <title>MySQL基础篇（四）-- 数据表的基本操作 | CarpeDiem&#39;s Blog</title>
 
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -513,14 +513,14 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        数据表的基本操作
+        MySQL基础篇（四）-- 数据表的基本操作
       </span>
     </div>
     
@@ -532,15 +532,28 @@
       
 
       
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-detail-header_category">
+              计算机基础
+            </a>
+          
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/MySQL-%E5%9F%BA%E7%A1%80/" class="post-detail-header_category">
+              MySQL 基础
+            </a>
+          
+        </span>
+      
 
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 0 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 3.6k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 1分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 12分钟 |
           </span>
   
           
@@ -567,9 +580,142 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        
+        <p>本节主要学习数据表的基本操作，包括创建数据表、修改数据表、修改字段、删除数据表、查看表结构、添加字段、复制表。</p>
+<span id="more"></span>
+
+
+<p>数据表是数据库的重要组成部分，每一个数据库都是由若干个数据表组成的。换句话说，没有数据表就无法在数据库中存放数据。</p>
+<h2 id="1-创建数据表"><a href="#1-创建数据表" class="headerlink" title="1 创建数据表"></a>1 创建数据表</h2><h3 id="1-1-表创建基础"><a href="#1-1-表创建基础" class="headerlink" title="1.1 表创建基础"></a>1.1 表创建基础</h3><p>熟悉Excel的小伙伴肯定都知道，需要先新建工作簿，然后在该工作簿里新建表格，相似的过程，创建数据库后，并在该数据库中创建数据表。</p>
+<p>可使用SQL的<code>CREATE TABLE</code>语句创建表，必须给出以下信息：</p>
+<ul>
+<li>新表的名字，在关键字CREATE TABLE之后给出；</li>
+<li>表列的名字和定义，用逗号分隔。</li>
+</ul>
+<p>语法格式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">字段名<span class="number">1</span> 类型[(宽度)] [约束条件] [comment <span class="string">&#x27;字段说明&#x27;</span>],</span><br><span class="line">字段名<span class="number">2</span> 类型[(宽度)] [约束条件] [comment <span class="string">&#x27;字段说明&#x27;</span>],</span><br><span class="line">字段名<span class="number">3</span> 类型[(宽度)] [约束条件] [comment <span class="string">&#x27;字段说明&#x27;</span>]</span><br><span class="line">)[表的一些设置];</span><br></pre></td></tr></table></figure>
+<p>CREATE TABLE 语句的主要语法及使用说明如下：</p>
+<ul>
+<li>CREATE TABLE：用于创建给定名称的表，必须拥有表CREATE的权限。</li>
+<li>&lt;表名&gt;：指定要创建表的名称，在 CREATE TABLE 之后给出，必须符合标识符命名规则。表名称被指定为 db_name.tbl_name，以便在特定的数据库中创建表。无论是否有当前数据库，都可以通过这种方式创建。在当前数据库中创建表时，可以省略 db-name。如果使用加引号的识别名，则应对数据库和表名称分别加引号。例如，’mydb’.’mytbl’ 是合法的，但 ‘mydb.mytbl’ 不合法。</li>
+<li>&lt;表定义选项&gt;：表创建定义，由列名（col_name）、列的定义（column_definition）以及可能的空值说明、完整性约束或表索引组成。</li>
+<li>默认的情况是，表被创建到当前的数据库中。若表已存在、没有当前数据库或者数据库不存在，则会出现错误。</li>
+</ul>
+<p><strong>温馨提示：</strong> </p>
+<ul>
+<li>要创建的表的名称不区分大小写，不能使用SQL语言中的关键字，如DROP、ALTER、INSERT等。宽度和约束条件为可选参数，字段名和类型是必须的。每列的定义以列名（字段名，它在表中必须是唯一的）开始，后跟列的数据类型。各列之间用逗号分隔。</li>
+<li>在创建新表时，指定的表名必须不存在，否则将出错。如果要防止意外覆盖已有的表，SQL要求首先手工删除该表（请参阅后面的小节），然后再重建它，而不是简单地用创建表语句覆盖它。如果你仅想在一个表不存在时创建它，应该在表名后给出<code>IF NOT EXISTS</code>。这样做不检查已有表的模式是否与你打算创建的表模式相匹配。它只是查看表名是否存在，并且仅在表名不存在时创建它。</li>
+</ul>
+<h3 id="1-2-使用NULL值"><a href="#1-2-使用NULL值" class="headerlink" title="1.2 使用NULL值"></a>1.2 使用NULL值</h3><p>允许NULL值的列也允许在插入行时不给出该列的值。不允许NULL值的列不接受该列没有值的行，换句话说，在插入或更新行时，该列必须有值。</p>
+<p>每个表列或者是NULL列，或者是NOT NULL列，这种状态在创建时由表的定义规定。请看下面的例子：</p>
+<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/022.4i1f1vqaxt60.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/022.4i1f1vqaxt60.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%>
+
+
+<p><strong>温馨提示：</strong>不要把NULL值与空串相混淆。NULL值是没有值，它不是空串。如果指定’’（两个单引号，其间没有字符），这在NOT NULL列中是允许的。空串是一个有效的值，它不是无值。NULL值用关键字NULL而不是空串指定。</p>
+<h3 id="1-3-主键和外键"><a href="#1-3-主键和外键" class="headerlink" title="1.3 主键和外键"></a>1.3 主键和外键</h3><p>主键值必须唯一。即，表中的每个行必须具有唯一的主键值。如果主键使用单个列，则它的值必须唯一。如果使用多个列，则这些列的组合值必须唯一。</p>
+<p>primary key：标识该字段为该表的主键，可以唯一的标识记录，插入重复的会报错。<br>方式1：跟在列后，如下：<br><img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/023.4qa6sgkz77c0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/023.4qa6sgkz77c0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%></p>
+<p>方式2：在所有列定义之后定义，如下：<br><img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/024.44a8qgo49e40.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/024.44a8qgo49e40.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%></p>
+<p>方式3：支持多字段作为主键，多个之间用逗号隔开，语法：&#96;primary key(字段1, 字段2, 字段n)，示例：<br><img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/025.3i2pqjn24rs0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/025.3i2pqjn24rs0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%></p>
+<p>方式4：为表中的字段设置外键<br>语法：foreign key(当前表的列名) references 引用的外键表(外键表中字段名称）<br><img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/026.7gtuhbk4vio0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/026.7gtuhbk4vio0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%></p>
+<p>注意一下几点：</p>
+<ul>
+<li>两张表中需要建立外键关系的字段类型需要一致</li>
+<li>要设置外键的字段不能为主键</li>
+<li>被引用的字段需要为主键</li>
+<li>被插入的值在外键表必须存在，如上面向test10中插入ts9_a为2的时候报错了，原因：2的值在test9表中不存在</li>
+</ul>
+<p>温馨提示：主键为其值唯一标识表中每个行的列。主键中只能使用不允许NULL值的列。允许NULL值的列不能作为唯一标识。每个表只允许一个AUTO_INCREMENT列，而且它必须被索引（如，通过使它成为主键）。</p>
+<p>unique key(uq)：标识该字段的值是唯一的。支持一个到多个字段，插入重复的值会报违反唯一约束，会插入失败。<br>方式1：跟在字段后，如下所示：<br><img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/027.2bhq8l0yt5no.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/027.2bhq8l0yt5no.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%><br>方式2：所有列定义之后定义，如下：<br><img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/028.3tabh9ojp0w0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/028.3tabh9ojp0w0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%></p>
+<p>方式3：支持多字段，多个之间用逗号隔开，语法：<code>unique key(字段1,字段2,字段n)</code>，示例：<br><img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/029.6lvq5j5nauk0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/029.6lvq5j5nauk0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%></p>
+<h3 id="1-4-使用AUTO-INCREMENT"><a href="#1-4-使用AUTO-INCREMENT" class="headerlink" title="1.4 使用AUTO_INCREMENT"></a>1.4 使用AUTO_INCREMENT</h3><p>AUTO_INCREMENT告诉MySQL，本列每当增加一行时自动增量。每次执行一个INSERT操作时，MySQL自动对该列增量（从而才有这个关键字AUTO_INCREMENT），给该列赋予下一个可用的值。</p>
+<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/030.3wbswm2clw4.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/030.3wbswm2clw4.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%>
+
+<p><strong>温馨提示：</strong>关于自动增长字段的初始值、步长可以在mysql中进行设置，比如设置初始值为1万，每次增长10。自增长列当前值存储在内存中，数据库每次重启之后，会查询当前表中自增列的最大值作为当前值，如果表数据被清空之后，数据库重启了，自增列的值将从初始值开始。</p>
+<h3 id="1-5-指定默认值"><a href="#1-5-指定默认值" class="headerlink" title="1.5 指定默认值"></a>1.5 指定默认值</h3><p>如果在插入行时没有给出值，MySQL允许指定此时使用的默认值。默认值用CREATE TABLE语句的列定义中的DEFAULT关键字指定。<br><img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/031.7gmgmmbdauw0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/031.7gmgmmbdauw0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%></p>
+<p>温馨提示：与大多数DBMS不一样，MySQL不允许使用函数作为默认值，它只支持常量。</p>
+<h3 id="1-6-引擎类型"><a href="#1-6-引擎类型" class="headerlink" title="1.6 引擎类型"></a>1.6 引擎类型</h3><p>在创建表格时，常用的就是<code>ENGINE=InnoDB</code>；与其他DBMS一样，MySQL有一个具体管理和处理数据的内部引擎。在你使用CREATE TABLE语句时，该引擎具体创建表，而在你使用SELECT语句或进行其他数据库处理时，该引擎在内部处理你的请求。多数时候，此引擎都隐藏在DBMS内，不需要过多关注它。</p>
+<p>如果省略ENGINE&#x3D;语句，则使用默认引擎（很可能是MyISAM），多数SQL语句都会默认使用它。但并不是所有语句都默认使用它，这就是为什么ENGINE&#x3D;语句很重要的原因。</p>
+<p>常用的引擎：</p>
+<ul>
+<li>InnoDB是一个可靠的事务处理引擎，它不支持全文本搜索；</li>
+<li>MEMORY在功能等同于MyISAM，但由于数据存储在内存（不是磁盘）<br>中，速度很快（特别适合于临时表）；</li>
+<li>MyISAM是一个性能极高的引擎，它支持全文本搜索，但不支持事务处理。</li>
+</ul>
+<p><strong>温馨提示：</strong>混用引擎类型有一个大缺陷。外键（用于强制实施引用完整性）不能跨引擎，即使用一个引擎的表不能引用具有使用不同引擎的表的外键。</p>
+<h2 id="2-修改数据表"><a href="#2-修改数据表" class="headerlink" title="2 修改数据表"></a>2 修改数据表</h2><p>修改数据表的前提是数据库中已经存在该表。修改表指的是修改数据库中已经存在的数据表的结构。</p>
+<h3 id="2-1-修改表名"><a href="#2-1-修改表名" class="headerlink" title="2.1 修改表名"></a>2.1 修改表名</h3><p>MySQL 通过 ALTER TABLE 语句来实现表名的修改，语法规则如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="operator">&lt;</span>旧表名<span class="operator">&gt;</span> RENAME [<span class="keyword">TO</span>] <span class="operator">&lt;</span>新表名<span class="operator">&gt;</span>；</span><br></pre></td></tr></table></figure>
+<p>其中，TO 为可选参数，使用与否均不影响结果。</p>
+<p><strong>温馨提示：</strong> 使用<code>ALTER TABLE</code>要极为小心，应该在进行改动前做一个完整的备份（模式和数据的备份）。数据库表的更改不能撤销，如果增加了不需要的列，可能不能删除它们。类似地，如果删除了不应该删除的列，可能会丢失该列中的所有数据。</p>
+<h3 id="2-2-修改表字符集"><a href="#2-2-修改表字符集" class="headerlink" title="2.2 修改表字符集"></a>2.2 修改表字符集</h3><p>MySQL 通过 ALTER TABLE 语句来实现表字符集的修改，语法规则如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 [<span class="keyword">DEFAULT</span>] <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="operator">&lt;</span>字符集名<span class="operator">&gt;</span> [<span class="keyword">DEFAULT</span>] <span class="keyword">COLLATE</span> <span class="operator">&lt;</span>校对规则名<span class="operator">&gt;</span>;</span><br></pre></td></tr></table></figure>
+<p>其中，DEFAULT 为可选参数，使用与否均不影响结果。</p>
+<h2 id="3-修改字段"><a href="#3-修改字段" class="headerlink" title="3 修改字段"></a>3 修改字段</h2><h3 id="3-1-修改字段名称"><a href="#3-1-修改字段名称" class="headerlink" title="3.1 修改字段名称"></a>3.1 修改字段名称</h3><p>MySQL 中修改表字段名的语法规则如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="operator">&lt;</span>表名<span class="operator">&gt;</span> CHANGE <span class="operator">&lt;</span>旧字段名<span class="operator">&gt;</span> <span class="operator">&lt;</span>新字段名<span class="operator">&gt;</span> <span class="operator">&lt;</span>新数据类型<span class="operator">&gt;</span>；</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<ul>
+<li>旧字段名：指修改前的字段名；</li>
+<li>新字段名：指修改后的字段名；</li>
+<li>新数据类型：指修改后的数据类型，如果不需要修改字段的数据类型，- 可以将新数据类型设置成与原来一样，但数据类型不能为空。</li>
+</ul>
+<p><strong>温馨提示：</strong> 由于不同类型的数据在机器中的存储方式及长度并不相同，修改数据类型可能会影响数据表中已有的数据记录，因此，当数据表中已经有数据时，不要轻易修改数据类型。</p>
+<h3 id="3-2-修改字段数据类型"><a href="#3-2-修改字段数据类型" class="headerlink" title="3.2 修改字段数据类型"></a>3.2 修改字段数据类型</h3><p>修改字段的数据类型就是把字段的数据类型转换成另一种数据类型。在 MySQL 中修改字段数据类型的语法规则如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="operator">&lt;</span>表名<span class="operator">&gt;</span> MODIFY <span class="operator">&lt;</span>字段名<span class="operator">&gt;</span> <span class="operator">&lt;</span>数据类型<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ul>
+<li>表名：指要修改数据类型的字段所在表的名称；</li>
+<li>字段名：指需要修改的字段；</li>
+<li>数据类型：指修改后字段的新数据类型。</li>
+</ul>
+<h3 id="3-3-删除字段"><a href="#3-3-删除字段" class="headerlink" title="3.3 删除字段"></a>3.3 删除字段</h3><p>删除字段是将数据表中的某个字段从表中移除，语法格式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="operator">&lt;</span>表名<span class="operator">&gt;</span> <span class="keyword">DROP</span> <span class="operator">&lt;</span>字段名<span class="operator">&gt;</span>；</span><br></pre></td></tr></table></figure>
+<p>其中，“字段名”指需要从表中删除的字段的名称。</p>
+<h2 id="4-删除数据表"><a href="#4-删除数据表" class="headerlink" title="4 删除数据表"></a>4 删除数据表</h2><p>在删除表的同时，表的结构和表中所有的数据都会被删除，因此在删除数据表之前最好先备份，以免造成无法挽回的损失。删除表（删除整个表而不是其内容）非常简单，使用DROP TABLE语句即可：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> tb_test;</span><br></pre></td></tr></table></figure>
+<p><strong>温馨提示：</strong> 用户必须拥有执行<code>DROP TABLE</code>命令的权限，否则数据表不会被删除。表被删除时，用户在该表上的权限不会自动删除。</p>
+<h2 id="5-删除被其他表关联的主表"><a href="#5-删除被其他表关联的主表" class="headerlink" title="5 删除被其他表关联的主表"></a>5 删除被其他表关联的主表</h2><p>数据表之间经常存在外键关联的情况，这时如果直接删除父表，会破坏数据表的完整性，也会删除失败。</p>
+<p>删除父表有以下两种方法：</p>
+<ul>
+<li>先删除与它关联的子表，再删除父表；但是这样会同时删除两个表中的数据。</li>
+<li>将关联表的外键约束取消，再删除父表；适用于需要保留子表的数据，只删除父表的情况。</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/032.3v5rlo8lxpe0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/032.3v5rlo8lxpe0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%>
+
+<h2 id="6-查看表结构命令"><a href="#6-查看表结构命令" class="headerlink" title="6 查看表结构命令"></a>6 查看表结构命令</h2><h3 id="6-1-以表格的形式展示表结构"><a href="#6-1-以表格的形式展示表结构" class="headerlink" title="6.1 以表格的形式展示表结构"></a>6.1 以表格的形式展示表结构</h3><p>DESCRIBE&#x2F;DESC 语句会以表格的形式来展示表的字段信息，包括字段名、字段数据类型、是否为主键、是否有默认值等，语法格式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">describe</span>\<span class="keyword">desc</span> <span class="operator">&lt;</span>表名<span class="operator">&gt;</span>; </span><br></pre></td></tr></table></figure>
+
+
+<h3 id="6-2-以SQL语句的形式展示表结构"><a href="#6-2-以SQL语句的形式展示表结构" class="headerlink" title="6.2 以SQL语句的形式展示表结构"></a>6.2 以SQL语句的形式展示表结构</h3><p>SHOW CREATE TABLE 命令会以 SQL 语句的形式来展示表信息。和 DESCRIBE 相比，SHOW CREATE TABLE 展示的内容更加丰富，它可以查看表的存储引擎和字符编码；另外，你还可以通过\g或者\G参数来控制展示格式。</p>
+<p><code>SHOW CREATE TABLE</code>的语法格式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="operator">&lt;</span>表名<span class="operator">&gt;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在 SHOW CREATE TABLE 语句的结尾处（分号前面）添加\g或者\G参数可以改变展示形式。</p>
+<h2 id="7-数据表添加字段"><a href="#7-数据表添加字段" class="headerlink" title="7 数据表添加字段"></a>7 数据表添加字段</h2><p>MySQL 数据表是由行和列构成的，通常把表的“列”称为字段（Field），把表的“行”称为记录（Record）。随着业务的变化，可能需要在已有的表中添加新的字段。MySQL 允许在开头、中间和结尾处添加字段。</p>
+<p>一个完整的字段包括字段名、数据类型和约束条件。MySQL 添加字段的语法格式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="operator">&lt;</span>表名<span class="operator">&gt;</span> <span class="keyword">ADD</span> <span class="operator">&lt;</span>新字段名<span class="operator">&gt;</span><span class="operator">&lt;</span>数据类型<span class="operator">&gt;</span>[约束条件];</span><br></pre></td></tr></table></figure>
+<p>这种语法格式默认在表的最后位置（最后一列的后面）添加新字段。</p>
+<h3 id="7-1-在开头添加字段"><a href="#7-1-在开头添加字段" class="headerlink" title="7.1 在开头添加字段"></a>7.1 在开头添加字段</h3><p>MySQL 默认在表的最后位置添加新字段，如果希望在开头位置（第一列的前面）添加新字段，那么可以使用 FIRST 关键字，语法格式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="operator">&lt;</span>表名<span class="operator">&gt;</span> <span class="keyword">ADD</span> <span class="operator">&lt;</span>新字段名<span class="operator">&gt;</span> <span class="operator">&lt;</span>数据类型<span class="operator">&gt;</span> [约束条件] <span class="keyword">FIRST</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-在中间位置添加字段"><a href="#7-2-在中间位置添加字段" class="headerlink" title="7.2 在中间位置添加字段"></a>7.2 在中间位置添加字段</h3><p>MySQL 除了允许在表的开头位置和末尾位置添加字段外，还允许在中间位置（指定的字段之后）添加字段，此时需要使用 AFTER 关键字，语法格式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="operator">&lt;</span>表名<span class="operator">&gt;</span> <span class="keyword">ADD</span> <span class="operator">&lt;</span>新字段名<span class="operator">&gt;</span> <span class="operator">&lt;</span>数据类型<span class="operator">&gt;</span> [约束条件] AFTER <span class="operator">&lt;</span>已经存在的字段名<span class="operator">&gt;</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>温馨提示：</strong>AFTER 的作用是将新字段添加到某个已有字段后面。只能在某个已有字段的后面添加新字段，不能在它的前面添加新字段。</p>
+<h2 id="8-复制表"><a href="#8-复制表" class="headerlink" title="8 复制表"></a>8 复制表</h2><h3 id="8-1-只复制表结构"><a href="#8-1-只复制表结构" class="headerlink" title="8.1 只复制表结构"></a>8.1 只复制表结构</h3><p>语法格式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名 <span class="keyword">like</span> 被复制的表名;</span><br></pre></td></tr></table></figure>
+<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/033.69rtqxx0tuk0.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/033.69rtqxx0tuk0.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%>
+
+<h3 id="8-2-复制表结构-数据"><a href="#8-2-复制表结构-数据" class="headerlink" title="8.2 复制表结构+数据"></a>8.2 复制表结构+数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名 [<span class="keyword">as</span>] <span class="keyword">select</span> 字段,... <span class="keyword">from</span> 被复制的表 [<span class="keyword">where</span> 条件];</span><br></pre></td></tr></table></figure>
+<img src="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/034.nuivi0zcwr4.webp#pic_center" class="lazyload placeholder" data-srcset="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230801/034.nuivi0zcwr4.webp#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" width=36%>
       </div>
       <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E8%A1%A8/" class="">
+              创建数据表
+            </a>
+          
+        </div>
         
       </div>
       
@@ -580,7 +726,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/article/636c7070.html" target="_blank" title="数据表的基本操作">https://qxienote.com/article/636c7070.html</a>
+    <a href="/article/636c7070.html" target="_blank" title="MySQL基础篇（四）-- 数据表的基本操作">https://qxienote.com/article/636c7070.html</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -604,15 +750,15 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
     <a href="/article/ba595a63.html" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">数据类型</div>
+        <div class="title-text">MySQL基础篇（三）-- 数据类型</div>
       </div>
       <!-- <div class="content">
-        
+        本篇主要学习MySQL中的串数据类型（CHAR、VARCHAR、BINARY、VARBINARY、BLOB、TEXT、E
       </div> -->
     </a>
   </div>
@@ -833,7 +979,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!--  -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="toc-text">1 创建数据表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%9F%BA%E7%A1%80"><span class="toc-text">1.1 表创建基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%BD%BF%E7%94%A8NULL%E5%80%BC"><span class="toc-text">1.2 使用NULL值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%B8%BB%E9%94%AE%E5%92%8C%E5%A4%96%E9%94%AE"><span class="toc-text">1.3 主键和外键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E4%BD%BF%E7%94%A8AUTO-INCREMENT"><span class="toc-text">1.4 使用AUTO_INCREMENT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E6%8C%87%E5%AE%9A%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="toc-text">1.5 指定默认值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E5%BC%95%E6%93%8E%E7%B1%BB%E5%9E%8B"><span class="toc-text">1.6 引擎类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="toc-text">2 修改数据表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%BF%AE%E6%94%B9%E8%A1%A8%E5%90%8D"><span class="toc-text">2.1 修改表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%BF%AE%E6%94%B9%E8%A1%A8%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="toc-text">2.2 修改表字符集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9%E5%AD%97%E6%AE%B5"><span class="toc-text">3 修改字段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%BF%AE%E6%94%B9%E5%AD%97%E6%AE%B5%E5%90%8D%E7%A7%B0"><span class="toc-text">3.1 修改字段名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BF%AE%E6%94%B9%E5%AD%97%E6%AE%B5%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">3.2 修改字段数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%88%A0%E9%99%A4%E5%AD%97%E6%AE%B5"><span class="toc-text">3.3 删除字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="toc-text">4 删除数据表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%88%A0%E9%99%A4%E8%A2%AB%E5%85%B6%E4%BB%96%E8%A1%A8%E5%85%B3%E8%81%94%E7%9A%84%E4%B8%BB%E8%A1%A8"><span class="toc-text">5 删除被其他表关联的主表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%9F%A5%E7%9C%8B%E8%A1%A8%E7%BB%93%E6%9E%84%E5%91%BD%E4%BB%A4"><span class="toc-text">6 查看表结构命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E4%BB%A5%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%B1%95%E7%A4%BA%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">6.1 以表格的形式展示表结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E4%BB%A5SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%B1%95%E7%A4%BA%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">6.2 以SQL语句的形式展示表结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%B7%BB%E5%8A%A0%E5%AD%97%E6%AE%B5"><span class="toc-text">7 数据表添加字段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E5%9C%A8%E5%BC%80%E5%A4%B4%E6%B7%BB%E5%8A%A0%E5%AD%97%E6%AE%B5"><span class="toc-text">7.1 在开头添加字段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E5%9C%A8%E4%B8%AD%E9%97%B4%E4%BD%8D%E7%BD%AE%E6%B7%BB%E5%8A%A0%E5%AD%97%E6%AE%B5"><span class="toc-text">7.2 在中间位置添加字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%A4%8D%E5%88%B6%E8%A1%A8"><span class="toc-text">8 复制表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E5%8F%AA%E5%A4%8D%E5%88%B6%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">8.1 只复制表结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E5%A4%8D%E5%88%B6%E8%A1%A8%E7%BB%93%E6%9E%84-%E6%95%B0%E6%8D%AE"><span class="toc-text">8.2 复制表结构+数据</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -868,7 +1014,7 @@
             <div class="post-img-box">
               <a href="/article/636c7070.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -877,7 +1023,7 @@
                   <span class="post-date">08-06</span>
                 
               </div>
-              <a class="post-title" href="/article/636c7070.html">数据表的基本操作</a>
+              <a class="post-title" href="/article/636c7070.html">MySQL基础篇（四）-- 数据表的基本操作</a>
             </div>
           </div>
         
@@ -889,7 +1035,7 @@
             <div class="post-img-box">
               <a href="/article/ba595a63.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -898,7 +1044,7 @@
                   <span class="post-date">08-06</span>
                 
               </div>
-              <a class="post-title" href="/article/ba595a63.html">数据类型</a>
+              <a class="post-title" href="/article/ba595a63.html">MySQL基础篇（三）-- 数据类型</a>
             </div>
           </div>
         
@@ -910,7 +1056,7 @@
             <div class="post-img-box">
               <a href="/article/3c6d2611.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -919,7 +1065,7 @@
                   <span class="post-date">08-06</span>
                 
               </div>
-              <a class="post-title" href="/article/3c6d2611.html">MySql 基础</a>
+              <a class="post-title" href="/article/3c6d2611.html">MySQL基础篇（二）-- MySql 基础</a>
             </div>
           </div>
         
@@ -931,7 +1077,7 @@
             <div class="post-img-box">
               <a href="/article/f416b295.html" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -940,7 +1086,7 @@
                   <span class="post-date">08-06</span>
                 
               </div>
-              <a class="post-title" href="/article/f416b295.html">SQL 基础</a>
+              <a class="post-title" href="/article/f416b295.html">MySQL基础篇（一）-- SQL 基础</a>
             </div>
           </div>
         

@@ -596,7 +596,7 @@
 </ul>
 <p>要实现 Web 服务器，需使用套接字 Socket 编程接口来使用操作系统提供的网络通信功能。</p>
 <p><font color=#9900CC><strong>Socket 是应用层与 TCP&#x2F;IP 协议族通信的中间软件抽象层，是一组编程接口。它把复杂的 TCP&#x2F;IP 协议族隐藏在 Socket 接口后面，对用户来说，一组简单的接口就是全部，让 Socket 去组织数据，以符合指定的协议。使用 Socket 后，无需深入理解 TCP&#x2F;UDP 协议细节（因为Socket 已经为我们封装好了），只需要遵循 Socket 的规定去编程，写出的程序自然就是遵循 TCP&#x2F;UDP 标准的。</strong></font>Socket 的地位如下图所示：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/001.1wujw2azhhhc.webp#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/001.1wujw2azhhhc.webp#pic_center" width = 36%>
 
 <p><font color=#9900CC><strong>从某种意义上说，Socket 由地址IP和端口Port构成。</font></strong>IP 是用来标识互联网中的一台主机的位置，而 Port 是用来标识这台机器上的一个应用程序，IP 地址是配置到网卡上的，而 Port 是应用程序开启的，IP 与 Port 的绑定就标识了互联网中独一无二的一个应用程序。</p>
 <p><strong>套接字类型</strong></p>
@@ -606,7 +606,7 @@
 <li>原始套接字（SOCK_RAW）：主要用于实现自定义协议或底层网络协议。</li>
 </ul>
 <p>在本 WEB 服务器程序实验中，采用流式套接字进行通信。其基本模型如下图所示：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/002.3r9nhi7ohm00.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/002.3r9nhi7ohm00.webp#pic_center" width = 48%>
 
 
 <p>其工作过程如下：服务器首先启动，通过调用 <code>socket()</code> 建立一个套接字，然后调用绑定方法 <code>bind()</code> 将该套接字和本地网络地址联系在一起，再调用 <code>listen()</code> 使套接字做好侦听连接的准备，并设定的连接队列的长度。客户端在建立套接字后，就可调用连接方法 <code>connect()</code> 向服务器端提出连接请求。服务器端在监听到连接请求后，建立和该客户端的连接，并放入连接队列中，并通过调用 <code>accept()</code> 来返回该连接，以便后面通信使用。客户端和服务器连接一旦建立，就可以通过调用接收方法 <code>recv()/recvfrom()</code> 和发送 方法 <code>send()/sendto()</code> 来发送和接收数据。最后，待数据传送结束后，双方调用 <code>close()</code> 关闭套接字。</p>
@@ -615,7 +615,7 @@
 </blockquote>
 <hr>
 <h2 id="2-创建TCP套接字"><a href="#2-创建TCP套接字" class="headerlink" title="2 创建TCP套接字"></a>2 创建TCP套接字</h2><h3 id="2-1-套接字"><a href="#2-1-套接字" class="headerlink" title="2.1 套接字"></a>2.1 套接字</h3><p><font color=#9900CC><strong>套接字（Socket）是一个抽象层，应用程序可以通过它发送或接收数据，可对其进行像对文件一样的打开、读写和关闭等操作。套接字允许应用程序将 I&#x2F;O 插入到网络中，并与网络中的其他应用程序进行通信。网络套接字是 IP 地址与端口 Port 的组合。</font></strong></p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/003.1a0a2dxbsfr4.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/003.1a0a2dxbsfr4.webp#pic_center" width = 48%>
 
 <p>为了满足不同的通信程序对通信质量和性能的要求，网络系统提供了三种不同类型的套接字，以供用户在设计网络应用程序时根据不同的要求来选择。分别是：</p>
 <ul>
@@ -660,7 +660,7 @@
 <p>从上方代码可以看出，请求网页文件名位于请求行（第一行）中用空格分隔的第二个部分。</p>
 <p>在获得请求文件名后，读取文件内容使用文件操作来实现。Python 提供了必要的函数和方法进行默认情况下的文件基本操作。你可以用 file 对象做大部分的文件操作。</p>
 <h3 id="2-7-服务端响应请求头部信息"><a href="#2-7-服务端响应请求头部信息" class="headerlink" title="2.7 服务端响应请求头部信息"></a>2.7 服务端响应请求头部信息</h3><h4 id="2-7-1-WEB服务器响应消息头部定义"><a href="#2-7-1-WEB服务器响应消息头部定义" class="headerlink" title="2.7.1 WEB服务器响应消息头部定义"></a>2.7.1 WEB服务器响应消息头部定义</h4><p>WEB 服务器在接收到客户端的连接请求后，接下来就会响应该请求。HTTP 响应报文由三部分组成：响应行、响应头、响应体。如下图所示。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/004.36a8ikrs6si0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/004.36a8ikrs6si0.webp#pic_center" width = 48%>
 
 <ul>
 <li>响应行：一般由协议版本、状态码及其描述组成，比如 <code>HTTP/1.1 200 OK</code> 其中协议版本 <code>HTTP/1.1</code> 或者 <code>HTTP/1.0</code>，<code>200</code> 就是它的状态码，<code>OK</code> 则为它的描述。</li>
@@ -697,15 +697,15 @@
 
 <p><strong>服务器端：</strong></p>
 <p>在一台主机上的同一目录下放入<code>WebServer.py</code>和<code>HelloWorld.html</code>两个文件，并运行<code>WebServer.py</code>，作为服务器。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/005.1q8kc9lae4sg.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/005.1q8kc9lae4sg.webp#pic_center" width = 48%>
 
 <p><strong>客户端：</strong></p>
 <p>在另一台主机上打开浏览器，并输入”<a target="_blank" rel="noopener" href="http://xxx.xxx.xxx.xxx:6789/HelloWorld.html">http://XXX.XXX.XXX.XXX:6789/HelloWorld.html</a>“ （其中”XXX.XXX.XXX.XXX”是服务器IP地址），以获取服务器上的<code>HelloWorld.html</code>文件。</p>
 <p>一切正常的话，可以看到如下页面：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/006.1kv6ji5c5ygw.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/006.1kv6ji5c5ygw.webp#pic_center" width = 48%>
 
 <p>输入新地址<code>&quot;http://XXX.XXX.XXX.XXX:6789/abc.html&quot;</code>，以获取服务器上不存在的<code>abc.html</code>。将出现以下页面（注意页面中的”HTTP ERROR 404”）：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/007.7jp8f2p1r000.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/007.7jp8f2p1r000.webp#pic_center" width = 48%>
 
 <h3 id="2-8-示例分析"><a href="#2-8-示例分析" class="headerlink" title="2.8 示例分析"></a>2.8 示例分析</h3><p><strong>1. 服务端</strong></p>
 <p>下面的代码实现了一个提供时间日期的服务器。</p>
@@ -715,13 +715,13 @@
 <blockquote>
 <p>查找自己电脑IP和端口的方法：<br>  <strong>第一步： Win+R</strong><br>  <strong>第二步： 输入：cmd  然后点击确定（Enter）进入</strong><br>  <strong>第三步： 输入：ipconfig  然后Enter</strong><br>  <strong>第四步： 输入：netstat 然后Enter</strong>  一般用第一个就行</p>
 </blockquote>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/008.1r14az76m0g0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/008.1r14az76m0g0.webp#pic_center" width = 48%>
 
 <p>运行服务器程序后我们可以通过Windows系统的telnet来访问该服务器，结果如下图所示。</p>
-<center class = "half"><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/015.1lq3ku8fzvkw.webp#pic_left" width = "30%"><img src = "https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/009.v6i83q4ig28.webp#pic_left"  width = "48%"></center></p>
+<center class = "half"><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/015.1lq3ku8fzvkw.webp#pic_left" width = "30%"><img src = "https://cdn.statically.io/gh/molimi/image-hosting@main/230608/009.v6i83q4ig28.webp#pic_left"  width = "48%"></center></p>
 
 <p>Windows开启telnet服务，见下图所示：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/010.72oe6hf6xfc0.gif#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/010.72oe6hf6xfc0.gif#pic_center" width = 48%>
 
 <p>当然我们也可以通过Python的程序来实现TCP客户端的功能，相较于实现服务器程序，实现客户端程序就简单多了，代码如下所示。</p>
 <p><strong>2. 客户端</strong></p>

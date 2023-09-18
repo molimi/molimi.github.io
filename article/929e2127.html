@@ -598,7 +598,7 @@
 <p>首先，要实现一个用 Python 编写的简单的 Ping 服务端程序，然后再实现对应的客户端程序。程序功能类似于现代操作系统中可用的标准 Ping 程序功能，不过这里使用简单的 UDP 协议，而不是标准互联网控制消息协议（ICMP）来进行通信的</p>
 <h3 id="1-1-基于-UDP-协议的-Socket-套接字编程"><a href="#1-1-基于-UDP-协议的-Socket-套接字编程" class="headerlink" title="1.1 基于 UDP 协议的 Socket 套接字编程"></a>1.1 基于 UDP 协议的 Socket 套接字编程</h3><p>UDP 协议是非连接的协议，通信双方不用建立连接，而是直接把要发送的数据发送给对方。UDP 协议适用于一次传输数据量很少，对可靠性要求不高的应用场景。但由于UDP 协议没有类似于 TCP 的三次握手、可靠传输机制等，所以通信效率比较高。</p>
 <p>UDP 协议的应用也非常广泛，比如知名的应用层协议：SNMP、DNS 都是基于 UDP的。一个常用的 UDP 通信的框架如下图所示：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/011.2h2w2f6qok40.webp#pic_center" width = 64%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/011.2h2w2f6qok40.webp#pic_center" width = 64%>
 
 <p>由图可以看出，客户端要发起一次请求，仅仅需要两个步骤（socket 和 sendto），而服务器端也仅仅需要三个步骤即可接收到来自客户端的消息（socket、bind、recvfrom）。和 TCP 通信不同的是，UDP 通信不需要监听（listen）及建立连接（accept）步骤，在创建及套接字后，可以直接使用 <code>sendto()</code> 及 <code>recvform()</code> 进行数据的发送及接收。</p>
 <h3 id="1-2-UDP-Ping服务程序框架"><a href="#1-2-UDP-Ping服务程序框架" class="headerlink" title="1.2 UDP Ping服务程序框架"></a>1.2 UDP Ping服务程序框架</h3><p>在这个简单的 UDP Ping 服务器程序中，完成套接字创建及绑定后，当接收到消息后进行简单处理（这里是转化为大写），再将消息回传给相应的客户端。</p>
@@ -635,7 +635,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>.encode([encoding=<span class="string">&quot;utf-8&quot;</span>][,errors=<span class="string">&quot;strict&quot;</span>])</span><br></pre></td></tr></table></figure>
 
 <p>注意，格式中用 [] 括起来的参数为可选参数，也就是说，在使用此方法时，可以使用 [] 中的参数，也可以不使用。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/012.53ukirqvzok0.webp#pic_center" width = 64%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/012.53ukirqvzok0.webp#pic_center" width = 64%>
 
 <p><strong>示例：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>.encode()</span><br></pre></td></tr></table></figure>
@@ -669,11 +669,11 @@
 <p><strong>服务器端：</strong></p>
 <p>在一台主机上运行<code>UDPPingerServer.py</code>，作为接收ping程序数据的服务器。</p>
 <p>效果如下：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/013.7g8vggsmopo0.webp#pic_center" width = 64%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/013.7g8vggsmopo0.webp#pic_center" width = 64%>
 
 <p><strong>客户端：</strong></p>
 <p>在另一台主机上运行<code>UDPPinger.py</code>，效果如下：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230608/014.2qzffvjk6qw0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230608/014.2qzffvjk6qw0.webp#pic_center" width = 48%>
       </div>
       <div class="post-tags-categories">
         

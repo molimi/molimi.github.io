@@ -583,7 +583,7 @@
         <p>本篇主要结合LeetCode上的题目分析常用的取模运算、带余除法、鸽巢定理、组合数学的解题技巧。</p>
 <span id="more"></span>
 
-<h2 id="1-可被-K-整除的最小整数"><a href="#1-可被-K-整除的最小整数" class="headerlink" title="1 可被 K 整除的最小整数"></a>1 可被 K 整除的最小整数</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/004.4r4wqioa0sk0.webp#pic_center" width = 64%>
+<h2 id="1-可被-K-整除的最小整数"><a href="#1-可被-K-整除的最小整数" class="headerlink" title="1 可被 K 整除的最小整数"></a>1 可被 K 整除的最小整数</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/004.4r4wqioa0sk0.webp#pic_center" width = 64%>
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/smallest-integer-divisible-by-k/description/">https://leetcode.cn/problems/smallest-integer-divisible-by-k/description/</a></p>
 <h3 id="1-2-思路分析"><a href="#1-2-思路分析" class="headerlink" title="1.2 思路分析"></a>1.2 思路分析</h3><p><strong>模运算</strong></p>
@@ -604,7 +604,7 @@
 <p>$$1 \rightarrow 4 \longrightarrow 6 \longrightarrow 5 \longrightarrow 2 \longrightarrow 0$$</p>
 <p><strong>举例二: $k&#x3D;24$</strong></p>
 <p>如果计算结果和之前的某个数相同，由于计算规则不变，后面会无限重复下去，无法得到0。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/005.54n4hhi87cg0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/005.54n4hhi87cg0.webp#pic_center" width = 48%>
 
 
 <p><strong>方法一：哈希表</strong></p>
@@ -648,7 +648,7 @@
 <li>时间复杂度：$\mathcal{O}(\sqrt{k}\log k)$。计算 $\phi(9k)$ 和枚举 $\phi(9k)$ 的因子都需要 $\mathcal{O}(\sqrt{k})$ 的时间，对每个因子计算快速幂需要 $\mathcal{O}(\log k)$ 的时间，所以时间复杂度为 $\mathcal{O}(\sqrt{k}\log k)$。</li>
 <li>空间复杂度：$\mathcal{O}(1)$。仅用到若干额外变量。</li>
 </ul>
-<h2 id="2-总持续时间可被-60-整除的歌曲"><a href="#2-总持续时间可被-60-整除的歌曲" class="headerlink" title="2 总持续时间可被 60 整除的歌曲"></a>2 总持续时间可被 60 整除的歌曲</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/006.3bcoupelrdk0.webp#pic_center" width = 64%>
+<h2 id="2-总持续时间可被-60-整除的歌曲"><a href="#2-总持续时间可被-60-整除的歌曲" class="headerlink" title="2 总持续时间可被 60 整除的歌曲"></a>2 总持续时间可被 60 整除的歌曲</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/006.3bcoupelrdk0.webp#pic_center" width = 64%>
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/pairs-of-songs-with-total-durations-divisible-by-60/description/">https://leetcode.cn/problems/pairs-of-songs-with-total-durations-divisible-by-60/description/</a></p>
 <h3 id="2-2-思路分析"><a href="#2-2-思路分析" class="headerlink" title="2.2 思路分析"></a>2.2 思路分析</h3><p><strong>1. 组合数学</strong></p>

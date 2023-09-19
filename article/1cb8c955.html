@@ -583,7 +583,7 @@
         <p>本篇分享LeetCode 搜索二维矩阵的两道题目，主要学习二分查找和双指针算法</p>
 <span id="more"></span>
 
-<h2 id="1-搜索二维矩阵"><a href="#1-搜索二维矩阵" class="headerlink" title="1 搜索二维矩阵"></a>1 搜索二维矩阵</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/030.bt6mp598usw.webp#pic_center" width = 64%>
+<h2 id="1-搜索二维矩阵"><a href="#1-搜索二维矩阵" class="headerlink" title="1 搜索二维矩阵"></a>1 搜索二维矩阵</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/030.bt6mp598usw.webp#pic_center" width = 64%>
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix/">https://leetcode.cn/problems/search-a-2d-matrix/</a></p>
 <h3 id="1-2-求解思路"><a href="#1-2-求解思路" class="headerlink" title="1.2 求解思路"></a>1.2 求解思路</h3><p><strong>方法一：遍历</strong><br>该方法就是遍历查找每个位置，看 target 是否出现。这个方法也能通过本题。</p>
@@ -636,7 +636,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">searchMatrix</span>(<span class="params">self, matrix, target</span>):</span><br><span class="line">        matrix = np.reshape(matrix, [<span class="number">1</span>, -<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">return</span> target <span class="keyword">in</span> matrix</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="2-搜索二维矩阵Ⅱ"><a href="#2-搜索二维矩阵Ⅱ" class="headerlink" title="2 搜索二维矩阵Ⅱ"></a>2 搜索二维矩阵Ⅱ</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/031.1bsh7ouswcg0.webp#pic_center" width = 64%>
+<h2 id="2-搜索二维矩阵Ⅱ"><a href="#2-搜索二维矩阵Ⅱ" class="headerlink" title="2 搜索二维矩阵Ⅱ"></a>2 搜索二维矩阵Ⅱ</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/031.1bsh7ouswcg0.webp#pic_center" width = 64%>
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix-ii/">https://leetcode.cn/problems/search-a-2d-matrix-ii/</a></p>
 <h3 id="2-2-求解思路"><a href="#2-2-求解思路" class="headerlink" title="2.2 求解思路"></a>2.2 求解思路</h3><p><strong>方法一：直接查找</strong></p>
@@ -648,7 +648,7 @@
 </ul>
 <p><strong>方法二：减而治之</strong></p>
 <p>(1) 选择左下角为起点，以下展示了「减治」的过程</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/032.5qxia2tpa340.gif#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/032.5qxia2tpa340.gif#pic_center" width = 48%>
 
 <p>总结出搜索的规律是：</p>
 <ul>
@@ -663,7 +663,7 @@
 <li>空间复杂度：$O(1)$，算法使用了常数个变量。</li>
 </ul>
 <p>(2) 如果选择右上角为起点，以下展示了「减治」的过程</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/033.ujgfc06gvt.gif#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/033.ujgfc06gvt.gif#pic_center" width = 48%>
 
 <p>总结出「搜索」的规律是：</p>
 <ul>

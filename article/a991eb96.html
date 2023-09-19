@@ -584,7 +584,7 @@
 <span id="more"></span>
 
 
-<h2 id="1-区域和检索-数组不可变"><a href="#1-区域和检索-数组不可变" class="headerlink" title="1 区域和检索 - 数组不可变"></a>1 区域和检索 - 数组不可变</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/016.16tdea598mkg.webp#pic_center" width = 80%>
+<h2 id="1-区域和检索-数组不可变"><a href="#1-区域和检索-数组不可变" class="headerlink" title="1 区域和检索 - 数组不可变"></a>1 区域和检索 - 数组不可变</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/016.16tdea598mkg.webp#pic_center" width = 80%>
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/range-sum-query-immutable/">https://leetcode.cn/problems/range-sum-query-immutable/</a></p>
 <h3 id="1-2-思路分析"><a href="#1-2-思路分析" class="headerlink" title="1.2 思路分析"></a>1.2 思路分析</h3><p>最朴素的想法是存储数组 nums 的值，每次调用 sumRange 时，通过循环的方法计算数组 nums 从下标 $i$ 到下标 $j$ 范围内的元素和，需要计算 $j−i+1$ 个元素的和。由于每次检索的时间和检索的下标范围有关，因此检索的时间复杂度较高，如果检索次数较多，则会超出时间限制。</p>
@@ -597,7 +597,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>):</span><br><span class="line">        self.pre_sum = [<span class="number">0</span>]            <span class="comment"># 便于计算累加和，若直接分配数组空间，计算效率更高</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            self.pre_sum.append(self.pre_sum[i] + nums[i])  <span class="comment"># 计算nums累加和</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumRange</span>(<span class="params">self, left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> self.pre_sum[right+<span class="number">1</span>] - self.pre_sum[left]</span><br></pre></td></tr></table></figure>
 
 <p>下面以数组 [1, 12, -5, -6, 50, 3] 为例，展示了求 pre_sum 的过程。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/017.4h0ovjbmi640.gif#pic_center" width = 64%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/017.4h0ovjbmi640.gif#pic_center" width = 64%>
 
 
 
@@ -607,7 +607,7 @@
 <li>空间复杂度：$O(n)$，其中 $n$ 是数组 nums 的长度。需要创建一个长度为 $n+1$ 的前缀和数组。</li>
 </ul>
 <hr>
-<h2 id="2-二维区域和检索-矩阵不可变"><a href="#2-二维区域和检索-矩阵不可变" class="headerlink" title="2 二维区域和检索 - 矩阵不可变"></a>2 二维区域和检索 - 矩阵不可变</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/018.60fo4kdbbs00.webp#pic_center" width = 80%>
+<h2 id="2-二维区域和检索-矩阵不可变"><a href="#2-二维区域和检索-矩阵不可变" class="headerlink" title="2 二维区域和检索 - 矩阵不可变"></a>2 二维区域和检索 - 矩阵不可变</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/018.60fo4kdbbs00.webp#pic_center" width = 80%>
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/range-sum-query-2d-immutable/">https://leetcode.cn/problems/range-sum-query-2d-immutable/</a></p>
 <h3 id="2-2-思路分析"><a href="#2-2-思路分析" class="headerlink" title="2.2 思路分析"></a>2.2 思路分析</h3><p>这部分借鉴自：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/range-sum-query-2d-immutable/solution/er-wei-qian-zhui-he-jian-dan-tui-dao-tu-sqekv/">笨猪爆破组的题解————从暴力法开始优化 「二维前缀和」做了什么事 | leetcode.304</a></p>
@@ -619,11 +619,11 @@
 <p>昨天我们学习了一维前缀和，我们可以对这n个一维数组求前缀和，得到n个一维pre_sum数组。</p>
 <p>为了节省查询的时间，我们求出整个矩阵每一行的一维pre_sum数组</p>
 <p>根据前缀和定义：${pre}_{sum}[i]&#x3D;nums[0]+nums[1]+\cdots+nums[i]$，求出前缀和（下图红字）：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/019.3u6m52tef9s0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/019.3u6m52tef9s0.webp#pic_center" width = 48%>
 
 <p>然后套用通式：$nums[i]+\cdots+nums[j]&#x3D;pre_sum[j]-pre_sum[i-1]$</p>
 <p>即可求出粉色子阵列的和，计算情况如下图。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/020.hj2lugpi4p4.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/020.hj2lugpi4p4.webp#pic_center" width = 48%>
 
 <p>可见，如果想多次查询子阵列的和，我们可以提前求出每一行数组的一维前缀和。</p>
 <p>那么查询阶段，求出一行子数组的求和，就只是 $O(1)$，查询 n 行的子阵列，每次就查询花费 $O(n)$，比 $O(n^2)$ 好</p>
@@ -634,26 +634,26 @@
 
 <p><strong>4. 第二步优化</strong><br>还可以继续优化吗？</p>
 <p>我们引入一个概念：二维前缀和，定义式如下</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/021.2ysqnsk7mj40.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/021.2ysqnsk7mj40.webp#pic_center" width = 48%>
 
 <p><code>pre_sum[i][j]</code> 表示：左上角为 <code>arr[0][0]</code>，右下角为 <code>arr[i][j]</code> 的阵列的求和.</p>
 <p>我们把这个阵列拆分成四个部分，如图中的色块。</p>
 <p>要想求出 <code>pre_sum[i][j]</code>，根据上图，由容斥原理，有：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/022.8w4fiqsxvew.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/022.8w4fiqsxvew.webp#pic_center" width = 48%>
 
 <p>移项后：</p>
 <p>$$arr[i][j] &#x3D; pre_sum[i][j] + pre_sum[i-1][j-1] - pre_sum[i-1][j] - pre_sum[i][j-1]$$</p>
 <p>现在想求：行 从 a 到 A，列 从 b 到 B 的子阵列的和。叠加上式，各种相消后。得：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/023.6dkvz3kmwdc0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/023.6dkvz3kmwdc0.webp#pic_center" width = 48%>
 
 <p>回到粉色子阵列，求她的和，就是如下图的 4 个 pre_sum 矩阵元素相加减。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/024.79mvkez7230.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/024.79mvkez7230.webp#pic_center" width = 48%>
 
 
 <p>问题来了，怎么求出 pre_sum 二维阵列的每一项？</p>
 <p>就是用遍历原矩阵，两层循环，套下图的公式。</p>
 <p>注意到上图黄字，在 -1 位置上预置了 0，只是为了让处于边界的 preSum 元素，也能套用下面的通式。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/025.5ybgixgg7ds0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/025.5ybgixgg7ds0.webp#pic_center" width = 48%>
 
 <p>两个关键式 <code>pre_sum[i][j]</code> 的定义式如下，并且预置 <code>pre-sum[-1][j]</code> 和 <code>pre_sum[i][-1]</code> 为 0：</p>
 <p>$$<br>\operatorname{preSum}[i][j]&#x3D;\sum_{x&#x3D;0}^i \sum_{y&#x3D;0}^j \operatorname{arr}[x][y]<br>$$</p>
@@ -665,7 +665,7 @@
 <p>为了减少特判的代码，我们调整一下 pre_sum 矩阵，原先 <code>arr[i][j]</code> 对应 <code>pre_sum[i][j]</code></p>
 <p>现在错开，<code>arr[i][j]</code> 对应 <code>pre_sum[i+1][j+1]</code>。</p>
 <p>如下图所示，pre_sum 阵列会比原矩阵多一行一列，为了让 pre_sum 的 -1 列 -1 行变成 0 行 0 列</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/026.20ie8zlewqps.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/026.20ie8zlewqps.webp#pic_center" width = 48%>
 
 <p>现在 preSum[i][j] 的定义式，改一下</p>
 <p>$$<br>\operatorname{pre_sum}[i+1][j+1]&#x3D;\sum_{x&#x3D;0}^i \sum_{y&#x3D;0}^j \operatorname{arr}[x][y]<br>$$</p>

@@ -584,13 +584,13 @@
 <span id="more"></span>
 
 
-<h2 id="1-删除最短的子数组使剩余数组有序"><a href="#1-删除最短的子数组使剩余数组有序" class="headerlink" title="1  删除最短的子数组使剩余数组有序"></a>1  删除最短的子数组使剩余数组有序</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/009.1b99zv7n25og.webp#pic_center" width = 80%>
+<h2 id="1-删除最短的子数组使剩余数组有序"><a href="#1-删除最短的子数组使剩余数组有序" class="headerlink" title="1  删除最短的子数组使剩余数组有序"></a>1  删除最短的子数组使剩余数组有序</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/009.1b99zv7n25og.webp#pic_center" width = 80%>
 
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-subarray-to-be-removed-to-make-array-sorted/description/">https://leetcode.cn/problems/shortest-subarray-to-be-removed-to-make-array-sorted/description/</a></p>
 <h3 id="1-2-滑动窗口"><a href="#1-2-滑动窗口" class="headerlink" title="1.2 滑动窗口"></a>1.2 滑动窗口</h3><p><strong>1. 枚举左端点，移动右端点</strong></p>
 <p>核心思路：枚举 $\textit{left}$，增大 $\textit{right}$ 直到 $\textit{arr}[\textit{left}]\le\textit{arr}[\textit{right}]$，此时更新子数组长度的最小值。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/010.2wx6zs4lrs60.gif#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/010.2wx6zs4lrs60.gif#pic_center" width = 36%>
 
 <p><strong>解疑答惑：</strong></p>
 <p>问：为什么枚举一个新的 $\textit{left}$ 时，$\textit{right}$ 不会往左移？或者说，是否需要再次枚举之前枚举过的 $\textit{arr}[\textit{right}]$？</p>
@@ -610,7 +610,7 @@
 </ul>
 <p><strong>2. 枚举右端点，移动左端点</strong></p>
 <p>核心思路：枚举 $\textit{right}$，增大 $\textit{left}$ 直到 $\textit{arr}[\textit{left}]&gt;\textit{arr}[\textit{right}]$。在增大过程中去更新子数组长度的最小值。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/011.1pr1dt5dsy0w.gif#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/011.1pr1dt5dsy0w.gif#pic_center" width = 36%>
 
 <p>问：为什么枚举一个新的 $\textit{right}$ 时，$\textit{left}$ 不会往左移？或者说，是否需要再次枚举之前枚举过的 $\textit{arr}[\textit{left}]$？</p>
 <p>答：在向右移动时，由于 $\textit{arr}[\textit{left}]$ 和 $\textit{arr}[\textit{right}]$ 都是非递减的，所以 $\textit{left}$ 左侧之前枚举过的元素必然小于等于 $\textit{arr}[\textit{right}]$，由于这样的子数组长度更长，无需再次枚举。这也是本题可以使用同向双指针（不定长滑动窗口）的前提。</p>

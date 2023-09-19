@@ -583,13 +583,13 @@
         <p>移掉 K 位数字、去除重复字母、拼接最大数这三道题目都是同一套路，即删除或者保留若干个字符，使得剩下的数字最小（或最大）或者字典序最小（或最大）。而解决问题的前提是要有一定数学前提。而基于这个数学前提，我们贪心地删除栈中相邻的字符。如果你会了这个套路，那么这三道题目应该都可以轻松解决。</p>
 <span id="more"></span>
 
-<h2 id="1-移掉-K-位数字"><a href="#1-移掉-K-位数字" class="headerlink" title="1 移掉 K 位数字"></a>1 移掉 K 位数字</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/040.4ke3hv739fo0.webp#pic_center" width = 64%>
+<h2 id="1-移掉-K-位数字"><a href="#1-移掉-K-位数字" class="headerlink" title="1 移掉 K 位数字"></a>1 移掉 K 位数字</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/040.4ke3hv739fo0.webp#pic_center" width = 64%>
 
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-k-digits/">https://leetcode.cn/problems/remove-k-digits/</a></p>
 <h3 id="1-2-思路分析"><a href="#1-2-思路分析" class="headerlink" title="1.2 思路分析"></a>1.2 思路分析</h3><p>这道题让我们从一个字符串数字中删除 k 个数字，使得剩下的数最小。也就说，我们要保持原来的数字的相对位置不变。</p>
 <p>以题目中的 $num &#x3D; 1432219，k &#x3D; 3$ 为例，我们需要返回一个长度为 4 的字符串，问题在于： 我们怎么才能求出这四个位置依次是什么呢？</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/041.3k2aqhji1d20.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/041.3k2aqhji1d20.webp#pic_center" width = 48%>
 
 <p>暴力法的话，我们需要枚举 $C_n^(n - k)$ 种序列（其中 $n$ 为数字长度），并逐个比较最大。这个时间复杂度是指数级别的，必须进行优化。</p>
 <p>一个思路是：</p>
@@ -607,13 +607,13 @@
 <li>丢弃与否的依据如上面的前置知识中阐述中的方法。</li>
 </ul>
 <p>以题目中的 $num &#x3D; 1432219，k &#x3D; 3$ 为例的图解过程如下：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/042.5xmn9diclm00.webp#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/042.5xmn9diclm00.webp#pic_center" width = 36%>
 
 <p>由于没有左侧相邻元素，因此没办法丢弃。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/043.3a4rwxtigf20.webp#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/043.3a4rwxtigf20.webp#pic_center" width = 36%>
 
 <p>由于 4 比左侧相邻的 1 大。如果选择丢弃左侧的 1，那么会使得剩下的数字更大（开头的数从 1 变成了 4）。因此我们仍然选择不丢弃。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/044.5mzf9sc97z40.webp#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/044.5mzf9sc97z40.webp#pic_center" width = 36%>
 
 <p>由于 3 比左侧相邻的 4 小。 如果选择丢弃左侧的 4，那么会使得剩下的数字更小（开头的数从 4 变成了 3）。因此我们选择丢弃。</p>
 <p>后面的思路类似，这里就不继续分析啦。</p>
@@ -628,10 +628,10 @@
 <p>按照上面的思路，我们来选择数据结构。由于我们需要保留和丢弃相邻的元素，因此使用栈这种在一端进行添加和删除的数据结构是再合适不过了，我们来看下代码实现。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeKdigits</span>(<span class="params">self, num, k</span>):</span><br><span class="line">        stack = []</span><br><span class="line">        remain = <span class="built_in">len</span>(num) - k</span><br><span class="line">        <span class="keyword">for</span> digit <span class="keyword">in</span> num:               <span class="comment"># 构建单调递增的数字串</span></span><br><span class="line">            <span class="keyword">while</span> k <span class="keyword">and</span> stack <span class="keyword">and</span> stack[-<span class="number">1</span>] &gt; digit:</span><br><span class="line">                stack.pop()</span><br><span class="line">                k -= <span class="number">1</span></span><br><span class="line">            stack.append(digit)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(stack[:remain]).lstrip(<span class="string">&#x27;0&#x27;</span>) <span class="keyword">or</span> <span class="string">&#x27;0&#x27;</span>      </span><br></pre></td></tr></table></figure>
 
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/045.2qdr9my17iw.gif#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/045.2qdr9my17iw.gif#pic_center" width = 48%>
 
 <p>提示： 如果题目改成求删除 k 个字符之后的最大数，我们只需要将 stack[-1] &gt; digit 中的大于号改成小于号即可</p>
-<h2 id="2-去除重复字母"><a href="#2-去除重复字母" class="headerlink" title="2 去除重复字母"></a>2 去除重复字母</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/046.2cir1n6s89j4.webp#pic_center" width = 64%>
+<h2 id="2-去除重复字母"><a href="#2-去除重复字母" class="headerlink" title="2 去除重复字母"></a>2 去除重复字母</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/046.2cir1n6s89j4.webp#pic_center" width = 64%>
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicate-letters/">https://leetcode.cn/problems/remove-duplicate-letters/</a></p>
 <h3 id="2-2-思路分析"><a href="#2-2-思路分析" class="headerlink" title="2.2 思路分析"></a>2.2 思路分析</h3><p>与上面题目不同，这道题没有一个全局的删除次数 k。而是对于每一个在字符串 s 中出现的字母 c 都有一个 k 值。这个 k 是 c 出现次数 - 1。</p>
@@ -647,7 +647,7 @@
 <p>不过不必担心。由于题目是要求只出现一次。我们可以在遍历的时候简单地判断其是否在栈上即可。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeDuplicateLetters</span>(<span class="params">self, s</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        stack = []</span><br><span class="line">        remain_counter = collections.Counter(s)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> stack:</span><br><span class="line">                <span class="keyword">while</span> stack <span class="keyword">and</span> c &lt; stack[-<span class="number">1</span>] <span class="keyword">and</span>  remain_counter[stack[-<span class="number">1</span>]] &gt; <span class="number">0</span>:</span><br><span class="line">                    stack.pop()</span><br><span class="line">                stack.append(c)</span><br><span class="line">            remain_counter[c] -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(stack)</span><br></pre></td></tr></table></figure>
 
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/047.3dkxsbuhwk00.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/047.3dkxsbuhwk00.webp#pic_center" width = 48%>
 
 <p>查询给定字符是否在一个序列中存在的方法。根本上来说，有两种可能：</p>
 <ul>
@@ -656,7 +656,7 @@
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeDuplicateLetters</span>(<span class="params">self, s</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        stack = []</span><br><span class="line">        seen = <span class="built_in">set</span>()</span><br><span class="line">        remain_counter = collections.Counter(s)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">                <span class="keyword">while</span> stack <span class="keyword">and</span> c &lt; stack[-<span class="number">1</span>] <span class="keyword">and</span>  remain_counter[stack[-<span class="number">1</span>]] &gt; <span class="number">0</span>:</span><br><span class="line">                    seen.discard(stack.pop())</span><br><span class="line">                seen.add(c)</span><br><span class="line">                stack.append(c)</span><br><span class="line">            remain_counter[c] -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(stack)</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-拼接最大数"><a href="#3-拼接最大数" class="headerlink" title="3 拼接最大数"></a>3 拼接最大数</h2><h3 id="3-1-题目描述"><a href="#3-1-题目描述" class="headerlink" title="3.1 题目描述"></a>3.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/048.6bvg2v7uuj40.webp#pic_center" width = 64%>
+<h2 id="3-拼接最大数"><a href="#3-拼接最大数" class="headerlink" title="3 拼接最大数"></a>3 拼接最大数</h2><h3 id="3-1-题目描述"><a href="#3-1-题目描述" class="headerlink" title="3.1 题目描述"></a>3.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/048.6bvg2v7uuj40.webp#pic_center" width = 64%>
 
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/create-maximum-number/">https://leetcode.cn/problems/create-maximum-number/</a></p>
@@ -668,7 +668,7 @@
 <p>以题目的 nums1 &#x3D; [3, 4, 6, 5] nums2 &#x3D; [9, 1, 2, 5, 8, 3] k &#x3D; 5 为例。 假如我们从 num1 中取出 1 个数字，那么就要从 nums2 中取出 4 个数字。</p>
 <p>运用第一题的方法，我们计算出应该取 nums1 的 [6]，并取 nums2 的 [9,5,8,3]。 如何将 [6] 和 [9,5,8,3]，使得数字尽可能大，并且保持相对位置不变呢？</p>
 <p>实际上这个过程有点类似归并排序中的治，而上面我们分别计算 num1 和 num2 的最大数的过程类似归并排序中的分。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/049.58yaxtonyxs0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/049.58yaxtonyxs0.webp#pic_center" width = 48%>
 
 
 <p>我们将从 num1 中挑选的 k1 个数组成的数组称之为 A，将从 num2 中挑选的 k2 个数组成的数组称之为 B，</p>
@@ -678,7 +678,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A = [<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">B = [<span class="number">2</span>]</span><br><span class="line">A &lt; B <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">A = [<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">B = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">A &lt; B <span class="comment"># False</span></span><br></pre></td></tr></table></figure>
 
 <p>以合并 [6] 和 [9,5,8,3] 为例，图解过程如下：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/050.3pp1a4yjzpe0.webp#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/050.3pp1a4yjzpe0.webp#pic_center" width = 36%>
 
 
 <p>具体算法：</p>
@@ -690,7 +690,7 @@
 <p>上面我们暴力了 k 种组合情况，我们只需要将 k 种情况取出最大值即可。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxNumber</span>(<span class="params">self, nums1, nums2, k</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">pick_max</span>(<span class="params">nums, k</span>):</span><br><span class="line">            stack = []</span><br><span class="line">            drop = <span class="built_in">len</span>(nums) - k</span><br><span class="line">            <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">                <span class="keyword">while</span> drop <span class="keyword">and</span> stack <span class="keyword">and</span> stack[-<span class="number">1</span>] &lt; num:</span><br><span class="line">                    stack.pop()</span><br><span class="line">                    drop -= <span class="number">1</span></span><br><span class="line">                stack.append(num)</span><br><span class="line">            <span class="keyword">return</span> stack[:k]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">A, B</span>):</span><br><span class="line">            ans = []</span><br><span class="line">            <span class="keyword">while</span> A <span class="keyword">or</span> B:</span><br><span class="line">                bigger = A <span class="keyword">if</span> A &gt; B <span class="keyword">else</span> B</span><br><span class="line">                ans.append(bigger[<span class="number">0</span>])</span><br><span class="line">                bigger.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(merge(pick_max(nums1, i), pick_max(nums2, k-i)) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k+<span class="number">1</span>) <span class="keyword">if</span> i &lt;= <span class="built_in">len</span>(nums1) <span class="keyword">and</span> k-i &lt;= <span class="built_in">len</span>(nums2))</span><br></pre></td></tr></table></figure>
 
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/051.5bcgk06xnyc0.gif#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/051.5bcgk06xnyc0.gif#pic_center" width = 48%>
 
 
 <p><strong>小结</strong></p>

@@ -590,7 +590,7 @@
 <li>每一个非根节点有且只有一个父节点；</li>
 <li>除了根节点外，每个子节点可以分为多个不相交的子树；</li>
 </ul>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/001.7c11iupwauk0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/001.7c11iupwauk0.webp#pic_center" width = 48%>
 
 <h3 id="1-2-树的术语"><a href="#1-2-树的术语" class="headerlink" title="1.2 树的术语"></a>1.2 树的术语</h3><ul>
 <li>节点的度：一个节点含有的子树的个数称为该节点的度；</li>
@@ -601,7 +601,7 @@
 <li>兄弟节点：具有相同父节点的节点互称为兄弟节点；</li>
 </ul>
 <p>如下图，A 节点就是 B 节点的父节点，B 节点是 A 节点的子节点。B、C、D 这三个节点的父节点是同一个节点，所以它们之间互称为兄弟节点。我们把没有父节点的节点叫做根节点，也就是图中的节点 E。我们把没有子节点的节点叫做叶子节点或者叶节点，比如图中的 G、H、I、J、K、L 都是叶子节点。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/002.7d6hue0pbm00.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/002.7d6hue0pbm00.webp#pic_center" width = 48%>
 
 <ul>
 <li>节点的层次：从根开始定义起，根为第1层，根的子节点为第2层，以此类推；</li>
@@ -611,7 +611,7 @@
 <li>子孙：以某节点为根的子树中任一节点都称为该节点的子孙；</li>
 <li>森林：由 $m$（$m\geq 0$）棵互不相交的树的集合称为森林。</li>
 </ul>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/003.5sez1y8lbt40.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/003.5sez1y8lbt40.webp#pic_center" width = 48%>
 
 <ul>
 <li>深度：对于任意节点n, n 的深度为从根到 n 的唯一路径长，根的深度为0；</li>
@@ -635,7 +635,7 @@
 </li>
 </ul>
 <p>用图片来展示什么是完全二叉树，请看下图：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/004.1b9h32y2iji8.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/004.1b9h32y2iji8.webp#pic_center" width = 48%>
 
 <p>下面这两棵树都是搜索树</p>
 <ul>
@@ -643,20 +643,20 @@
 <li>若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
 <li>它的左、右子树也分别为二叉排序树</li>
 </ul>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/005.5ku881wu4to0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/005.5ku881wu4to0.webp#pic_center" width = 48%>
 
 <p>最后一棵 不是平衡二叉树，因为它的左右两个子树的高度差的绝对值超过了1。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/006.5fiprv9i92w0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/006.5fiprv9i92w0.webp#pic_center" width = 48%>
 
 
 <h4 id="1-4-树的存储和表示"><a href="#1-4-树的存储和表示" class="headerlink" title="1.4 树的存储和表示"></a>1.4 树的存储和表示</h4><p><strong>1. 链式存储法</strong></p>
 <p>一种基于指针或者引用的二叉链式存储法，每个节点有三个字段，其中一个存储数据，另外两个是指向左右子节点的指针。我们只要拎住根节点，就可以通过左右子节点的指针，把整棵树都串起来。这种存储方式我们比较常用。大部分二叉树代码都是通过这种结构来实现的。结构如下图：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/007.6kxybgrn4pg0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/007.6kxybgrn4pg0.webp#pic_center" width = 48%>
 
 
 <p><strong>2. 顺序存储法</strong></p>
 <p>顺序存储：将数据结构存储在固定的数组中，然在遍历速度上有一定的优势，但因所占空间比较大，是非主流二叉树。我们把根节点存储在下标 i &#x3D; 1 的位置，那左子节点存储在下标 2 * i &#x3D; 2 的位置，右子节点存储在 2 * i + 1 &#x3D; 3 的位置。以此类推，B 节点的左子节点存储在 2 * i &#x3D; 2 * 2 &#x3D; 4 的位置，右子节点存储在 2 * i + 1 &#x3D; 2 * 2 + 1 &#x3D; 5 的位置。即如果节点 X 存储在数组中下标为 i 的位置，下标为 2 * i 的位置存储的就是左子节点，下标为 2 * i + 1 的位置存储的就是右子节点。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/008.vvpo3mca8g0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/008.vvpo3mca8g0.webp#pic_center" width = 48%>
 
 <p>不过上图是一颗完全二叉树，所以数组仅仅浪费了下标为0的存储位置，如果是非完全二叉树，则可能会浪费比较多的数组内存空间。所以当要存储的树是一颗完全二叉树时，数组才是最合适的选择。所以，二叉树通常以链式存储。</p>
 <h2 id="2-二叉树"><a href="#2-二叉树" class="headerlink" title="2 二叉树"></a>2 二叉树</h2><p>二叉树是每个节点最多有两个子树的树结构。通常子树被称作“左子树”(left subtree)和“右子树”(right subtree)。</p>
@@ -670,12 +670,12 @@
 <blockquote>
 <p>完全二叉树————若设二叉树的高度为$h$，除第 $h$ 层外，其它各层 $(1~h-1)$ 的结点数都达到最大个数，第 $h$ 层有叶子结点，并且叶子结点都是从左到右依次排布，这就是完全二叉树。</p>
 </blockquote>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/009.1fabcfnlkitc.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/009.1fabcfnlkitc.webp#pic_center" width = 48%>
 
 <blockquote>
 <p>满二叉树——除了叶结点外每一个结点都有左右子叶且叶子结点都处在最底层的二叉树。</p>
 </blockquote>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/010.4pofeqgfk9s0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/010.4pofeqgfk9s0.webp#pic_center" width = 48%>
 
 <h3 id="2-2-二叉树的实现"><a href="#2-2-二叉树的实现" class="headerlink" title="2.2 二叉树的实现"></a>2.2 二叉树的实现</h3><p><strong>1. 列表实现</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /user/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">@author: CarpeDiem</span></span><br><span class="line"><span class="string">@date: 23/2/27</span></span><br><span class="line"><span class="string">@version: 0.1</span></span><br><span class="line"><span class="string">@description: 树的列表实现</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">binary_tree</span>(<span class="params">r</span>):</span><br><span class="line">    <span class="keyword">return</span> [r, [], []]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">insert_left</span>(<span class="params">root, new_branch</span>):</span><br><span class="line">    t = root.pop(<span class="number">1</span>)     <span class="comment"># 取出左子树</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(t) &gt; <span class="number">1</span>:      <span class="comment"># 左子树已存在</span></span><br><span class="line">        root.insert(<span class="number">1</span>, [new_branch, t, []])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root.insert(<span class="number">1</span>, [new_branch, [], []])</span><br><span class="line">    <span class="keyword">return</span> root</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">insert_right</span>(<span class="params">root, new_branch</span>):</span><br><span class="line">    t = root.pop(<span class="number">2</span>)     <span class="comment"># 取出右子树</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(t) &gt; <span class="number">1</span>:      <span class="comment"># 右子树已存在</span></span><br><span class="line">        root.insert(<span class="number">2</span>, [new_branch, [], t])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        root.insert(<span class="number">2</span>, [new_branch, [], []])</span><br><span class="line">    <span class="keyword">return</span> root</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_root_val</span>(<span class="params">root</span>):</span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">set_root_val</span>(<span class="params">root, new_val</span>):</span><br><span class="line">    root[<span class="number">0</span>] = new_val</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_left_child</span>(<span class="params">root</span>):</span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_right_child</span>(<span class="params">root</span>):</span><br><span class="line">    <span class="keyword">return</span> root[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">r = binary_tree(<span class="number">3</span>)</span><br><span class="line">insert_left(r, <span class="number">4</span>)</span><br><span class="line">insert_left(r, <span class="number">5</span>)</span><br><span class="line">insert_right(r, <span class="number">6</span>)</span><br><span class="line">insert_right(r, <span class="number">7</span>)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line">l = get_left_child(r)</span><br><span class="line"><span class="built_in">print</span>(l)</span><br><span class="line">set_root_val(l, <span class="number">9</span>)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line">insert_left(l, <span class="number">11</span>)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line"><span class="built_in">print</span>(get_right_child(get_right_child(r)))</span><br></pre></td></tr></table></figure>
@@ -703,12 +703,12 @@
 </ul>
 </li>
 </ul>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/011.46af021h4fo0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/011.46af021h4fo0.webp#pic_center" width = 48%>
 
 <p>下面以LeetCode为例，如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TreeNode</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, value</span>):</span><br><span class="line">        self.value = value</span><br><span class="line">        self.left = <span class="literal">None</span></span><br><span class="line">        self.right = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="2-3-1-前序遍历"><a href="#2-3-1-前序遍历" class="headerlink" title="2.3.1 前序遍历"></a>2.3.1 前序遍历</h4><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/012.5qei5gwywa80.webp#pic_center" width = 48%>
+<h4 id="2-3-1-前序遍历"><a href="#2-3-1-前序遍历" class="headerlink" title="2.3.1 前序遍历"></a>2.3.1 前序遍历</h4><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/012.5qei5gwywa80.webp#pic_center" width = 48%>
 
 
 <ul>
@@ -721,11 +721,11 @@
 <p><strong>2. 迭代遍历</strong></p>
 <p>前序遍历是中左右，每次先处理的是中间节点，那么先将根节点放入栈中，然后将右孩子加入栈，再加入左孩子。</p>
 <p>为什么要先加入 右孩子，再加入左孩子呢？ 因为这样出栈的时候才是中左右的顺序。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/013.5m8n41fvngc0.gif#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/013.5m8n41fvngc0.gif#pic_center" width = 36%>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">preorderTraversal</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 迭代法</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span> []</span><br><span class="line">        stack = [root]</span><br><span class="line">        result = []</span><br><span class="line">        <span class="keyword">while</span> stack:</span><br><span class="line">            node = stack.pop()</span><br><span class="line">            result.append(node.val)         <span class="comment"># 中结点先处理</span></span><br><span class="line">            <span class="keyword">if</span> node.right:</span><br><span class="line">                stack.append(node.right)    <span class="comment"># 右子树先入栈</span></span><br><span class="line">            <span class="keyword">if</span> node.left:</span><br><span class="line">                stack.append(node.left)     <span class="comment"># 左子树先入栈</span></span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
 
-<h4 id="2-3-2-中序遍历"><a href="#2-3-2-中序遍历" class="headerlink" title="2.3.2 中序遍历"></a>2.3.2 中序遍历</h4><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/014.zoh9hj3411s.webp#pic_center" width = 48%>
+<h4 id="2-3-2-中序遍历"><a href="#2-3-2-中序遍历" class="headerlink" title="2.3.2 中序遍历"></a>2.3.2 中序遍历</h4><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/014.zoh9hj3411s.webp#pic_center" width = 48%>
 
 <ul>
 <li>遍历顺序：左子树-&gt;根结点-&gt;右子树</li>
@@ -739,11 +739,11 @@
 <p>分析一下为什么前面写的前序遍历的代码，不能和中序遍历通用呢，因为前序遍历的顺序是中左右，先访问的元素是中间节点，要处理的元素也是中间节点，所以刚刚才能写出相对简洁的代码，因为要访问的元素和要处理的元素顺序是一致的，都是中间节点。</p>
 <p>那么再看看中序遍历，中序遍历是左中右，先访问的是二叉树顶部的节点，然后一层一层向下访问，直到到达树左面的最底部，再开始处理节点（也就是在把节点的数值放进result数组中），这就造成了处理顺序和访问顺序是不一致的。</p>
 <p>那么在使用迭代法写中序遍历，就需要借用指针的遍历来帮助访问节点，栈则用来处理节点上的元素。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/015.a7oiu182jww.gif#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/015.a7oiu182jww.gif#pic_center" width = 36%>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inorderTraversal</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span> []</span><br><span class="line">        stack = []                      <span class="comment"># 不能提前将root结点加入stack中</span></span><br><span class="line">        result = []</span><br><span class="line">        cur = root</span><br><span class="line">        <span class="keyword">while</span> cur <span class="keyword">or</span> stack:         </span><br><span class="line">            <span class="keyword">if</span> cur:                     <span class="comment"># 先迭代访问最底层的左子树结点</span></span><br><span class="line">                stack.append(cur)</span><br><span class="line">                cur = cur.left</span><br><span class="line">            <span class="keyword">else</span>:                       <span class="comment"># 到达最左节点后处理栈顶结点</span></span><br><span class="line">                cur = stack.pop()</span><br><span class="line">                result.append(cur.val)</span><br><span class="line">                cur = cur.right         <span class="comment"># 取栈顶元素右节点</span></span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
 
-<h4 id="2-3-3-后序遍历"><a href="#2-3-3-后序遍历" class="headerlink" title="2.3.3 后序遍历"></a>2.3.3 后序遍历</h4><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/016.4w5738j4umi0.webp#pic_center" width = 48%>
+<h4 id="2-3-3-后序遍历"><a href="#2-3-3-后序遍历" class="headerlink" title="2.3.3 后序遍历"></a>2.3.3 后序遍历</h4><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/016.4w5738j4umi0.webp#pic_center" width = 48%>
 
 <ul>
 <li>遍历顺序：左子树-&gt;右子树-&gt;根结点</li>
@@ -756,7 +756,7 @@
 
 <p><strong>2. 顺序遍历</strong></p>
 <p>先序遍历是中左右，后续遍历是左右中，那么我们只需要调整一下先序遍历的代码顺序，就变成中右左的遍历顺序，然后在反转result数组，输出的结果顺序就是左右中了，如下图：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/017.6ln5rgj5w0w0.webp#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/017.6ln5rgj5w0w0.webp#pic_center" width = 36%>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">postorderTraversal</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 迭代遍历</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span> []</span><br><span class="line">        stack = [root]</span><br><span class="line">        result = []</span><br><span class="line">        <span class="keyword">while</span> stack:</span><br><span class="line">            node = stack.pop()</span><br><span class="line">            result.append(node.val)                     <span class="comment"># 中结点先处理</span></span><br><span class="line">            <span class="keyword">if</span> node.left: stack.append(node.left)       <span class="comment"># 左子树先入栈</span></span><br><span class="line">            <span class="keyword">if</span> node.right: stack.append(node.right)     <span class="comment"># 右子树后入栈</span></span><br><span class="line">        <span class="keyword">return</span> result[::-<span class="number">1</span>]                             <span class="comment"># 将最终数组反转</span></span><br></pre></td></tr></table></figure>
 
@@ -764,7 +764,7 @@
 <p>需要借用一个辅助数据结构即队列来实现，队列先进先出，符合一层一层遍历的逻辑，而用栈先进后出适合模拟深度优先遍历也就是递归的逻辑。</p>
 <p>而这种层序遍历方式就是图论中的广度优先遍历，只不过我们应用在二叉树上。</p>
 <p>使用队列实现二叉树广度优先遍历，动画如下：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/018.5in2a4wgs600.gif#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/018.5in2a4wgs600.gif#pic_center" width = 36%>
 
 <p><strong>1. 迭代法</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">        <span class="comment"># 二叉树层序遍历迭代解法</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span> []</span><br><span class="line">        results = []</span><br><span class="line">        que = deque([root])</span><br><span class="line">        <span class="keyword">while</span> que:</span><br><span class="line">            size = <span class="built_in">len</span>(que)</span><br><span class="line">            result = []</span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size):       <span class="comment"># 这里一定要使用固定大小size，不要使用len(que)，因为len(que)是不断变化的</span></span><br><span class="line">                cur = que.popleft()</span><br><span class="line">                result.append(cur.val)</span><br><span class="line">                <span class="keyword">if</span> cur.left:</span><br><span class="line">                    que.append(cur.left)</span><br><span class="line">                <span class="keyword">if</span> cur.right:</span><br><span class="line">                    que.append(cur.right)</span><br><span class="line">            results.append(result)</span><br><span class="line">        <span class="keyword">return</span> results</span><br></pre></td></tr></table></figure>
@@ -777,7 +777,7 @@
 <blockquote>
 <p><font color=#9900CC><strong>二叉树基础部分已整理完毕，后面在学习中持续补充，谢谢大家的鼓励和支持！<font><strong></p>
 </blockquote>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/019.32u2n6vhr4o0.gif#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/019.32u2n6vhr4o0.gif#pic_center" width = 48%>
 
 <hr>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>

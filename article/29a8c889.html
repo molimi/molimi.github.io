@@ -583,13 +583,13 @@
         <p>本篇主要以LeetCode[370]区间加法、LeetCode[1109]航班预定统计、LeetCode[1094]拼车为例，讲解差分数组的思想和应用。</p>
 <span id="more"></span>
 
-<h2 id="1-区间加法"><a href="#1-区间加法" class="headerlink" title="1 区间加法"></a>1 区间加法</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/001.186b44op9p9c.webp#pic_center" width = 64%>
+<h2 id="1-区间加法"><a href="#1-区间加法" class="headerlink" title="1 区间加法"></a>1 区间加法</h2><h3 id="1-1-题目描述"><a href="#1-1-题目描述" class="headerlink" title="1.1 题目描述"></a>1.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/001.186b44op9p9c.webp#pic_center" width = 64%>
 
 <h3 id="1-2-求解思路"><a href="#1-2-求解思路" class="headerlink" title="1.2 求解思路"></a>1.2 求解思路</h3><p>常规的思路很容易，给区间 nums[i: j] 加上 val，那就⼀个 for 循环给它们都加上呗，但这种思路的时间复杂度是 $O(N)$，由于这个场景下对 nums 的修改⾮常频繁，所以效率会很低下。</p>
 <p>这⾥就需要差分数组的技巧，差分数组是与前缀和数组所对应的一种逆操作，类似于求导和积分，也就是说，对差分数组求前缀和，可以得到原数组，同样的，对前缀和数组求差分，也可以得到原数组。</p>
 <p>差分数组的性质是：当我们希望对原数组的某一个区间[i, j]施加一个增量 inc 时，差分数组d对应的变化是：d[i]增加inc，d[j+1]减少inc，并且这种操作是可以叠加的。</p>
 <p>下面举个例子：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/002.o2smmp2nbps.webp#pic_center" width = 64%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/002.o2smmp2nbps.webp#pic_center" width = 64%>
 
 <p>差分数组是一个辅助数组，从侧面来表示给定某一数组的变化，一般用来对数组进行区间修改的操作。</p>
 <p>还是上面那个表里的例子，我们需要进行以下操作：</p>
@@ -600,10 +600,10 @@
 <p>很简单对吧，你可以进行枚举。但是如果给你的数据量是1e5，操作量1e5，限时1000ms你暴力枚举能莽的过去吗？慢到你怀疑人生直接。这时我们就需要使用到差分数组了。</p>
 <p>其实当你将原始数组中元素同时加上或者减掉某个数，那么他们的差分数组其实是不会变化的。</p>
 <p>利用这个思想，咱们将区间缩小，缩小的例子中的区间 [1,4] 吧这是你会发现只有 d[1] 和 d[5] 发生了变化，而 d[2], d[3], d[4]却保持着原样，</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/003.26qp336md6ow.webp#pic_center" width = 64%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/003.26qp336md6ow.webp#pic_center" width = 64%>
 
 <p>进行下一个操作，</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/004.5fbtn7ubb500.webp#pic_center" width = 64%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/004.5fbtn7ubb500.webp#pic_center" width = 64%>
 
 <p>这时我们就会发现这样一个规律，当对一个区间进行增减某个值的时候，他的差分数组对应的区间左端点的值会同步变化，而他的右端点的后一个值则会相反地变化，其实这个很好理解。</p>
 <p>本部分参考自：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44786250/article/details/100056975">差分详解+例题</a></p>
@@ -612,7 +612,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getModifiedArray</span>(<span class="params">self, length: <span class="built_in">int</span>, updates: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        diff = [<span class="number">0</span>] * (length+<span class="number">1</span>)  <span class="comment"># 末尾多个0，防止越界</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> update <span class="keyword">in</span> updates:</span><br><span class="line">            start, end, inc = update[<span class="number">0</span>], update[<span class="number">1</span>], update[<span class="number">2</span>]</span><br><span class="line">            diff[start] += inc</span><br><span class="line">            diff[end + <span class="number">1</span>] -= inc</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, length):</span><br><span class="line">            diff[i] += diff[i - <span class="number">1</span>]            <span class="comment"># 对差分数组求前缀和便可得到原数组</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> diff[:-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="2-航班预订统计"><a href="#2-航班预订统计" class="headerlink" title="2 航班预订统计"></a>2 航班预订统计</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/005.7jqt4ty7a0o0.webp#pic_center" width = 64%>
+<h2 id="2-航班预订统计"><a href="#2-航班预订统计" class="headerlink" title="2 航班预订统计"></a>2 航班预订统计</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/005.7jqt4ty7a0o0.webp#pic_center" width = 64%>
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/corporate-flight-bookings/">https://leetcode.cn/problems/corporate-flight-bookings/</a></p>
 <h3 id="2-2-代码实现"><a href="#2-2-代码实现" class="headerlink" title="2.2 代码实现"></a>2.2 代码实现</h3><p>题⽬说的 n 是从 1 开始计数的，⽽数组索引从 0 开始，在构造差分数组时，需要相应的调整数组下标对应关系，这里在前面添加0，和三元组 (i, j, k) 依次对应。</p>
@@ -623,7 +623,7 @@
 <li>时间复杂度：$O(n+m)$，其中 $n$ 为要求的数组长度，$m$ 为预定记录的数量。我们需要对于每一条预定记录处理一次差分数组，并最后对差分数组求前缀和。</li>
 <li>空间复杂度：$O(1)$。</li>
 </ul>
-<h2 id="3-拼车"><a href="#3-拼车" class="headerlink" title="3 拼车"></a>3 拼车</h2><h3 id="3-1-题目描述"><a href="#3-1-题目描述" class="headerlink" title="3.1 题目描述"></a>3.1 题目描述</h3><img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/006.2mzdjelg76k0.webp#pic_center" width = 64%>
+<h2 id="3-拼车"><a href="#3-拼车" class="headerlink" title="3 拼车"></a>3 拼车</h2><h3 id="3-1-题目描述"><a href="#3-1-题目描述" class="headerlink" title="3.1 题目描述"></a>3.1 题目描述</h3><img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/006.2mzdjelg76k0.webp#pic_center" width = 64%>
 
 <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/car-pooling/">https://leetcode.cn/problems/car-pooling/</a></p>
 <h3 id="3-2-思路分析"><a href="#3-2-思路分析" class="headerlink" title="3.2 思路分析"></a>3.2 思路分析</h3><ol>
@@ -639,7 +639,7 @@
 <li>0 &lt;&#x3D; trips[i][1] &lt; trips[i][2] &lt;&#x3D; 1000，可以看出trips中start&#x2F;end就是数组下标，这里可以直接定义差分数组大小，也可以使用循环找到最多有几站</li>
 </ul>
 <p>以trips &#x3D; [[2,1,5],[3,3,7]], capacity &#x3D; 4为例，数组变化：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/007.6bjq9cr5fw00.webp#pic_center" width = 64%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/007.6bjq9cr5fw00.webp#pic_center" width = 64%>
 
 <ol>
 <li>说明：</li>
@@ -653,7 +653,7 @@
 <ol start="5">
 <li>观察上面数组变化，可以看出是子区间内元素全部加 n，多次修改后求修改后数组的问题——典型的差分数组求解，对应差分数组变化：</li>
 </ol>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/008.mm47mmjjymo.webp#pic_center" width = 80%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/008.mm47mmjjymo.webp#pic_center" width = 80%>
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">carPooling</span>(<span class="params">self, trips: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], capacity: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        diff = [<span class="number">0</span>] * (<span class="number">1001</span>)      <span class="comment"># 题目中最多有1001个车站</span></span><br><span class="line">        max_station = <span class="number">0</span>          <span class="comment"># 找到车站数</span></span><br><span class="line">        <span class="keyword">for</span> trip <span class="keyword">in</span> trips:</span><br><span class="line">            inc, start, end = trip[<span class="number">0</span>], trip[<span class="number">1</span>], trip[<span class="number">2</span>]</span><br><span class="line">            diff[start] += inc</span><br><span class="line">            diff[end] -= inc      <span class="comment"># 第end站乘客已经下车，这里就不用end+1</span></span><br><span class="line">            max_station = <span class="built_in">max</span>(max_station, end)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, max_station+<span class="number">1</span>): <span class="comment"># 进行区间求和</span></span><br><span class="line">            diff[i] += diff[i-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">max</span>(diff[:max_station]) &gt; capacity:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>

@@ -604,7 +604,7 @@
 </ul>
 </li>
 </ul>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230701/001.4s173f3j2n8.gif#pic_center" width = 80%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230701/001.4s173f3j2n8.gif#pic_center" width = 80%>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addStrings</span>(<span class="params">self, num1: <span class="built_in">str</span>, num2: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        i, j, carry = <span class="built_in">len</span>(num1)-<span class="number">1</span>, <span class="built_in">len</span>(num2)-<span class="number">1</span>, <span class="number">0</span></span><br><span class="line">        res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">or</span> j &gt;= <span class="number">0</span>:</span><br><span class="line">            n1 = <span class="built_in">int</span>(num1[i]) <span class="keyword">if</span> i &gt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            n2 = <span class="built_in">int</span>(num2[j]) <span class="keyword">if</span> j &gt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            n = n1 + n2 + carry</span><br><span class="line">            carry = n // <span class="number">10</span></span><br><span class="line">            res = <span class="built_in">str</span>(n%<span class="number">10</span>) + res</span><br><span class="line">            i, j = i-<span class="number">1</span>, j-<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;1&#x27;</span>+res <span class="keyword">if</span> carry <span class="keyword">else</span> res</span><br></pre></td></tr></table></figure>
 
@@ -616,7 +616,7 @@
 <blockquote>
 <p>示例 1：<br>输入：l1 &#x3D; [2,4,3], l2 &#x3D; [5,6,4]<br>输出：[7,0,8]<br>解释：342 + 465 &#x3D; 807.</p>
 </blockquote>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230701/001.4r3fkezt2uu0.webp#pic_center" width = 64%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230701/001.4r3fkezt2uu0.webp#pic_center" width = 64%>
 
 <blockquote>
 <p>示例 2：<br>输入：l1 &#x3D; [0], l2 &#x3D; [0]<br>输出：[0]</p>
@@ -628,7 +628,7 @@
 <p>我们同时遍历两个链表，逐位计算它们的和，并与当前位置的进位值相加。具体而言，如果当前两个链表处相应位置的数字为 $n1,n2$，进位值为 $\textit{carry}$，则它们的和为 $n1+n2+\textit{carry}$；其中，答案链表处相应位置的数字为 $(n1+n2+\textit{carry}) \bmod 10$，而新的进位值为 $\lfloor\frac{n1+n2+\textit{carry}}{10}\rfloor$。</p>
 <p>如果两个链表的长度不同，则可以认为长度短的链表的后面有若干个 0 。</p>
 <p>此外，如果链表遍历结束后，有 $\textit{carry} &gt; 0$，还需要在答案链表的后面附加一个节点，节点的值为 $\textit{carry}$。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230701/002.3n0qk884hs80.gif#pic_center" width = 64%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230701/002.3n0qk884hs80.gif#pic_center" width = 64%>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: <span class="type">Optional</span>[ListNode], l2: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        head = current = ListNode()</span><br><span class="line">        res, newval = <span class="number">0</span>, <span class="number">0</span>          <span class="comment"># 进位值和余数</span></span><br><span class="line">        <span class="keyword">while</span> res <span class="keyword">or</span> l1 <span class="keyword">or</span> l2:</span><br><span class="line">            <span class="keyword">if</span> l1: l1, newval = l1.<span class="built_in">next</span>, l1.val + newval</span><br><span class="line">            <span class="keyword">if</span> l2: l2, newval = l2.<span class="built_in">next</span>, l2.val + newval</span><br><span class="line">            res, newval = <span class="built_in">divmod</span>(newval,<span class="number">10</span>)</span><br><span class="line">            current.<span class="built_in">next</span> = current = ListNode(newval)</span><br><span class="line">            newval = res</span><br><span class="line">        <span class="keyword">return</span> head.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
 
@@ -642,7 +642,7 @@
 <blockquote>
 <p>示例1：<br>输入：l1 &#x3D; [7,2,4,3], l2 &#x3D; [5,6,4]<br>输出：[7,8,0,7]</p>
 </blockquote>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230701/017.3ayevdyxwku0.webp#pic_center" width = 64%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230701/017.3ayevdyxwku0.webp#pic_center" width = 64%>
 
 <blockquote>
 <p>示例2：<br>输入：l1 &#x3D; [2,4,3], l2 &#x3D; [5,6,4]<br>输出：[8,0,7]</p>

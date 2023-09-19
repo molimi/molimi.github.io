@@ -618,17 +618,17 @@
 <li>重复第（3）步，直到找到的 $i$ 大于$\sqrt(n)$为止</li>
 <li>表中所有未被划去的整数均为素数</li>
 </ol>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/001.4amrzpcmi3q0.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/001.4amrzpcmi3q0.webp#pic_center" width = 48%>
 
 
 <p><strong>算法流程图：</strong></p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/002.4erghtl420w0.webp#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/002.4erghtl420w0.webp#pic_center" width = 36%>
 
 <blockquote>
 <p>一个素数的各个倍数，是一个差为此素数本身的等差数列。此为这个筛法和试除法不同的关键之处，后者是以素数来测试每个待测数能否被整除。</p>
 </blockquote>
 <p>下面以所有不超过100的素数为例，因为小于等于10的所有素数为2、3、5、7，所以依次删除2、3、5、7的倍数。</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230614/003.2bbbtx0zzuqs.gif#pic_center" width = 36%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230614/003.2bbbtx0zzuqs.gif#pic_center" width = 36%>
 
 <p>代码实现：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countPrimes</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> n &lt; <span class="number">2</span>: <span class="keyword">return</span> <span class="number">0</span>                  <span class="comment"># 不存在小于 2 的素数</span></span><br><span class="line">        flag_list = [<span class="number">1</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">        flag_list[:<span class="number">2</span>] = [<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n**<span class="number">0.5</span>)+<span class="number">1</span>):   <span class="comment">#  遍历 i=2 到 根号 n</span></span><br><span class="line">            <span class="keyword">if</span> flag_list[i]:                 <span class="comment"># 筛去 i 的倍数</span></span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i*i, n, i):</span><br><span class="line">                    flag_list[j] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(flag_list)</span><br></pre></td></tr></table></figure>

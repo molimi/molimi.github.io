@@ -577,7 +577,7 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">CarpeDiem&#x27;s</span> <span class="string">Blog</span>         <span class="comment"># 标题</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;虽不能至，心向往之&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;不闻不若闻之，闻之不若见之，见之不若知之，知之不若行之。&#x27;</span>       <span class="comment"># 简介或格言</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">&quot;Python, Linux, Java, 算法, 人工智能&quot;</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">Carpe</span> <span class="string">Diem</span>     <span class="comment"># 作者</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span>           <span class="comment"># 主题语言 en/zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">Asia/Shanghai</span>           <span class="comment"># 中国的时区</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">hexo-theme-bamboo</span>          <span class="comment"># 主体修改为 next</span></span><br></pre></td></tr></table></figure>
 
 <p>主题语言主要是看你的themes&#x2F;next&#x2F;language中的简体中文是 zh-CN 还是 zh-Hans：</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/010.6bt308ce0240.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230526/010.6bt308ce0240.webp#pic_center" width = 48%>
 
 <p>next主题有四种，如下图依次为Muse、Mist、Pisces、Gemini（你可以每个设置一遍，确定一个喜欢的），这里选的是Gemini，打开目录 <code>Blog/themes/next/</code> 下的_config.yml（称为主题配置文件），只要将你选的主题前的#删除就行了：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line"><span class="comment">#scheme: Mist</span></span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Gemini</span>          <span class="comment"># 选择的主题</span></span><br></pre></td></tr></table></figure>
@@ -657,13 +657,13 @@
 <p><strong>1. Valine 评论系统</strong></p>
 <p>Valine 评论系统，此款系统不需要登录，无后端，nexT 主题最新也已经支持安装。</p>
 <p>因为 Valine 是基于 LeanCloud 系统的，所以先在 LeanCloud 中注册账号，LeanCloud官网：<a target="_blank" rel="noopener" href="https://console.leancloud.cn/login">https://console.leancloud.cn/login</a>，注册登陆后，访问控制台，创建应用，选择开发版，确定创建，如下图</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/007.63c1igtf5a40.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230526/007.63c1igtf5a40.webp#pic_center" width = 48%>
 
 <p>创建成功，生成了 AppID 和 AppKey，在控制台—应用凭证 查看，如下图</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/008.3bs8wz462a20.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230526/008.3bs8wz462a20.webp#pic_center" width = 48%>
 
 <p>在主题的配置文件_config.yml中，修改关于 valine 的配置，如下图</p>
-<img src ="https://cdn.staticaly.com/gh/molimi/image-hosting@main/230526/009.3xocq7i43e20.webp#pic_center" width = 48%>
+<img src ="https://cdn.statically.io/gh/molimi/image-hosting@main/230526/009.3xocq7i43e20.webp#pic_center" width = 48%>
 
 <p>上述设置仅作参考！<br>最后，重新部署即可。</p>
 <p><strong>2. Gitment 评论系统</strong></p>
